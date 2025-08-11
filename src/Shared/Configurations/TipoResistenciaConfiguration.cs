@@ -15,6 +15,7 @@ namespace Cafe_Colombiano.src.Shared.Configurations
             builder.ToTable("TipoResistencia");
             builder.HasKey(tr => tr.id);
             builder.Property(tr => tr.nombre_tipo).IsRequired().HasMaxLength(100);
+            builder.HasIndex(tr => tr.nombre_tipo).IsUnique();
             builder.HasMany(tr => tr.VariedadesResistencia)
                 .WithOne(v => v.TipoResistencia)
                 .HasForeignKey(v => v.id_tipo_resistencia);

@@ -14,7 +14,8 @@ namespace Cafe_Colombiano.src.Shared.Configurations
         {
             builder.ToTable("Porte");
             builder.HasKey(p => p.id);
-            builder.Property(p => p.nombre_porte).IsRequired().HasMaxLength(100);
+            builder.Property(p => p.nombre_porte).IsRequired().HasMaxLength(50);
+            builder.HasIndex(p => p.nombre_porte).IsUnique();
             builder.HasMany(p => p.Variedades)
                 .WithOne(v => v.Porte)
                 .HasForeignKey(v => v.id_porte);

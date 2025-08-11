@@ -15,7 +15,8 @@ namespace Cafe_Colombiano.src.Shared.Configurations
             builder.ToTable("Usuario");
             builder.HasKey(u => u.id);
             builder.Property(u => u.nombre_usuario).IsRequired().HasMaxLength(100);
-            builder.Property(u => u.contrasena);
+            builder.HasIndex(u => u.nombre_usuario).IsUnique();
+            builder.Property(u => u.contrasena).IsRequired().HasMaxLength(255);
         }
     }
 }

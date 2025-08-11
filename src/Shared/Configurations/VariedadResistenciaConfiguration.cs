@@ -13,10 +13,11 @@ namespace Cafe_Colombiano.src.Shared.Configurations
         public void Configure(EntityTypeBuilder<VariedadResistencia> builder)
         {
             builder.ToTable("VariedadResistencia");
-            builder.HasKey(vr => vr.id_variedad);
+            builder.HasKey(vr => new { vr.id_variedad, vr.id_tipo_resistencia });
             builder.HasOne(vr => vr.Variedad)
                 .WithMany(v => v.VariedadesResistencia)
-                .HasForeignKey(v => v.id_variedad);
+                .HasForeignKey(v => v.id_variedad)
+                .OnDelete(DeleteBehavior.Cascade);;
             builder.HasOne(vr => vr.TipoResistencia)
                 .WithMany(v => v.VariedadesResistencia)
                 .HasForeignKey(v => v.id_tipo_resistencia);

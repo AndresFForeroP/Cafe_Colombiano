@@ -16,7 +16,9 @@ namespace Cafe_Colombiano.src.Shared.Configurations
             builder.ToTable("Variedad");
             builder.HasKey(v => v.id);
             builder.Property(v => v.nombre_comun).IsRequired().HasMaxLength(255);
+            builder.HasIndex(v => v.nombre_comun).IsUnique();
             builder.Property(v => v.nombre_cientifico).IsRequired().HasMaxLength(255);
+            builder.HasIndex(v => v.nombre_cientifico).IsUnique();
             builder.Property(v => v.descripcion_general);
             builder.Property(v => v.imagen_referencia_url).HasMaxLength(512);
             builder.Property(v => v.historia_linaje);
@@ -38,10 +40,6 @@ namespace Cafe_Colombiano.src.Shared.Configurations
             builder.HasOne(v => v.CalidadGrano)
                 .WithMany(gp => gp.Variedades)
                 .HasForeignKey(v => v.id_calidad_grano);
-            builder.HasOne(v => v.InformacionAgronomica)
-               .WithOne(ia => ia.Variedad)
-               .HasForeignKey<InformacionAgronomica>(ia => ia.id_variedad)
-               .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

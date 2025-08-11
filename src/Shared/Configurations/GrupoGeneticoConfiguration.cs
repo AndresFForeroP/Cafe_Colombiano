@@ -14,7 +14,8 @@ namespace Cafe_Colombiano.src.Shared.Configurations
         {
             builder.ToTable("GrupoGenetico");
             builder.HasKey(gc => gc.id);
-            builder.Property(gc => gc.nombre_grupo).IsRequired().HasMaxLength(50);
+            builder.Property(gc => gc.nombre_grupo).IsRequired().HasMaxLength(100);
+            builder.HasIndex(gc => gc.nombre_grupo).IsUnique();
             builder.Property(gc => gc.origen).HasMaxLength(255);
             builder.HasMany(gc => gc.Variedades)
                 .WithOne(v => v.GrupoGenetico)

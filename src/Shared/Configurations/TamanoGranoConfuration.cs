@@ -14,10 +14,11 @@ namespace Cafe_Colombiano.src.Shared.Configurations
         {
             builder.ToTable("TamanoGrano");
             builder.HasKey(tg => tg.id);
-            builder.Property(tg => tg.nombre_tamano).IsRequired().HasMaxLength(100);
+            builder.Property(tg => tg.nombre_tamano).IsRequired().HasMaxLength(50);
+            builder.HasIndex(tg => tg.nombre_tamano).IsUnique();
             builder.HasMany(tg => tg.Variedades)
                 .WithOne(v => v.TamanoGrano)
-                .HasForeignKey(v => v.id_altitud_optima);
+                .HasForeignKey(v => v.id_tamano_grano);
         }
     }
 }

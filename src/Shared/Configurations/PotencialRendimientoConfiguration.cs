@@ -14,7 +14,8 @@ namespace Cafe_Colombiano.src.Shared.Configurations
         {
             builder.ToTable("PotencialRendimiento");
             builder.HasKey(pr => pr.id);
-            builder.Property(pr => pr.nivel_rendimiento).IsRequired().HasMaxLength(100);
+            builder.Property(pr => pr.nivel_rendimiento).IsRequired().HasMaxLength(50);
+            builder.HasIndex(pr => pr.nivel_rendimiento).IsUnique();
             builder.HasMany(pr => pr.Variedades)
                 .WithOne(v => v.PotencialRendimiento)
                 .HasForeignKey(v => v.id_potencial_rendimiento);

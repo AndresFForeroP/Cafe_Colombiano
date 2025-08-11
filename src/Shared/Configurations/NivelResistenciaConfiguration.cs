@@ -14,10 +14,11 @@ namespace Cafe_Colombiano.src.Shared.Configurations
         {
             builder.ToTable("NivelResistencia");
             builder.HasKey(nr => nr.id);
-            builder.Property(nr => nr.nombre_nivel).IsRequired().HasMaxLength(100);
+            builder.Property(nr => nr.nombre_nivel).IsRequired().HasMaxLength(50);
+            builder.HasIndex(nr => nr.nombre_nivel).IsUnique();
             builder.HasMany(nr => nr.VariedadesResistencia)
                 .WithOne(v => v.NivelResistencia)
-                .HasForeignKey(v => v.id_variedad);
+                .HasForeignKey(v => v.id_nivel_resistencia);
         }
     }
 }
