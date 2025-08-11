@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Cafe_Colombiano")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+08bb0259349683aae158a853cbdd0fa50b0fa1ff")]
 [assembly: System.Reflection.AssemblyProductAttribute("Cafe_Colombiano")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Cafe_Colombiano")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
