@@ -40,6 +40,9 @@ namespace Cafe_Colombiano.src.Shared.Configurations
             builder.HasOne(v => v.CalidadGrano)
                 .WithMany(gp => gp.Variedades)
                 .HasForeignKey(v => v.id_calidad_grano);
+            builder.HasOne(ia => ia.InformacionAgronomica)
+                   .WithOne(v => v.Variedad)
+                   .HasForeignKey<InformacionAgronomica>("id_variedad");
         }
     }
 }
