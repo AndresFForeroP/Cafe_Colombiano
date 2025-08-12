@@ -3137,19 +3137,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\user\\.nuget\\packages\\": {}
+    "/home/camper/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Proyectos visual\\C#\\Proyecto Final\\v1\\Cafe_Colombiano\\Cafe_Colombiano.csproj",
+      "projectUniqueName": "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj",
       "projectName": "Cafe_Colombiano",
-      "projectPath": "C:\\Proyectos visual\\C#\\Proyecto Final\\v1\\Cafe_Colombiano\\Cafe_Colombiano.csproj",
-      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Proyectos visual\\C#\\Proyecto Final\\v1\\Cafe_Colombiano\\obj\\",
+      "projectPath": "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj",
+      "packagesPath": "/home/camper/.nuget/packages/",
+      "outputPath": "/home/camper/Cafe_Colombiano/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/home/camper/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -3173,7 +3173,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net9.0": {
@@ -3222,7 +3222,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.303/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
