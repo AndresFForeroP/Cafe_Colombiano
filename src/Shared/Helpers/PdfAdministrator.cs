@@ -8,6 +8,7 @@ namespace Cafe_Colombiano.src.Shared.Helpers
 
         public void GenerateSamplePdf()
         {
+            QuestPDF.Settings.License = LicenseType.Community;
             // Create a simple PDF document using QuestPDF
             // This is just a sample; you can modify it to suit your needs
             Document.Create(container =>
