@@ -42,6 +42,12 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
             else
             {
                 Console.WriteLine("No hay variedades disponibles para mostrar.");
+
+        //     var context = DbContextFactory.Create();
+        // var variedadRepository = new VariedadRepository(context); // Implement VariedadRepository if not already done
+        // var variedadService = new VariedadService(variedadRepository);
+        // var menuController = new VariedadShowCatalogoService(variedadService);
+        // await menuController.HandleShowCatalogo();
             }
 
         }
