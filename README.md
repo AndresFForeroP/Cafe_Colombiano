@@ -13,6 +13,15 @@ Brindar una herramienta interactiva y funcional que permita:
 
 ---
 
+## 👥 Integrantes
+
+- **Andres Felipe Forero Perez** *(Líder de eqipo)*
+- Hector Andrés Mejia Samoret
+- Hadassa Raquel Galindo Rojas
+- Juan Manuel Crispin Castellanos
+
+---
+
 ## 🧱 Arquitectura
 
 ### 🔷 Hexagonal (Ports & Adapters)
@@ -113,3 +122,14 @@ Cada módulo funcional (e.g. Variedades, PDF, Administración) se organiza como 
 2. Configura el archivo appsetings segun tu base de datos.
 
 3. Ejecuta desde la consola dotnet run.
+
+---
+
+## 📝 Tareas Fase 1
+
+- **Hector Andrés Mejia Samoret** → UI de todos los menús  
+- **Hadassa Raquel Galindo Rojas** → Generar el PDF  
+- **Juan Manuel Crispin Castellanos** → Función ver catálogo  
+- **Andres Felipe Forero Perez** → Filtrar variedades  
+
+---
