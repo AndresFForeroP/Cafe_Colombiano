@@ -9,7 +9,6 @@ internal class Program
     {
         var context = DbContextFactory.Create();
         var pdfAdmin = new PdfAdministrator();
-        // pdfAdmin.GenerateSamplePdf(context);
-        pdfAdmin.GenerateSamplePdf();
+        pdfAdmin.GenerateSamplePdf(context);
     }
 }
