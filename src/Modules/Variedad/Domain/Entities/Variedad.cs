@@ -25,7 +25,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Domain.Entities
         public Cafe_Colombiano.src.Modules.PotencialRendimiento.Domain.Entities.PotencialRendimiento? PotencialRendimiento { get; set; }
         public int id_calidad_grano { get; set; }
         public Cafe_Colombiano.src.Modules.CalidadGrano.Domain.Entities.CalidadGrano? CalidadGrano { get; set; }
-        public ICollection<Cafe_Colombiano.src.Modules.VariedadResistencia.Domain.Entities.VariedadResistencia>? VariedadesResistencia { get; set; }
+        public ICollection<Cafe_Colombiano.src.Modules.VariedadResistencia.Domain.Entities.VariedadResistencia>? VariedadesResistencia { get; set; } = new List<Cafe_Colombiano.src.Modules.VariedadResistencia.Domain.Entities.VariedadResistencia>();
         public Cafe_Colombiano.src.Modules.InformacionAgronomica.Domain.Entities.InformacionAgronomica? InformacionAgronomica { set; get; }
     }
 }
