@@ -5,13 +5,20 @@ using Cafe_Colombiano.src.Modules.Usuario.Ui;
 using Cafe_Colombiano.src.Modules.Usuario.Application.Interfaces;
 using Cafe_Colombiano.src.Modules.Usuario.Infrastructure.Repository;
 using System.Threading.Tasks;
+using Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository;
+using Cafe_Colombiano.src.Modules.Variedad.Application.Services;
 
 internal class Program
 {
-    public static async Task Main(string[] args)
+     private static async Task Main(string[] args)
     {
-        Console.ForegroundColor = ConsoleColor.DarkCyan;
-        var Saludo = new DibujoMenusUsuario();
-        await Saludo.Iniciar();
+        var context = DbContextFactory.Create();
+
+        var repo = new VariedadRepository(context);
+        var filtroServices = new FiltroServices(repo);
+
+        await filtroServices.Filtrar();
+        Console.WriteLine("\nPresiona cualquier tecla para salir...");
+        Console.ReadKey();
     }
 }
