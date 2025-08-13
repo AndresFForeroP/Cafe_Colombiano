@@ -133,3 +133,14 @@ Cada módulo funcional (e.g. Variedades, PDF, Administración) se organiza como 
 - **Andres Felipe Forero Perez** → Filtrar variedades  
 
 ---
+
+---
+
+## 📝 Tareas Fase 2
+
+- **Hector Andrés Mejia Samoret** → Gestion de contenido  
+- **Hadassa Raquel Galindo Rojas** → Terminacion Generar el PDF  
+- **Juan Manuel Crispin Castellanos** → Gestion de variedades  
+- **Andres Felipe Forero Perez** → > Validacion de usuario, y terminar filtrado  
+
+---
