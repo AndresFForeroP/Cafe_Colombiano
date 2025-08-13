@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj": {}
+    "/home/camper/Cafe_Colombiano-4/Cafe_Colombiano.csproj": {}
   },
   "projects": {
-    "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj": {
+    "/home/camper/Cafe_Colombiano-4/Cafe_Colombiano.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj",
+        "projectUniqueName": "/home/camper/Cafe_Colombiano-4/Cafe_Colombiano.csproj",
         "projectName": "Cafe_Colombiano",
-        "projectPath": "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj",
+        "projectPath": "/home/camper/Cafe_Colombiano-4/Cafe_Colombiano.csproj",
         "packagesPath": "/home/camper/.nuget/packages/",
-        "outputPath": "/home/camper/Cafe_Colombiano/obj/",
+        "outputPath": "/home/camper/Cafe_Colombiano-4/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/camper/.nuget/NuGet/NuGet.Config"

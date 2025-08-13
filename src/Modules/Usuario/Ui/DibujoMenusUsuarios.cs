@@ -52,7 +52,7 @@ namespace Cafe_Colombiano.src.Modules.Usuario.Ui
                     break;
                 case 2:
                     var dibujoPanelAdministrativo = new DibujoPanelAdministrativo();
-                    await dibujoPanelAdministrativo.Inicio();
+                    dibujoPanelAdministrativo.Inicio();
                     break;
                 case 3:
                     Console.WriteLine("Saliendo del sistema...");

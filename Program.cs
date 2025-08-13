@@ -8,16 +8,12 @@ using System.Threading.Tasks;
 
 internal class Program
 {
-    private static async Task Main(string[] args)
+    public static async Task Main(string[] args)
     {
         Console.ForegroundColor = ConsoleColor.DarkCyan;
         var Saludo = new DibujoMenusUsuario();
-        var explorarVariedades = new DibujoExplorarVariedades();
-        var AdministrarProductos = new DibujoPanelAdministrativo();
         await Saludo.Iniciar();
-        await explorarVariedades.IniciarAsync();
-        await AdministrarProductos.Inicio();
-        
+       
         
     }
 }
