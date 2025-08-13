@@ -15,7 +15,7 @@ using Cafe_Colombiano.src.Modules.Usuario.Domain.Entities;
 using Cafe_Colombiano.src.Modules.Variedad.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Liga_futbol.Src.Shared.Context
+namespace Cafe_Colombiano.src.Shared.Context
 {
     public class AppDbContext : DbContext
     {

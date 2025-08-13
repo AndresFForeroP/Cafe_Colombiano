@@ -1,9 +1,9 @@
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
-using Liga_futbol.Src.Shared.Context;
+using Cafe_Colombiano.src.Shared.Context;
 using Microsoft.EntityFrameworkCore;
-using Liga_Futbol.src.Shared.Helpers;
+using Cafe_Colombiano.src.Shared.Helpers;
 using Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository;
 using System.Threading.Tasks;
 //en proceso, aun no crea el pdf y hay problemas leyendo el contexto de la base de datos

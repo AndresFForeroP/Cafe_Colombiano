@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Cafe_Colombiano.src.Modules.Usuario.Application.Interfaces;
-using Liga_futbol.Src.Shared.Context;
+using Cafe_Colombiano.src.Shared.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace Cafe_Colombiano.src.Modules.Usuario.Infrastructure.Repository

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MySqlConnector;
 
-namespace Liga_Futbol.src.Shared.Helpers
+namespace Cafe_Colombiano.src.Shared.Helpers
 {
     public class MySqlVersionResolver
     {

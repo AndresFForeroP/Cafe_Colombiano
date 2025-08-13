@@ -1,6 +1,5 @@
-﻿using Cafe_Colombiano.src.Shared.Helpers;
-using Liga_futbol.Src.Shared.Context;
-using Liga_Futbol.src.Shared.Helpers;
+﻿using Cafe_Colombiano.src.Shared.Context;
+using Cafe_Colombiano.src.Shared.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Cafe_Colombiano.src.Modules.Usuario.Ui;
 using Cafe_Colombiano.src.Modules.Usuario.Application.Interfaces;
@@ -14,7 +13,5 @@ internal class Program
         Console.ForegroundColor = ConsoleColor.DarkCyan;
         var Saludo = new DibujoMenusUsuario();
         await Saludo.Iniciar();
-       
-        
     }
 }
