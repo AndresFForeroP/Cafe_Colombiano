@@ -11,6 +11,9 @@ internal class Program
     public static async Task Main(string[] args)
     {
         Console.ForegroundColor = ConsoleColor.DarkCyan;
+        var context = DbContextFactory.Create();
+        var pdfAdmin = new PdfAdministrator();
+        _ = pdfAdmin.GenerateSamplePdf(context);
         var Saludo = new DibujoMenusUsuario();
         await Saludo.Iniciar();
     }

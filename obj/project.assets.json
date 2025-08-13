@@ -3366,19 +3366,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\user\\.nuget\\packages\\": {}
+    "C:\\Users\\HP\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Proyectos visual\\C#\\Proyecto Final\\v1\\Cafe_Colombiano\\Cafe_Colombiano.csproj",
+      "projectUniqueName": "C:\\Users\\HP\\Desktop\\Cafe_Colombiano\\Cafe_Colombiano.csproj",
       "projectName": "Cafe_Colombiano",
-      "projectPath": "C:\\Proyectos visual\\C#\\Proyecto Final\\v1\\Cafe_Colombiano\\Cafe_Colombiano.csproj",
-      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Proyectos visual\\C#\\Proyecto Final\\v1\\Cafe_Colombiano\\obj\\",
+      "projectPath": "C:\\Users\\HP\\Desktop\\Cafe_Colombiano\\Cafe_Colombiano.csproj",
+      "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\HP\\Desktop\\Cafe_Colombiano\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -3455,7 +3455,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.303/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
