@@ -17,8 +17,8 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
         {
             Console.Clear();
             var variedades = await _repo.GetAllVariedadesAsync();
-
-            foreach (var v in variedades)
+            var Variedad = FiltrarPorPorte(variedades);
+            foreach (var v in Variedad)
             {
                 Console.WriteLine($"--- Variedad ---");
                 Console.WriteLine($"ID: {v.id}");
@@ -47,8 +47,62 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
 
                 Console.WriteLine(new string('-', 50)); // Separador
             }
-            Console.WriteLine("Fin del listado");
-            Console.ReadKey();
+        }
+        private IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorNombre(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista)
+        {
+            Console.WriteLine("Ingrese el nombre cientifico del grano que desea buscar");
+            string nombre = Console.ReadLine() ?? "";
+            return Lista.Where(v => v.nombre_cientifico != null && v.nombre_cientifico.ToLower().Contains(nombre.ToLower()));
+        }
+        private IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorPorte(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista)
+        {
+            string nombre = "";
+            Console.WriteLine("""
+        ==============================
+            Explorar Productos
+        ==============================
+        1.Alto.
+        2.Bajo.
+        3.Dwarf/Compact
+        4.Tall
+        5.Desconocido
+        9.Cancelar Filtro
+        ==============================
+        """);
+            Console.WriteLine("Ingrese un numero segun el Porte del grano que desea buscar");
+            int porte = validarentero(5);
+            switch (porte)
+            {
+                case 1:
+                    nombre = "Alto";
+                    break;
+                case 2:
+                    nombre = "Bajo";
+                    break;
+                case 3:
+                    nombre = "Dwarf/Compact";
+                    break;
+                case 4:
+                    nombre = "Tall";
+                    break;
+                case 5:
+                    nombre = "Desconocido";
+                    break;
+            }
+            return Lista.Where(v => v.Porte?.nombre_porte != null && v.Porte.nombre_porte.ToLower().Contains(nombre.ToLower()));
+        }
+        private int validarentero(int maximo)
+        {
+            int salida = 0;
+            do
+            {
+                if (!int.TryParse(Console.ReadLine(), out salida) || (salida < 1 || salida > maximo) && salida != 9)
+                {
+                    Console.WriteLine("VALOR INGRESADO NO VALIDO");
+                }
+            }
+            while (salida < 1 || salida > maximo);
+            return salida;
         }
     }
 }
