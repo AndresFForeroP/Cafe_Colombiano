@@ -1,13 +1,19 @@
 ﻿using Liga_futbol.Src.Shared.Context;
 using Liga_Futbol.src.Shared.Helpers;
 using Microsoft.EntityFrameworkCore;
-using Cafe_Colombiano.src.Modules.Variedad.Application.Services;
-using Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository;
+using Cafe_Colombiano.src.Modules.Usuario.Ui;
+using Cafe_Colombiano.src.Modules.Usuario.Application.Interfaces;
+using Cafe_Colombiano.src.Modules.Usuario.Infrastructure.Repository;
+using System.Threading.Tasks;
 
 internal class Program
 {
-    private static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
-        var context = DbContextFactory.Create();
+        Console.ForegroundColor = ConsoleColor.DarkCyan;
+        var Saludo = new DibujoMenusUsuario();
+        await Saludo.Iniciar();
+       
+        
     }
 }
