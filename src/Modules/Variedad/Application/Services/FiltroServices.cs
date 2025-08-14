@@ -17,7 +17,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
         {
             Console.Clear();
             var variedades = await _repo.GetAllVariedadesAsync();
-            var Variedad = FiltrarPorResistencia(variedades);
+            var Variedad = FiltrarPorNutricion(variedades);
             foreach (var v in Variedad)
             {
                 Console.WriteLine($"--- Variedad ---");
@@ -29,7 +29,11 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
                 Console.WriteLine($"Tamaño Grano: {v.TamanoGrano?.nombre_tamano}");
                 Console.WriteLine($"Potencial Rendimiento: {v.PotencialRendimiento?.nivel_rendimiento}");
                 Console.WriteLine($"Calidad Grano: {v.CalidadGrano?.nivel_calidad}");
-                Console.WriteLine($"Información Agronómica: {v.InformacionAgronomica?.maduracion}");
+                Console.WriteLine($"Información Agronómica:");
+                Console.WriteLine($"Maduracion {v.InformacionAgronomica?.maduracion}");
+                Console.WriteLine($"Tiempo de cosecha {v.InformacionAgronomica?.tiempo_cosecha}");
+                Console.WriteLine($"Nutricion {v.InformacionAgronomica?.nutricion}");
+                Console.WriteLine($"Densidad de siembra {v.InformacionAgronomica?.densidad_siembra}");
 
                 if (v.VariedadesResistencia != null && v.VariedadesResistencia.Any())
                 {
@@ -324,6 +328,93 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
         r.TipoResistencia.nombre_tipo.Contains(nombre, StringComparison.OrdinalIgnoreCase) &&
         !string.IsNullOrEmpty(r.NivelResistencia?.nombre_nivel) &&
         r.NivelResistencia.nombre_nivel.Contains(NivelResistencia, StringComparison.OrdinalIgnoreCase)));
+        }
+        private IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorTiempoCoshecha(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista)
+        {
+            string nombre = "";
+            Console.WriteLine("""
+        ==============================
+           Filtra Por Tiempo Cosecha
+        ==============================
+        1.6-8 meses.
+        2.Año 2.
+        3.Año 4.
+        4.Desconocida.
+        9.Cancelar Filtro
+        ==============================
+        """);
+            Console.WriteLine("Ingrese un numero segun la Tiempo de cosecha del grano que desea buscar");
+            int porte = validarentero(4);
+            switch (porte)
+            {
+                case 1:
+                    nombre = "Principal: 6-8 meses después de floración";
+                    break;
+                case 2:
+                    nombre = "Año 2";
+                    break;
+                case 3:
+                    nombre = "Año 4";
+                    break;
+                case 4:
+                    nombre = "Desconocida";
+                    break;
+            }
+            return Lista.Where(v => v.InformacionAgronomica?.tiempo_cosecha!= null && v.InformacionAgronomica.tiempo_cosecha.ToLower().Contains(nombre.ToLower()));
+        }
+        private IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorMaduracion(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista)
+        {
+            string nombre = "";
+            Console.WriteLine("""
+        ==============================
+            Filtra Por Maduracion
+        ==============================
+        1.Promedio.
+        2.Tardía.
+        9.Cancelar Filtro
+        ==============================
+        """);
+            Console.WriteLine("Ingrese un numero segun la Maduracion del grano que desea buscar");
+            int porte = validarentero(2);
+            switch (porte)
+            {
+                case 1:
+                    nombre = "Promedio";
+                    break;
+                case 2:
+                    nombre = "Tardía";
+                    break;
+            }
+            return Lista.Where(v => v.InformacionAgronomica?.maduracion!= null && v.InformacionAgronomica.maduracion.ToLower().Contains(nombre.ToLower()));
+        }
+        private IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorNutricion(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista)
+        {
+            string nombre = "";
+            Console.WriteLine("""
+        ==============================
+            Filtra Por Nutricion
+        ==============================
+        1.Media.
+        2.Alta.
+        3.Desconocida.
+        9.Cancelar Filtro
+        ==============================
+        """);
+            Console.WriteLine("Ingrese un numero segun la Nutricion del grano que desea buscar");
+            int porte = validarentero(3);
+            switch (porte)
+            {
+                case 1:
+                    nombre = "Media";
+                    break;
+                case 2:
+                    nombre = "Alta";
+                    break;
+                case 3:
+                    nombre = "Desconocida";
+                    break;
+            }
+            return Lista.Where(v => v.InformacionAgronomica?.nutricion!= null && v.InformacionAgronomica.nutricion.ToLower().Contains(nombre.ToLower()));
         }
     
         
