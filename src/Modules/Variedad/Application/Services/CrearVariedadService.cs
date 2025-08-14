@@ -8,7 +8,7 @@ using Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository;
 
 namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
 {
-    public class CrearVariedadService 
+    public class CrearVariedadService
     {
         private readonly VariedadRepository _variedadService;
 
@@ -27,50 +27,26 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
             Console.WriteLine("╚══════════════════════════════════════════════════════════════════════════════════╝");
             Console.WriteLine();
 
-            Console.Write("Ingrese el nombre común de la variedad: ");
-            string nombreComun;
-            while (true)
-            {
-                nombreComun = Console.ReadLine()!;
-                if (string.IsNullOrWhiteSpace(nombreComun))
-                {
-                    Console.WriteLine("El nombre no puede estar vacío. Por favor, ingrese un nombre válido.");
-                    continue;
-                }
+            var nombreComun = PedirDatoObligatorio("Ingrese el nombre común de la variedad: ");
 
-                var existe = await _variedadService.ConsultarCatalogoAsync();
-                if (existe.Any(v => v.nombre_comun != null && v.nombre_comun.Equals(nombreComun, StringComparison.OrdinalIgnoreCase)))
-                {
-                    Console.WriteLine("La variedad ya existe. Por favor, ingrese un nombre diferente.");
-                }
-                else
-                {
-                    break;
-                }
-            }
+            var nombreCientifico = PedirDatoObligatorio("Ingrese el nombre científico de la variedad: ");
 
+            var imagenReferenciaUrl = PedirDatoObligatorio("Ingrese la URL de la imagen de referencia: ");
 
-            Console.Write("Ingrese el nombre científico de la variedad: ");
-            var nombreCientifico = Console.ReadLine();
-            Console.Write("Ingrese la URL de la imagen de referencia: ");
-            var imagenReferenciaUrl = Console.ReadLine();
+    
+            var descripcionGeneral = PedirDatoObligatorio("Ingrese la descripción general de la variedad: ");
 
-            Console.Write("Ingrese la descripción general de la variedad: ");
-            var descripcionGeneral = Console.ReadLine();
-
-            Console.Write("Ingrese la historia del linaje de la variedad: ");
-            var historiaLinaje = Console.ReadLine();
+   
+            var historiaLinaje = PedirDatoObligatorio("Ingrese la historia del linaje de la variedad: ");
 
             Console.WriteLine("╔═══════════════════════════════════════════════════════════╗");
             Console.WriteLine("║                     GRUPO GENETICO                        ║");
             Console.WriteLine("╚═══════════════════════════════════════════════════════════╝");
             Console.WriteLine();
 
-            Console.Write("Ingrese el grupo genético de la variedad: ");
-            var grupoGenetico = Console.ReadLine();
+            var grupoGenetico = PedirDatoObligatorio("Ingrese el grupo genético de la variedad: ");
 
-            Console.Write("Ingrese el origen de la variedad: ");
-            var origen = Console.ReadLine();
+            var origen = PedirDatoObligatorio("Ingrese el origen de la variedad: ");
 
 
             Console.WriteLine("╔════════════════════════════════════════════════╗");
@@ -79,45 +55,37 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
             Console.WriteLine();
 
 
-            Console.Write("Ingrese el porte de la planta: ");
-            var porte = Console.ReadLine();
+            var porte = PedirDatoObligatorio("Ingrese el porte de la planta(Alto/Bajo/Dwarf/Compact/Tall/Desconocido): ");
 
-            Console.Write("Ingrese el tamaño de grano: ");
-            var tamanoGrano = Console.ReadLine();
+            var tamanoGrano = PedirDatoObligatorio("Ingrese el tamaño de grano(Pequeño/Meniano/Grande/muy Grande): ");
 
-            Console.Write("Ingrese la altitud óptima: ");
-            var altitudOptima = Console.ReadLine();
+            var altitudOptima = PedirDatoObligatorio("Ingrese la altitud óptima(ej: 500 - 100): ");
+            var descripcionAltitudOptima = PedirDatoObligatorio("Ingrese la descripción de la altitud óptima: ");
 
-            Console.Write("Ingrese el potencial de rendimiento: ");
-            var potencialRendimiento = Console.ReadLine();
+            var potencialRendimiento = PedirDatoObligatorio("Ingrese el potencial de rendimiento: ");
 
-            Console.Write("Ingrese la calidad de grano: ");
-            var calidadGrano = Console.ReadLine();
-            Console.WriteLine("Descripcion de la calidad de grano: ");
-            var descripcionCalidadGrano = Console.ReadLine();
+            var calidadGrano = PedirDatoObligatorio("Ingrese la calidad de grano: ");
+        
+            var descripcionCalidadGrano = PedirDatoObligatorio("Descripcion de la calidad de grano: ");
 
-            Console.Write("Tipo de resistencia: ");
-            var tipoResistencia = Console.ReadLine();
+            var tipoResistencia = PedirDatoObligatorio("Tipo de resistencia: ");
 
-            Console.Write("Nivel de resistencia: ");
-            var nivelResistencia = Console.ReadLine();
-            
+            var nivelResistencia = PedirDatoObligatorio("Nivel de resistencia: ");
+
+
 
             Console.WriteLine("╔════════════════════════════════════════════════════════════════════════╗");
             Console.WriteLine("║                      INFORMACION AGRONOMICA                            ║");
             Console.WriteLine("╚════════════════════════════════════════════════════════════════════════╝");
             Console.WriteLine();
 
-            Console.Write("Ingrese el tiempo de cosecha: ");
-            var tiempoCosecha = Console.ReadLine();
-            Console.Write("Ingrese la maduración: ");
-            var maduracion = Console.ReadLine();
-            Console.Write("Ingrese la nutrición: ");
-            var nutricion = Console.ReadLine();
-            Console.Write("Ingrese la densidad de siembra: ");
-            var densidadSiembra = Console.ReadLine();
+            
+            var tiempoCosecha = PedirDatoObligatorio("Ingrese el tiempo de cosecha: ");
+            var maduracion = PedirDatoObligatorio("Ingrese la maduración: ");
+            var nutricion = PedirDatoObligatorio("Ingrese la nutrición: ");
+            var densidadSiembra = PedirDatoObligatorio("Ingrese la densidad de siembra: ");
 
-           
+
 
             Console.Write("Ingrese el rango de Altitud: ");
             var rangoAltitud = Console.ReadLine();
@@ -132,16 +100,16 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
                 imagen_referencia_url = imagenReferenciaUrl
 
             };
-            
+
             var nuevoGrupoGenetico = new Cafe_Colombiano.src.Modules.GrupoGenetico.Domain.Entities.GrupoGenetico { nombre_grupo = grupoGenetico };
             var nuevoPorte = new Cafe_Colombiano.src.Modules.Porte.Domain.Entities.Porte { nombre_porte = porte };
             var nuevoTamanoGrano = new Cafe_Colombiano.src.Modules.TamanoGrano.Domain.Entities.TamanoGrano { nombre_tamano = tamanoGrano };
-            var nuevaAltitudOptima = new Cafe_Colombiano.src.Modules.AltitudOptima.Domain.Entities.AltitudOptima { descripcion = altitudOptima };
+            var nuevaAltitudOptima = new Cafe_Colombiano.src.Modules.AltitudOptima.Domain.Entities.AltitudOptima { rango_altitud = altitudOptima, descripcion = descripcionAltitudOptima };
             var nuevoPotencialRendimiento = new Cafe_Colombiano.src.Modules.PotencialRendimiento.Domain.Entities.PotencialRendimiento { nivel_rendimiento = potencialRendimiento };
             var nuevaCalidadGrano = new Cafe_Colombiano.src.Modules.CalidadGrano.Domain.Entities.CalidadGrano { nivel_calidad = calidadGrano };
             var nuevoTipoResistencia = new Cafe_Colombiano.src.Modules.TipoResistencia.Domain.Entities.TipoResistencia { nombre_tipo = tipoResistencia };
             var nuevoNivelResistencia = new Cafe_Colombiano.src.Modules.NivelResistencia.Domain.Entities.NivelResistencia { nombre_nivel = nivelResistencia };
-    
+
             // InformacionAgronomica
             var nuevaInformacionAgronomica = new Cafe_Colombiano.src.Modules.InformacionAgronomica.Domain.Entities.InformacionAgronomica
             {
@@ -149,7 +117,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
                 maduracion = maduracion,
                 nutricion = nutricion,
                 densidad_siembra = densidadSiembra
-               
+
             };
             // grupoGenetico
             nuevaVariedad.GrupoGenetico = nuevoGrupoGenetico;
@@ -157,12 +125,18 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
             nuevaVariedad.Porte = nuevoPorte;
             nuevaVariedad.TamanoGrano = nuevoTamanoGrano;
             nuevaVariedad.AltitudOptima = nuevaAltitudOptima;
+            nuevaVariedad.AltitudOptima = nuevaAltitudOptima;
             nuevaVariedad.PotencialRendimiento = nuevoPotencialRendimiento;
             nuevaVariedad.CalidadGrano = nuevaCalidadGrano;
             nuevaCalidadGrano.descripcion = descripcionCalidadGrano;
             nuevaVariedad.InformacionAgronomica = nuevaInformacionAgronomica;
             nuevaAltitudOptima.rango_altitud = rangoAltitud;
-  
+            nuevaVariedad.VariedadesResistencia!.Add(new Cafe_Colombiano.src.Modules.VariedadResistencia.Domain.Entities.VariedadResistencia
+            {
+                Variedad = nuevaVariedad,
+                TipoResistencia = nuevoTipoResistencia,
+                NivelResistencia = nuevoNivelResistencia
+            });
 
             await _variedadService.CrearVariedadAsync(nuevaVariedad);
 
@@ -170,5 +144,22 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
         }
 
 
+
+
+        private string PedirDatoObligatorio(string mensaje)
+        {
+            string? dato;
+            do
+            {
+                Console.Write(mensaje);
+                dato = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(dato))
+                {
+                    Console.WriteLine("Este campo es obligatorio.");
+                }
+            } while (string.IsNullOrWhiteSpace(dato));
+
+            return dato;
+        }
     }
 }
