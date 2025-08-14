@@ -134,7 +134,6 @@ Cada módulo funcional (e.g. Variedades, PDF, Administración) se organiza como 
 
 ---
 
----
 
 ## 📝 Tareas Fase 2
 
@@ -142,5 +141,14 @@ Cada módulo funcional (e.g. Variedades, PDF, Administración) se organiza como 
 - **Hadassa Raquel Galindo Rojas** → Terminacion Generar el PDF  
 - **Juan Manuel Crispin Castellanos** → Gestion de variedades  
 - **Andres Felipe Forero Perez** → > Validacion de usuario, y terminar filtrado  
+
+---
+
+## 📝 Tareas Fase 3
+
+- **Hector Andrés Mejia Samoret** → Terminar menus y Gestion de contenido 
+- **Hadassa Raquel Galindo Rojas** → Refactorizar codigo
+- **Juan Manuel Crispin Castellanos** → Actualizar y eliminar variedades  
+- **Andres Felipe Forero Perez** → > Validacion de usuario  
 
 ---
