@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
 {
     public class VariedadRepository : IVariedadRepository
+    public class VariedadRepository : IVariedadRepository
     {
         private readonly DbContext _context;
 
