@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Proyectos visual\\C#\\Proyecto Final\\v1\\Cafe_Colombiano\\Cafe_Colombiano.csproj": {}
+    "/home/camper/Cafe_Colombiano-6/Cafe_Colombiano.csproj": {}
   },
   "projects": {
-    "C:\\Proyectos visual\\C#\\Proyecto Final\\v1\\Cafe_Colombiano\\Cafe_Colombiano.csproj": {
+    "/home/camper/Cafe_Colombiano-6/Cafe_Colombiano.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Proyectos visual\\C#\\Proyecto Final\\v1\\Cafe_Colombiano\\Cafe_Colombiano.csproj",
+        "projectUniqueName": "/home/camper/Cafe_Colombiano-6/Cafe_Colombiano.csproj",
         "projectName": "Cafe_Colombiano",
-        "projectPath": "C:\\Proyectos visual\\C#\\Proyecto Final\\v1\\Cafe_Colombiano\\Cafe_Colombiano.csproj",
-        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Proyectos visual\\C#\\Proyecto Final\\v1\\Cafe_Colombiano\\obj\\",
+        "projectPath": "/home/camper/Cafe_Colombiano-6/Cafe_Colombiano.csproj",
+        "packagesPath": "/home/camper/.nuget/packages/",
+        "outputPath": "/home/camper/Cafe_Colombiano-6/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/camper/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -38,12 +38,16 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "ConsoleGUI": {
+              "target": "Package",
+              "version": "[1.4.2, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[9.0.8, )"
@@ -73,6 +77,14 @@
             "QuestPDF": {
               "target": "Package",
               "version": "[2025.7.0, )"
+            },
+            "SixLabors.ImageSharp": {
+              "target": "Package",
+              "version": "[3.1.3, )"
+            },
+            "Spectre.Console": {
+              "target": "Package",
+              "version": "[0.50.0, )"
             }
           },
           "imports": [
@@ -91,7 +103,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.303/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
