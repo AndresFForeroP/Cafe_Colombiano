@@ -10,7 +10,7 @@ internal class Program
 {
     public static async Task Main(string[] args)
     {
-         var autenticador = new AutenticadorUsuario("admin", "12345");
+        var autenticador = new AutenticadorUsuario("admin", "12345");
         var menuUsuario = new DibujoMenusUsuario(autenticador);
         await menuUsuario.Iniciar();
     }
