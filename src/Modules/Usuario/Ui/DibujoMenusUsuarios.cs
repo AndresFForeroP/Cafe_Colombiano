@@ -51,7 +51,7 @@ namespace Cafe_Colombiano.src.Modules.Usuario.Ui
             int salida = 0;
             do
             {
-                DibujarMenuColorido();
+                await DibujarMenuColorido();
                 if (!int.TryParse(Console.ReadLine(), out salida) || salida != 1 && salida != 2 && salida != 3 && salida != 9)
                 {
                     MostrarMensajeError("Opción no válida, por favor intente de nuevo.");
@@ -154,7 +154,7 @@ namespace Cafe_Colombiano.src.Modules.Usuario.Ui
             Console.WriteLine();
             return contrasena;
         }
-public void DibujarMenuColorido()
+public async Task DibujarMenuColorido()
 {
     Console.Clear();
     // Encabezado
@@ -181,13 +181,13 @@ public void DibujarMenuColorido()
     switch (opcionSeleccionada)
     {
         case "☕ Explorar productos":
-            EjecutarOpcionAsync(1).Wait();
+            await EjecutarOpcionAsync(1);
             break;
         case "🛠 Panel administrativo":
-            EjecutarOpcionAsync(2).Wait();
+            await EjecutarOpcionAsync(2);
             break;
         case "❌ Salir del sistema":
-            EjecutarOpcionAsync(9).Wait();
+            await EjecutarOpcionAsync(9);
             break;
     }
 }
