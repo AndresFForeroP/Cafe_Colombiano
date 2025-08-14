@@ -22,48 +22,90 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
             var Variedad = _repo.FiltrarPorGrupo(variedades);
             do
             {
-                
+                ImprimirMenuFiltros(FiltrosAplicados);
             } while (Respuesta != "no");
             MostrarVariedades(Variedad);
-
-            
         }
-        private int ImprimirMenuFiltros(List<string> filtros)
+        private int validarentero()
         {
+            // falta implementar validaciones de enteros
+            return 1;
+        }
+        private void ImprimirMenuFiltros(List<string> filtros)
+        {
+            bool hayFiltrosDisponibles = false;
             Console.WriteLine("""
         ==============================
             Filtros Disponibles
         ==============================
         """);
-            if (filtros.Contains("nombre"))
+            if (!filtros.Contains("nombre"))
             {
                 Console.WriteLine("1. Filtrar por Nombre de grano");
+                hayFiltrosDisponibles = true;
             }
-            else if (filtros.Contains("porte"))
+            if (!filtros.Contains("porte"))
             {
                 Console.WriteLine("2. Filtrar por Porte del grano");
+                hayFiltrosDisponibles = true;
             }
-            else if (filtros.Contains("tamano"))
+            if (!filtros.Contains("tamano"))
             {
                 Console.WriteLine("3. Filtrar por Tamaño del grano");
+                hayFiltrosDisponibles = true;
             }
-            else if (filtros.Contains("altitud"))
+            if (!filtros.Contains("altitud"))
             {
                 Console.WriteLine("4. Filtrar por Altitud del grano");
+                hayFiltrosDisponibles = true;
             }
-            else if (filtros.Contains("rendimiento"))
+            if (!filtros.Contains("rendimiento"))
             {
                 Console.WriteLine("5. Filtrar por Rendimiento del grano");
+                hayFiltrosDisponibles = true;
             }
-            else if (filtros.Contains("calidad"))
+            if (!filtros.Contains("calidad"))
             {
-                Console.WriteLine("2. Filtrar por Calidad del grano");
+                Console.WriteLine("6. Filtrar por Calidad del grano");
+                hayFiltrosDisponibles = true;
             }
-            else if (filtros.Contains("resistencia"))
+            if (!filtros.Contains("resistencia"))
             {
-                Console.WriteLine("2. Filtrar por Resistencia del grano");
+                Console.WriteLine("7. Filtrar por Resistencia del grano");
+                hayFiltrosDisponibles = true;
             }
-            return 1;
+            if (!filtros.Contains("tiempocosecha"))
+            {
+                Console.WriteLine("8. Filtrar por Tiempo de cosecha del grano");
+                hayFiltrosDisponibles = true;
+            }
+            if (!filtros.Contains("maduracion"))
+            {
+                Console.WriteLine("9. Filtrar por Maduración del grano");
+                hayFiltrosDisponibles = true;
+            }
+            if (!filtros.Contains("nutricion"))
+            {
+                Console.WriteLine("10. Filtrar por Nutrición del grano");
+                hayFiltrosDisponibles = true;
+            }
+            if (!filtros.Contains("densidad"))
+            {
+                Console.WriteLine("11. Filtrar por Densidad del grano");
+                hayFiltrosDisponibles = true;
+            }
+            if (!filtros.Contains("grupo"))
+            {
+                Console.WriteLine("12. Filtrar por Grupo del grano");
+                hayFiltrosDisponibles = true;
+            }
+
+            if (!hayFiltrosDisponibles)
+            {
+                Console.WriteLine("Ya has aplicado todos los filtros");
+            }
+            Console.WriteLine("==============================");
+            Console.WriteLine("Ingrese un número según el filtro que desea aplicar");
         }
 
         private void MostrarVariedades(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> variedad)
