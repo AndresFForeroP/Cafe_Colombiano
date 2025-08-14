@@ -218,7 +218,7 @@ public void DibujarMenuColorido()
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(mensaje);
             Console.ResetColor();
-            Thread.Sleep(1000);
+            Thread.Sleep(400);
             Console.Clear();
         }
     }

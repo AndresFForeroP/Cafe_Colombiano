@@ -20,26 +20,26 @@ namespace Cafe_Colombiano.src.Modules.Usuario.Ui
                 {
                     Console.Clear();
                     Console.WriteLine("Opción no válida, por favor intente de nuevo.");
-                    Thread.Sleep(2000);
+                    Thread.Sleep(400);
                     Console.Clear();
                 }
                 if (salida == 9)
                 {
                     Console.Clear();
                     Console.WriteLine("Saliendo del sistema...");
-                    Thread.Sleep(2000);
+                    Thread.Sleep(400);
                     Environment.Exit(0);
                 }
             }
             while (salida != 1 && salida != 2 && salida != 3 && salida != 4 && salida != 5 && salida != 9);
-            AdministrarProductos(salida);
+            await AdministrarProductosAsync(salida);
         }
         public void Dibujar()
         {
             Console.Clear();
             Console.WriteLine(Message);
         }
-        public static void AdministrarProductos(int opcion2)
+        public static async Task AdministrarProductosAsync(int opcion2)
         {
             switch (opcion2)
             {
@@ -60,8 +60,8 @@ namespace Cafe_Colombiano.src.Modules.Usuario.Ui
                     Console.Clear();
                     Console.WriteLine("Volviendo al Menu de Usuarios...");
                     Thread.Sleep(500);
-                    //var menusUsuario = new DibujoMenusUsuario();
-                    //await menusUsuario.Iniciar();
+                    var menusUsuario = new DibujoMenusUsuario();
+                    await menusUsuario.Iniciar();
                     break;
                 case 4:
                     Console.Clear();
