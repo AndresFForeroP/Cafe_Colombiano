@@ -19,9 +19,7 @@ namespace Cafe_Colombiano.src.Shared.Helpers
             var contexto = DbContextFactory.Create();
             var repo = new VariedadRepository(contexto);
             var variedades = await repo.GetAllVariedadesAsync();
-
-
-
+            var imagesPath = Path.Combine(Directory.GetCurrentDirectory(), "src", "Shared", "Resources", "Images");
             Document.Create(container =>
             {
                 _ = container.Page(page =>
@@ -34,7 +32,9 @@ namespace Cafe_Colombiano.src.Shared.Helpers
                     page.Header()
                         .AlignCenter()
                         .Text("Catálogo de Variedades de Café Colombiano")
-                        .ExtraBold().FontSize(24).FontColor(Colors.Green.Darken2);
+                        .ExtraBold()
+                        .FontSize(24)
+                        .FontColor(Colors.Green.Darken2);
 
                     page.Content()
                         .PaddingVertical(1, Unit.Centimetre)
@@ -45,16 +45,49 @@ namespace Cafe_Colombiano.src.Shared.Helpers
                             foreach (var variedad in variedades)
                             {
                                 // Sección por variedad
-                                column.Item().Background(Colors.Green.Lighten3).CornerRadius(10).Border(1).BorderColor(Colors.Green.Darken2).Padding(15).Column(variedadColumn =>
+                                column.Item().Background(Colors.Green.Lighten5).CornerRadius(10).Border(1).BorderColor(Colors.Green.Darken2).Padding(20).Column(variedadColumn =>
                                 {
-                                    variedadColumn.Item().Text($"{variedad.nombre_comun} ({variedad.nombre_cientifico})").ExtraBold().FontSize(16).FontColor(Colors.Green.Darken4).AlignRight();
-
-                                    variedadColumn.Item().PaddingTop(10).Row(row =>
+                                    variedadColumn.Item().Row(row =>
                                     {
-                                        //para la imagen
-                                        // row.AutoItem().Image(variedad.ImagenUrl).Height(100).Width(100).Alignment(QuestPDF.Infrastructure.ImageAlignment.Left);
-                                        
-                                        variedadColumn.Item().PaddingTop(10).Row(row =>
+                                        // Buscar imagen que coincida con el nombre
+                                        var imageFileName = (variedad.nombre_comun != null ? variedad.nombre_comun.Replace(" ", "").ToLower() : "sin_nombre") + ".jpeg";
+                                        var imageFullPath = Path.Combine(imagesPath, imageFileName);
+
+                                        if (File.Exists(imageFullPath))
+                                        {
+                                            row.RelativeItem().Height(100).Width(100).Image(imageFullPath);
+                                        }
+                                        else
+                                        {
+                                            row.RelativeItem().Text("Sin imagen").Bold().FontSize(16).FontColor(Colors.Green.Darken4);
+                                        }
+                                        row.RelativeItem().Text($"{variedad.nombre_comun} ({variedad.nombre_cientifico})").ExtraBold().FontSize(20).FontColor(Colors.Green.Darken4).AlignRight();
+                                    });
+                                    variedadColumn.Item().PaddingTop(5).Row(row =>
+                                    {
+                                        variedadColumn.Item().PaddingTop(10).CornerRadius(10).Column(detailsColumn =>
+                                        {
+                                            detailsColumn.Item().Table(table1 =>
+                                            {
+                                                table1.ColumnsDefinition(columns =>
+                                                {
+                                                    columns.RelativeColumn();
+                                                    columns.RelativeColumn();
+                                                });
+                                                table1.Cell().Row(1).Column(1).Background(Colors.Green.Lighten2).Padding(5).Text($"Potencial de rendimiento:").SemiBold();
+                                                table1.Cell().Row(1).Column(2).Background(Colors.Green.Lighten2).Padding(5).Text($"{(variedad.PotencialRendimiento != null ? variedad.PotencialRendimiento.nivel_rendimiento : "N/A")}");
+                                                table1.Cell().Row(2).Column(1).Background(Colors.Green.Lighten3).Padding(5).Text($"Calidad de grano: ").SemiBold();
+                                                table1.Cell().Row(2).Column(2).Background(Colors.Green.Lighten3).Padding(5).Text($"{(variedad.CalidadGrano != null ? variedad.CalidadGrano.nivel_calidad : "N/A")}");
+                                                if (variedad.InformacionAgronomica != null)
+                                                {
+                                                    table1.Cell().Row(3).Column(1).Background(Colors.Green.Lighten2).Padding(5).Text($"Tiempo de cosecha:").SemiBold();
+                                                    table1.Cell().Row(3).Column(2).Background(Colors.Green.Lighten2).Padding(5).Text($"{variedad.InformacionAgronomica.tiempo_cosecha}");
+                                                    table1.Cell().Row(4).Column(1).Background(Colors.Green.Lighten3).Padding(5).Text($"Maduración: ").SemiBold();
+                                                    table1.Cell().Row(4).Column(2).Background(Colors.Green.Lighten3).Padding(5).Text($"{variedad.InformacionAgronomica.maduracion}");
+                                                }
+                                            });
+                                        });
+                                        variedadColumn.Item().PaddingTop(10).CornerRadius(10).Row(row =>
                                         {
                                             // Tabla Detalles grano
                                             row.RelativeItem().Table(table =>
@@ -70,17 +103,17 @@ namespace Cafe_Colombiano.src.Shared.Helpers
                                                 table.Cell().ColumnSpan(2).Background(Colors.Green.Darken1).CornerRadiusTopLeft(10).Padding(5)
                                                     .Text("Detalles grano").FontColor(Colors.White).SemiBold().AlignCenter();
 
-                                                table.Cell().Text("Grupo Genético:").SemiBold().BackgroundColor(Colors.Green.Lighten2).FontSize(10);
-                                                table.Cell().Text(variedad.GrupoGenetico?.nombre_grupo ?? "N/A").BackgroundColor(Colors.Green.Lighten2).FontSize(10);
+                                                table.Cell().Background(Colors.Green.Lighten2).Padding(5).Text("Grupo Genético:").SemiBold().FontSize(10);
+                                                table.Cell().Background(Colors.Green.Lighten2).Padding(5).Text(variedad.GrupoGenetico?.nombre_grupo ?? "N/A").FontSize(10);
 
-                                                table.Cell().Text("Porte:").SemiBold().BackgroundColor(Colors.Green.Lighten3).FontSize(10);
-                                                table.Cell().Text(variedad.Porte?.nombre_porte ?? "N/A").BackgroundColor(Colors.Green.Lighten3).FontSize(10);
+                                                table.Cell().Background(Colors.Green.Lighten3).Padding(5).Text("Porte:").SemiBold().FontSize(10);
+                                                table.Cell().Background(Colors.Green.Lighten3).Padding(5).Text(variedad.Porte?.nombre_porte ?? "N/A").FontSize(10);
 
-                                                table.Cell().Text("Tamaño de grano:").SemiBold().BackgroundColor(Colors.Green.Lighten2).FontSize(10);
-                                                table.Cell().Text(variedad.TamanoGrano?.nombre_tamano ?? "N/A").BackgroundColor(Colors.Green.Lighten2).FontSize(10);
+                                                table.Cell().Background(Colors.Green.Lighten2).Padding(5).Text("Tamaño de grano:").SemiBold().FontSize(10);
+                                                table.Cell().Background(Colors.Green.Lighten2).Padding(5).Text(variedad.TamanoGrano?.nombre_tamano ?? "N/A").FontSize(10);
 
-                                                table.Cell().Text("Altitud óptima:").SemiBold().BackgroundColor(Colors.Green.Lighten3).FontSize(10);
-                                                table.Cell().Text(variedad.AltitudOptima?.rango_altitud ?? "N/A").BackgroundColor(Colors.Green.Lighten3).FontSize(10);
+                                                table.Cell().Background(Colors.Green.Lighten3).Padding(5).Text("Altitud óptima:").SemiBold().FontSize(10);
+                                                table.Cell().Background(Colors.Green.Lighten3).Padding(5).CornerRadiusBottomLeft(10).Text(variedad.AltitudOptima?.rango_altitud ?? "N/A").FontSize(10);
                                             });
 
                                             // Tabla Detalles agronómicos
@@ -96,29 +129,18 @@ namespace Cafe_Colombiano.src.Shared.Helpers
                                                 table.Cell().ColumnSpan(2).Background(Colors.Green.Darken1).CornerRadiusTopRight(10).Padding(5)
                                                     .Text("Detalles agronómicos").FontColor(Colors.White).SemiBold().AlignCenter();
 
-                                                table.Cell().Text("Potencial de rendimiento:").SemiBold().BackgroundColor(Colors.Green.Lighten2).FontSize(10);
-                                                table.Cell().Text(variedad.PotencialRendimiento?.nivel_rendimiento ?? "N/A").BackgroundColor(Colors.Green.Lighten2).FontSize(10);
+                                                table.Cell().Background(Colors.Green.Lighten2).Padding(5).Text("Potencial de rendimiento:").SemiBold().FontSize(10);
+                                                table.Cell().Background(Colors.Green.Lighten2).Padding(5).Text(variedad.PotencialRendimiento?.nivel_rendimiento ?? "N/A").FontSize(10);
 
-                                                table.Cell().Text("Calidad de grano:").SemiBold().BackgroundColor(Colors.Green.Lighten3).FontSize(10);
-                                                table.Cell().Text(variedad.CalidadGrano?.nivel_calidad ?? "N/A").BackgroundColor(Colors.Green.Lighten3).FontSize(10);
+                                                table.Cell().Background(Colors.Green.Lighten3).Padding(5).Text("Calidad de grano:").SemiBold().FontSize(10);
+                                                table.Cell().Background(Colors.Green.Lighten3).Padding(5).Text(variedad.CalidadGrano?.nivel_calidad ?? "N/A").FontSize(10);
 
-                                                table.Cell().Text("Tiempo de cosecha:").SemiBold().BackgroundColor(Colors.Green.Lighten2).FontSize(10);
-                                                table.Cell().Text(variedad.InformacionAgronomica?.tiempo_cosecha ?? "N/A").BackgroundColor(Colors.Green.Lighten2).FontSize(10);
+                                                table.Cell().Background(Colors.Green.Lighten2).Padding(5).Text("Tiempo de cosecha:").SemiBold().FontSize(10);
+                                                table.Cell().Background(Colors.Green.Lighten2).Padding(5).Text(variedad.InformacionAgronomica?.tiempo_cosecha ?? "N/A").FontSize(10);
 
-                                                table.Cell().Text("Maduración:").SemiBold().BackgroundColor(Colors.Green.Lighten3).FontSize(10);
-                                                table.Cell().Text(variedad.InformacionAgronomica?.maduracion ?? "N/A").BackgroundColor(Colors.Green.Lighten3).FontSize(10);
+                                                table.Cell().Background(Colors.Green.Lighten3).Padding(5).Text("Maduración:").SemiBold().FontSize(10);
+                                                table.Cell().Background(Colors.Green.Lighten3).Padding(5).CornerRadiusBottomRight(10).Text(variedad.InformacionAgronomica?.maduracion ?? "N/A").FontSize(10);
                                             });
-                                        });
-                                        row.RelativeItem().Column(detailsColumn =>
-                                        {
-                                            detailsColumn.Item().Text($"Potencial de rendimiento: {(variedad.PotencialRendimiento != null ? variedad.PotencialRendimiento.nivel_rendimiento : "N/A")}");
-                                            detailsColumn.Item().Text($"Calidad de grano: {(variedad.CalidadGrano != null ? variedad.CalidadGrano.nivel_calidad : "N/A")}");
-
-                                            if (variedad.InformacionAgronomica != null)
-                                            {
-                                                detailsColumn.Item().Text($"Tiempo de cosecha: {variedad.InformacionAgronomica.tiempo_cosecha}");
-                                                detailsColumn.Item().Text($"Maduración: {variedad.InformacionAgronomica.maduracion}");
-                                            }
                                         });
                                     });
 
@@ -147,10 +169,10 @@ namespace Cafe_Colombiano.src.Shared.Helpers
                         });
 
                     page.Footer()
-                        .AlignCenter()
+                        .AlignRight()
                         .Text(x =>
                         {
-                            x.Span("Página ");
+                            x.Span("Pg: ");
                             x.CurrentPageNumber();
                         });
                 });
