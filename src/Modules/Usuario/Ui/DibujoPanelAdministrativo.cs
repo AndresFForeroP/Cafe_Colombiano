@@ -10,7 +10,7 @@ namespace Cafe_Colombiano.src.Modules.Usuario.Ui
         public bool Admin { get; private set; }
 
 
-        public void Inicio()
+        public async void Inicio()
         {
             int salida = 0;
             do
