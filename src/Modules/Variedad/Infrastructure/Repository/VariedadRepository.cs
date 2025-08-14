@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
 {
     public class VariedadRepository : IVariedadRepository
-    public class VariedadRepository : IVariedadRepository
     {
         private readonly DbContext _context;
 
@@ -50,9 +49,9 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
                     .ThenInclude(vr => vr.TipoResistencia)
                 .FirstOrDefaultAsync(v => v.id == id);
         }
-        public void Add(Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad entity)
+        public async Task Add(Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad entity)
         {
-            _context.Set<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad>().Add(entity);
+            await _context.Set<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad>().AddAsync(entity);
         }
         public void Remove(Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad entity)
         {
@@ -532,5 +531,6 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
             while (salida < 1 || salida > maximo);
             return salida;
         }
+
     }
 }

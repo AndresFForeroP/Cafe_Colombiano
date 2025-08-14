@@ -17,7 +17,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
         }
         public async Task ShowCatalogo()
         {
-            var variedades = await _repo.ConsultarCatalogoAsync();
+            var variedades = await _repo.GetAllVariedadesAsync();
 
             if (variedades.Any())
             {

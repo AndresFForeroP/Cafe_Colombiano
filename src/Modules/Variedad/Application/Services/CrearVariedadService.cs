@@ -138,7 +138,8 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
                 NivelResistencia = nuevoNivelResistencia
             });
 
-            await _variedadService.CrearVariedadAsync(nuevaVariedad);
+            await _variedadService.Add(nuevaVariedad);
+            await _variedadService.SaveAsync();
 
             Console.WriteLine("Variedad creada exitosamente.");
         }
