@@ -13,11 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Cafe_Colombiano")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-<<<<<<< HEAD
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6b3c1fb413bcf49db712482bea20b5fd46113e6b")]
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+59a1cfc5308291285e5e61530e2987f82b9be94a")]
->>>>>>> feature/Menu_arreglos
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7ad6fc73d65014e6e8583e05b4f10d22d286ac87")]
 [assembly: System.Reflection.AssemblyProductAttribute("Cafe_Colombiano")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Cafe_Colombiano")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

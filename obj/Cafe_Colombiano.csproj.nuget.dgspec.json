@@ -1,20 +1,6 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "C:\\Users\\HP\\Desktop\\Cafe_Colombiano\\Cafe_Colombiano.csproj": {}
-  },
-  "projects": {
-    "C:\\Users\\HP\\Desktop\\Cafe_Colombiano\\Cafe_Colombiano.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\HP\\Desktop\\Cafe_Colombiano\\Cafe_Colombiano.csproj",
-        "projectName": "Cafe_Colombiano",
-        "projectPath": "C:\\Users\\HP\\Desktop\\Cafe_Colombiano\\Cafe_Colombiano.csproj",
-        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HP\\Desktop\\Cafe_Colombiano\\obj\\",
-=======
     "C:\\Proyectos visual\\C#\\Proyecto Final\\v2\\Cafe_Colombiano\\Cafe_Colombiano.csproj": {}
   },
   "projects": {
@@ -26,26 +12,9 @@
         "projectPath": "C:\\Proyectos visual\\C#\\Proyecto Final\\v2\\Cafe_Colombiano\\Cafe_Colombiano.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
         "outputPath": "C:\\Proyectos visual\\C#\\Proyecto Final\\v2\\Cafe_Colombiano\\obj\\",
->>>>>>> feature/FiltrosT
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config"
-=======
-    "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj": {}
-  },
-  "projects": {
-    "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj",
-        "projectName": "Cafe_Colombiano",
-        "projectPath": "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj",
-        "packagesPath": "/home/camper/.nuget/packages/",
-        "outputPath": "/home/camper/Cafe_Colombiano/obj/",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "/home/camper/.nuget/NuGet/NuGet.Config"
->>>>>>> feature/Menu_arreglos
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -69,7 +38,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net9.0": {
@@ -130,11 +99,7 @@
               "privateAssets": "all"
             }
           },
-<<<<<<< HEAD
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
-=======
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.203/PortableRuntimeIdentifierGraph.json"
->>>>>>> feature/Menu_arreglos
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
