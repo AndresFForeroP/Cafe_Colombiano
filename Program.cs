@@ -10,8 +10,8 @@ internal class Program
 {
     public static async Task Main(string[] args)
     {
-        Console.ForegroundColor = ConsoleColor.DarkCyan;
-        var Saludo = new DibujoMenusUsuario();
-        await Saludo.Iniciar();
+         var autenticador = new AutenticadorUsuario("admin", "12345");
+        var menuUsuario = new DibujoMenusUsuario(autenticador);
+        await menuUsuario.Iniciar();
     }
 }

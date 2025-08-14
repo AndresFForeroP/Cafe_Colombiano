@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     "net9.0": {
+      "ConsoleGUI/1.4.2": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/ConsoleGUI.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/ConsoleGUI.dll": {}
+        }
+      },
       "Humanizer.Core/2.14.1": {
         "type": "package",
         "compile": {
@@ -966,6 +975,22 @@
           }
         }
       },
+      "Spectre.Console/0.50.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Memory": "4.6.3"
+        },
+        "compile": {
+          "lib/net9.0/Spectre.Console.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/Spectre.Console.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.CodeDom/6.0.0": {
         "type": "package",
         "compile": {
@@ -1124,6 +1149,15 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
+      "System.Memory/4.6.3": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp2.1/_._": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.1/_._": {}
+        }
+      },
       "System.Reflection.Metadata/7.0.0": {
         "type": "package",
         "dependencies": {
@@ -1194,6 +1228,18 @@
     }
   },
   "libraries": {
+    "ConsoleGUI/1.4.2": {
+      "sha512": "xLJW4hsnybSDYUzxQQRv4rcEQsgln9GZh+/Zk4bbNV2EBbgB++XOnwyzLlsIiMiJxUivyo1tls251Xf7zaU9ag==",
+      "type": "package",
+      "path": "consolegui/1.4.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "consolegui.1.4.2.nupkg.sha512",
+        "consolegui.nuspec",
+        "lib/netstandard2.0/ConsoleGUI.dll"
+      ]
+    },
     "Humanizer.Core/2.14.1": {
       "sha512": "lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
       "type": "package",
@@ -2965,6 +3011,25 @@
         "runtimes/win-x86/native/qpdf.dll"
       ]
     },
+    "Spectre.Console/0.50.0": {
+      "sha512": "gkwYncFqMjlPF6Yz8KeVsKWpdfv15sr6uKm+vXVa/8Q4tvx52LPzMQOO5m+bXwI3AGGFeY3cok3ZJbguYizswg==",
+      "type": "package",
+      "path": "spectre.console/0.50.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net8.0/Spectre.Console.dll",
+        "lib/net8.0/Spectre.Console.xml",
+        "lib/net9.0/Spectre.Console.dll",
+        "lib/net9.0/Spectre.Console.xml",
+        "lib/netstandard2.0/Spectre.Console.dll",
+        "lib/netstandard2.0/Spectre.Console.xml",
+        "logo.png",
+        "spectre.console.0.50.0.nupkg.sha512",
+        "spectre.console.nuspec"
+      ]
+    },
     "System.CodeDom/6.0.0": {
       "sha512": "CPc6tWO1LAer3IzfZufDBRL+UZQcj5uS207NHALQzP84Vp/z6wF0Aa0YZImOQY8iStY0A2zI/e3ihKNPfUm8XA==",
       "type": "package",
@@ -3200,6 +3265,27 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "System.Memory/4.6.3": {
+      "sha512": "qdcDOgnFZY40+Q9876JUHnlHu7bosOHX8XISRoH94fwk6hgaeQGSgfZd8srWRZNt5bV9ZW2TljcegDNxsf+96A==",
+      "type": "package",
+      "path": "system.memory/4.6.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "PACKAGE.md",
+        "buildTransitive/net461/System.Memory.targets",
+        "buildTransitive/net462/_._",
+        "lib/net462/System.Memory.dll",
+        "lib/net462/System.Memory.xml",
+        "lib/netcoreapp2.1/_._",
+        "lib/netstandard2.0/System.Memory.dll",
+        "lib/netstandard2.0/System.Memory.xml",
+        "lib/netstandard2.1/_._",
+        "system.memory.4.6.3.nupkg.sha512",
+        "system.memory.nuspec"
+      ]
+    },
     "System.Reflection.Metadata/7.0.0": {
       "sha512": "MclTG61lsD9sYdpNz9xsKBzjsmsfCtcMZYXz/IUr2zlhaTaABonlr1ESeompTgM+Xk+IwtGYU7/voh3YWB/fWw==",
       "type": "package",
@@ -3356,21 +3442,28 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "ConsoleGUI >= 1.4.2",
       "Microsoft.EntityFrameworkCore >= 9.0.8",
       "Microsoft.EntityFrameworkCore.Design >= 9.0.8",
       "Microsoft.Extensions.Configuration >= 9.0.8",
       "Microsoft.Extensions.Configuration.EnvironmentVariables >= 9.0.8",
       "Microsoft.Extensions.Configuration.Json >= 9.0.8",
       "Pomelo.EntityFrameworkCore.MySql >= 9.0.0-rc.1.efcore.9.0.0",
-      "QuestPDF >= 2025.7.0"
+      "QuestPDF >= 2025.7.0",
+      "Spectre.Console >= 0.50.0"
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "C:\\Users\\HP\\.nuget\\packages\\": {}
+=======
+    "/home/camper/.nuget/packages/": {}
+>>>>>>> feature/Menu_arreglos
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
 <<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\HP\\Desktop\\Cafe_Colombiano\\Cafe_Colombiano.csproj",
       "projectName": "Cafe_Colombiano",
@@ -3387,6 +3480,16 @@
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config"
+=======
+      "projectUniqueName": "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj",
+      "projectName": "Cafe_Colombiano",
+      "projectPath": "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj",
+      "packagesPath": "/home/camper/.nuget/packages/",
+      "outputPath": "/home/camper/Cafe_Colombiano/obj/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/home/camper/.nuget/NuGet/NuGet.Config"
+>>>>>>> feature/Menu_arreglos
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -3410,12 +3513,16 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net9.0": {
         "targetAlias": "net9.0",
         "dependencies": {
+          "ConsoleGUI": {
+            "target": "Package",
+            "version": "[1.4.2, )"
+          },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
             "version": "[9.0.8, )"
@@ -3445,6 +3552,10 @@
           "QuestPDF": {
             "target": "Package",
             "version": "[2025.7.0, )"
+          },
+          "Spectre.Console": {
+            "target": "Package",
+            "version": "[0.50.0, )"
           }
         },
         "imports": [
@@ -3463,7 +3574,11 @@
             "privateAssets": "all"
           }
         },
+<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
+=======
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.203/PortableRuntimeIdentifierGraph.json"
+>>>>>>> feature/Menu_arreglos
       }
     }
   }

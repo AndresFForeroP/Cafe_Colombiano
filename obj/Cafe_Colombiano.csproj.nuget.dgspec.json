@@ -2,6 +2,7 @@
   "format": 1,
   "restore": {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "C:\\Users\\HP\\Desktop\\Cafe_Colombiano\\Cafe_Colombiano.csproj": {}
   },
   "projects": {
@@ -29,6 +30,22 @@
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config"
+=======
+    "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj": {}
+  },
+  "projects": {
+    "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj",
+        "projectName": "Cafe_Colombiano",
+        "projectPath": "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj",
+        "packagesPath": "/home/camper/.nuget/packages/",
+        "outputPath": "/home/camper/Cafe_Colombiano/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/camper/.nuget/NuGet/NuGet.Config"
+>>>>>>> feature/Menu_arreglos
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -52,12 +69,16 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "ConsoleGUI": {
+              "target": "Package",
+              "version": "[1.4.2, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[9.0.8, )"
@@ -87,6 +108,10 @@
             "QuestPDF": {
               "target": "Package",
               "version": "[2025.7.0, )"
+            },
+            "Spectre.Console": {
+              "target": "Package",
+              "version": "[0.50.0, )"
             }
           },
           "imports": [
@@ -105,7 +130,11 @@
               "privateAssets": "all"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
+=======
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.203/PortableRuntimeIdentifierGraph.json"
+>>>>>>> feature/Menu_arreglos
         }
       }
     }
