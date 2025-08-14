@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Cafe_Colombiano.src.Modules.Variedad.Application.Interfaces;
+using Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository;
 
 namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
 {
-    public class VariedadShowCatalogoService : IVariedadMenuController
+    public class VariedadShowCatalogoService 
     {
-        private readonly IVariedadService _variedadService;
+        private readonly VariedadRepository _repo;
 
-        public VariedadShowCatalogoService(IVariedadService variedadService)
+        public VariedadShowCatalogoService(VariedadRepository repo)
         {
-            _variedadService = variedadService;
+            _repo = repo;
         }
-        public async Task HandleShowCatalogo()
+        public async Task ShowCatalogo()
         {
-            var variedades = await _variedadService.ConsultarCatalogoAsync(); 
+            var variedades = await _repo.ConsultarCatalogoAsync();
 
             if (variedades.Any())
             {
-                var catalogo = await _variedadService.ConsultarCatalogoAsync();
-                foreach (var u in catalogo)
+                foreach (var u in variedades)
                 {
                     Console.WriteLine("".PadRight(80, '='));
                     Console.WriteLine($"ID: {u.id}, Nombre: {u.nombre_comun} ({u.nombre_cientifico})\n");
@@ -43,13 +43,10 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
             {
                 Console.WriteLine("No hay variedades disponibles para mostrar.");
 
-        //     var context = DbContextFactory.Create();
-        // var variedadRepository = new VariedadRepository(context); // Implement VariedadRepository if not already done
-        // var variedadService = new VariedadService(variedadRepository);
-        // var menuController = new VariedadShowCatalogoService(variedadService);
-        // await menuController.HandleShowCatalogo();
             }
 
         }
+
     }
 }
+
