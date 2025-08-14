@@ -18,7 +18,5 @@ internal class Program
         var filtroServices = new FiltroServices(repo);
 
         await filtroServices.Filtrar();
-        Console.WriteLine("\nPresiona cualquier tecla para salir...");
-        Console.ReadKey();
     }
 }
