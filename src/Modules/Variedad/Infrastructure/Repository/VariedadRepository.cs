@@ -9,7 +9,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
 {
     public class VariedadRepository : IVariedadRepository
     {
-        private readonly DbContext _context;
+        internal readonly DbContext _context;
 
         public VariedadRepository(DbContext context)
         {
@@ -53,14 +53,16 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
         {
             await _context.Set<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad>().AddAsync(entity);
         }
-        public void Remove(Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad entity)
+        public async Task Remove(Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad entity)
         {
             _context.Set<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad>().Remove(entity);
+            await _context.SaveChangesAsync();
         }
-        
-        public void Update(Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad entity)
+
+        public async Task Update(Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad entity)
         {
             _context.Set<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad>().Update(entity);
+            await _context.SaveChangesAsync();
         }
 
         public async Task SaveAsync()
@@ -68,10 +70,6 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
             await _context.SaveChangesAsync();
         }
         public Task ActualizarVariedadAsync(Domain.Entities.Variedad variedad)
-        {
-            throw new NotImplementedException();
-        }
-        public Task EliminarVariedadAsync(int id)
         {
             throw new NotImplementedException();
         }

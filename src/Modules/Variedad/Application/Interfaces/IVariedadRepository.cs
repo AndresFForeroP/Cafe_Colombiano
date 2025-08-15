@@ -10,11 +10,11 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Interfaces
         Task<IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad>> GetAllVariedadesAsync();
         public Task<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad?> GetVariedadByIdAsync(int id);
         public Task Add(Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad entity);
-        public void Remove(Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad entity);
-        public void Update(Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad entity);
+        public Task Remove(Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad entity);
+        public Task Update(Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad entity);
         public Task SaveAsync();
         public Task ActualizarVariedadAsync(Domain.Entities.Variedad variedad);
-        public Task EliminarVariedadAsync(int id);
+
         public IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorNombre(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista);
         public IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorPorte(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista);
         public IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorTamano(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista);

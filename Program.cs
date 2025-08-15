@@ -20,9 +20,20 @@ internal class Program
 {
     public static async Task Main(string[] args)
     {
-        var autenticador = new AutenticadorUsuario("admin", "12345");
-        var menuUsuario = new DibujoMenusUsuario(autenticador);
-        await menuUsuario.Iniciar();
+        // Crea el contexto de base de datos
+        // Usa tu clase de contexto real
+
+        // Instancia el repositorio
+
+        // Ahora puedes usarlo
+
+        var context = DbContextFactory.Create();
+        var variedadRepository = new VariedadRepository(context);
+        var eliminar = new EliminarVariedad(variedadRepository);
+        var crearVariedadService = new CrearVariedadService(variedadRepository);
+
+        await crearVariedadService.CrearVariedad();
+        await eliminar.EliminarVariedadAsync();
     }
 
 }

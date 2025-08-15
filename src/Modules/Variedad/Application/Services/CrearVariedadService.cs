@@ -90,6 +90,8 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
             Console.Write("Ingrese el rango de Altitud: ");
             var rangoAltitud = Console.ReadLine();
 
+            // VariedadResistencia
+
             //NUEVA VARIEDAD
             var nuevaVariedad = new Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad
             {
