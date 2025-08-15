@@ -57,7 +57,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
         {
             _context.Set<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad>().Remove(entity);
         }
-
+        
         public void Update(Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad entity)
         {
             _context.Set<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad>().Update(entity);
@@ -531,6 +531,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
             while (salida < 1 || salida > maximo);
             return salida;
         }
+
 
     }
 }
