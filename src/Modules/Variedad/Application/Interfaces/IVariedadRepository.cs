@@ -13,7 +13,6 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Interfaces
         public Task Remove(Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad entity);
         public Task Update(Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad entity);
         public Task SaveAsync();
-        public Task ActualizarVariedadAsync(Domain.Entities.Variedad variedad);
 
         public IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorNombre(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista);
         public IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorPorte(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista);

@@ -29,7 +29,7 @@ internal class Program
 
         var context = DbContextFactory.Create();
         var variedadRepository = new VariedadRepository(context);
-        var eliminar = new EliminarVariedad(variedadRepository);
+        var eliminar = new EliminarVariedadService(variedadRepository);
         var crearVariedadService = new CrearVariedadService(variedadRepository);
 
         await crearVariedadService.CrearVariedad();

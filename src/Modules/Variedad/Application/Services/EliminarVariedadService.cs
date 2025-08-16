@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
 {
-    public class EliminarVariedad
+    public class EliminarVariedadService
     {
         private readonly VariedadRepository _repo;
 
-        public EliminarVariedad(VariedadRepository repo)
+        public EliminarVariedadService(VariedadRepository repo)
         {
             _repo = repo;
 
