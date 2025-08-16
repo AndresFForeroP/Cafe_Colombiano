@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Cafe_Colombiano.src.Modules.Usuario.Application.Interfaces;
 using Cafe_Colombiano.src.Modules.Usuario.Ui;
 using Spectre.Console;
+using SkiaSharp;
 
 namespace Cafe_Colombiano.src.Modules.Usuario.Ui
 {
@@ -40,14 +41,29 @@ namespace Cafe_Colombiano.src.Modules.Usuario.Ui
             _autenticador = autenticador;
         }
 
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
         public DibujoMenusUsuario()
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
         {
+            _autenticador = new AutenticadorUsuario("admin", "1234");
+        }
+
+        // === Pantalla de bienvenida con ASCII Art ===
+        public void MostrarBienvenida()
+        {
+            Console.Clear();
+            AnsiConsole.Write(
+                new FigletText("Cafe Colombiano")
+                    .Centered()
+                    .Color(Color.Green));
+
+            AnsiConsole.MarkupLine("[bold yellow]🌱 Bienvenido al Sistema Administrativo de Café Colombiano[/]");
+            AnsiConsole.MarkupLine("[dim]Presione cualquier tecla para continuar...[/]");
+            Console.ReadKey();
         }
 
         public async Task Iniciar()
         {
+            MostrarBienvenida(); // <<< Nueva bienvenida
+
             int salida = 0;
             do
             {
@@ -58,8 +74,11 @@ namespace Cafe_Colombiano.src.Modules.Usuario.Ui
                 }
                 if (salida == 9)
                 {
-                    MostrarCargando("Saliendo del sistema");
-                    Environment.Exit(0);
+                    if (ConfirmarSalida())
+                    {
+                        MostrarCargaInteractiva("Saliendo del sistema...");
+                        Environment.Exit(0);
+                    }
                 }
             }
             while (salida != 1 && salida != 2 && salida != 3 && salida != 9);
@@ -69,40 +88,51 @@ namespace Cafe_Colombiano.src.Modules.Usuario.Ui
 
         private async Task EjecutarOpcionAsync(int opcion)
         {
-            switch (opcion)
+            do
             {
-                case 1:
-                    MostrarCargando("Abriendo catálogo de productos");
-                    var dibujoExplorarVariedades = new DibujoExplorarVariedades();
-                    await dibujoExplorarVariedades.IniciarAsync();
-                    break;
+                switch (opcion)
+                {
+                    case 1:
+                        MostrarCargaInteractiva("Abriendo catálogo de productos...");
+                        var dibujoExplorarVariedades = new DibujoExplorarVariedades();
+                        await dibujoExplorarVariedades.IniciarAsync();
+                        break;
 
-                case 2:
-                    if (LoginConIntentos())
-                    {
-                        MostrarCargando("Accediendo al Panel Administrativo");
-                        var dibujoPanelAdministrativo = new DibujoPanelAdministrativo();
-                        dibujoPanelAdministrativo.Inicio();
-                    }
-                    else
-                    {
-                        MostrarMensajeError("🚫 Acceso bloqueado. Demasiados intentos fallidos.");
-                    }
-                    break;
+                    case 2:
+                        if (LoginConIntentos())
+                        {
+                            Console.Clear();
+                            MostrarCargaInteractiva("Accediendo al Panel Administrativo...");
+                            var dibujoPanelAdministrativo = new DibujoPanelAdministrativo();
+                            await dibujoPanelAdministrativo.Inicio();
+                        }
+                        else
+                        {
+                            MostrarMensajeError("🚫 Acceso bloqueado. Demasiados intentos fallidos.");
+                            MostrarMensajeError("SALIENDO DEL SISTEMA POR SEGURIDAD");
+                            Environment.Exit(0);
+                        }
+                        break;
 
-                case 3:
-                    MostrarCargando("Saliendo del sistema");
-                    Environment.Exit(0);
-                    break;
+                    case 3:
+                        if (ConfirmarSalida())
+                        {
+                            MostrarCargaInteractiva("Saliendo del sistema...");
+                            GifRenderer.MostrarGifEnConsola("/home/camper/Cafe_Colombiano/video/fall-kirby.gif");
+                            Environment.Exit(0);
+                        }
+                        break;
 
-                default:
-                    MostrarMensajeError("Opción no válida, por favor intente de nuevo.");
-                    break;
-            }
+                    default:
+                        MostrarMensajeError("Opción no válida, por favor intente de nuevo.");
+                        break;
+                }
+            } while (opcion != 3);
         }
 
         private bool LoginConIntentos()
         {
+            const int MAX_INTENTOS = 3;
             int intentos = 0;
 
             while (intentos < MAX_INTENTOS)
@@ -113,9 +143,7 @@ namespace Cafe_Colombiano.src.Modules.Usuario.Ui
                 Console.ResetColor();
 
                 Console.Write("Usuario: ");
-#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
                 string usuario = Console.ReadLine();
-#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
 
                 Console.Write("Contraseña: ");
                 string contrasena = LeerContrasenaOculta();
@@ -154,62 +182,59 @@ namespace Cafe_Colombiano.src.Modules.Usuario.Ui
             Console.WriteLine();
             return contrasena;
         }
-public async Task DibujarMenuColorido()
-{
-    Console.Clear();
-    // Encabezado
-    Console.ForegroundColor = ConsoleColor.Cyan;
-    Console.WriteLine("╔════════════════════════════════════════╗");
-    Console.WriteLine("║    🌱 Sistema Administrativo Café      ║");
-    Console.WriteLine("╚════════════════════════════════════════╝");
-    Console.ResetColor();
-    Console.WriteLine();
 
-    // Menú interactivo con Spectre.Console
-    var opcionSeleccionada = Spectre.Console.AnsiConsole.Prompt(
-        new Spectre.Console.SelectionPrompt<string>()
-            .Title("[cyan]Seleccione una opción:[/]")
-            .HighlightStyle(Spectre.Console.Style.Parse("yellow"))
-            .AddChoices(
-                "☕ Explorar productos",
-                "🛠 Panel administrativo",
-                "❌ Salir del sistema"
-            )
-    );
-
-    // Mapear las opciones seleccionadas a números
-    switch (opcionSeleccionada)
-    {
-        case "☕ Explorar productos":
-            await EjecutarOpcionAsync(1);
-            break;
-        case "🛠 Panel administrativo":
-            await EjecutarOpcionAsync(2);
-            break;
-        case "❌ Salir del sistema":
-            await EjecutarOpcionAsync(9);
-            break;
-    }
-}
-
-        private void MostrarImagenEnConsola(string v1, int v2)
+        public async Task DibujarMenuColorido()
         {
-            throw new NotImplementedException();
+            Console.Clear();
+            // Encabezado
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("╔════════════════════════════════════════╗");
+            Console.WriteLine("║    🌱 Sistema Administrativo Café      ║");
+            Console.WriteLine("╚════════════════════════════════════════╝");
+            Console.ResetColor();
+            Console.WriteLine();
+
+            var opcionSeleccionada = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .Title("[cyan]Seleccione una opción:[/]")
+                    .HighlightStyle(Style.Parse("yellow"))
+                    .AddChoices(
+                        "☕ Explorar productos",
+                        "🛠 Panel administrativo",
+                        "❌ Salir del sistema"
+                    )
+            );
+
+            switch (opcionSeleccionada)
+            {
+                case "☕ Explorar productos":
+                    await EjecutarOpcionAsync(1);
+                    break;
+                case "🛠 Panel administrativo":
+                    await EjecutarOpcionAsync(2);
+                    break;
+                case "❌ Salir del sistema":
+                    await EjecutarOpcionAsync(3);
+                    break;
+            }
         }
 
-        private void MostrarCargando(string mensaje)
+        private void MostrarCargaInteractiva(string mensaje)
         {
-            
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.Write(mensaje);
-            Console.ResetColor();
-            for (int i = 0; i < 3; i++)
-            {
-                Thread.Sleep(300);
-                Console.Write(".");
-            }
-            Console.WriteLine();
-            Thread.Sleep(300);
+            AnsiConsole.Status()
+                .Spinner(Spinner.Known.Dots2)
+                .SpinnerStyle(Style.Parse("green"))
+                .Start(mensaje, ctx =>
+                {
+                    Thread.Sleep(1500);
+                });
+        }
+
+        
+        private bool ConfirmarSalida()
+        {
+            var confirmacion = AnsiConsole.Confirm("[red]¿Está seguro de que desea salir del sistema?[/]");
+            return confirmacion;
         }
 
         private void MostrarMensajeError(string mensaje)
@@ -218,7 +243,7 @@ public async Task DibujarMenuColorido()
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(mensaje);
             Console.ResetColor();
-            Thread.Sleep(400);
+            Thread.Sleep(800);
             Console.Clear();
         }
     }

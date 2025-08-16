@@ -1,57 +1,54 @@
-//using System;
-//using System.Text;
-//using SixLabors.ImageSharp;
-//using SixLabors.ImageSharp.PixelFormats;
-//using SixLabors.ImageSharp.Processing;
-//
-//namespace Cafe_Colombiano.src.Modules.Usuario.Ui
-//{
-//    public static class ImagenConsola
-//    {
-//        public static void MostrarImagenEnConsola(string rutaImagen, int anchoMax = 60)
-//        {
-//            try
-//            {
-//                using (var imagen = Image.Load<Rgba32>(rutaImagen))
-//                {
-//                    // Ajustar brillo y contraste para mejor visualización
-//                    imagen.Mutate(x =>
-//                        x.Contrast(1.8f) // aumenta contraste
-//                         .Brightness(2f) // aumenta brillo
-//                    );
-//
-//                    // Mantener proporción
-//                    double relacion = (double)imagen.Height / imagen.Width;
-//                    int nuevoAlto = (int)(anchoMax * relacion);
-//                    imagen.Mutate(x => x.Resize(anchoMax, nuevoAlto));
-//
-//                    // Mapa de caracteres para sombreado (de oscuro a claro)
-//                    string caracteres = "@%#*+=-:. ";
-//
-//                    // Calcular margen izquierdo para centrar la imagen
-//                    int margenIzquierdo = Math.Max(0, (Console.WindowWidth - anchoMax) / 2);
-//
-//                    for (int y = 0; y < imagen.Height; y++)
-//                    {
-//                        StringBuilder linea = new StringBuilder();
-//                        linea.Append(' ', margenIzquierdo); // añadir espacios para centrar
-//                        for (int x = 0; x < imagen.Width; x++)
-//                        {
-//                            var pixel = imagen[x, y];
-//                            var gris = (pixel.R + pixel.G + pixel.B) / 3;
-//                            int indice = gris * (caracteres.Length - 1) / 255;
-//                            linea.Append(caracteres[indice]);
-//                        }
-//                        Console.WriteLine(linea.ToString());
-//                    }
-//                }
-//            }
-//            catch (Exception ex)
-//            {
-//                Console.ForegroundColor = ConsoleColor.Red;
-//                Console.WriteLine($"Error mostrando imagen: {ex.Message}");
-//                Console.ResetColor();
-//            }
-//        }
-//    }
-//}
+using SkiaSharp;
+
+public static class GifRenderer
+{
+    public static void MostrarGifEnConsola(string rutaGif)
+    {
+        using var stream = File.OpenRead(rutaGif);
+        using var codec = SKCodec.Create(stream);
+
+        var frameInfos = codec.FrameInfo;
+        var info = new SKImageInfo(codec.Info.Width, codec.Info.Height);
+        using var bitmap = new SKBitmap(info);
+
+        // Paleta de caracteres para distintos niveles de gris
+        string charset = "@%#*+=-:. ";
+
+        // Tamaño dinámico según la consola
+        int ancho = Console.WindowWidth - 1;
+        int alto = (Console.WindowHeight - 1) * 2; // compensar aspecto
+
+        Console.CursorVisible = false;
+
+        for (int i = 0; i < frameInfos.Length; i++)
+        {
+            var opts = new SKCodecOptions(i);
+            codec.GetPixels(info, bitmap.GetPixels(), opts);
+
+            Console.SetCursorPosition(0, 0); // más fluido que Clear()
+
+            for (int y = 0; y < alto; y++)
+            {
+                for (int x = 0; x < ancho; x++)
+                {
+                    int srcX = x * bitmap.Width / ancho;
+                    int srcY = y * bitmap.Height / alto;
+
+                    SKColor color = bitmap.GetPixel(srcX, srcY);
+
+                    int gray = (color.Red + color.Green + color.Blue) / 3;
+                    int idx = gray * (charset.Length - 1) / 255;
+
+                    Console.Write(charset[idx]);
+                }
+                Console.WriteLine();
+            }
+
+            int delay = frameInfos[i].Duration;
+            if (delay <= 0) delay = 33; // default más rápido
+            Thread.Sleep(delay);
+        }
+
+        Console.CursorVisible = true;
+    }
+}

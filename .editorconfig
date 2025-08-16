@@ -1,4 +1,7 @@
 [*.cs]
 
-# CS8604: Possible null reference argument.
-dotnet_diagnostic.CS8604.severity = none
+# CS8600: Se va a convertir un literal nulo o un posible valor nulo en un tipo que no acepta valores NULL
+dotnet_diagnostic.CS8600.severity = silent
+
+# CS8604: Posible argumento de referencia nulo
+dotnet_diagnostic.CS8604.severity = silent
