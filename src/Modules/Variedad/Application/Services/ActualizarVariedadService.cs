@@ -2,30 +2,27 @@ using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository;
+using Cafe_Colombiano.src.Modules.Variedad.Application.Interfaces;
+using Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository;
 
     namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
     {
     public class ActualizarVariedadService
     {
-        private readonly VariedadRepository _VariedadRepository;
+        private readonly IVariedadRepository _VariedadRepository;
 
-        public ActualizarVariedadService(VariedadRepository variedadRepository)
+        public ActualizarVariedadService(IVariedadRepository variedadRepository)
         {
             _VariedadRepository = variedadRepository;
         }
+
         public async Task ActualizarVariedad()
         {
             Console.Clear();
             Console.WriteLine("Actualizar Variedad");
             Console.WriteLine("-------------------");
 
-            var variedades = await _VariedadRepository.GetAllVariedadesAsync();
-
-            foreach (var variedad in variedades)
-            {
-                Console.WriteLine($"ID: {variedad.id}, Nombre: {variedad.nombre_comun} ({variedad.nombre_cientifico})");
-            }
+            _VariedadRepository.MostrasListaIds();
 
             Console.Write("Ingrese el ID de la variedad a actualizar: ");
             if (int.TryParse(Console.ReadLine(), out int id))
@@ -118,12 +115,14 @@ using System;
                 Console.WriteLine("ID inválido.");
             }
         }
+
         private string PedirDatoOpcional(string mensaje, string valorActual)
         {
             Console.Write($"{mensaje} (actual: {valorActual}): ");
             var entrada = Console.ReadLine();
             return string.IsNullOrWhiteSpace(entrada) ? valorActual : entrada;
         }
+ 
 
         }
     }
