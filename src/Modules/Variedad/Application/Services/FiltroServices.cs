@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Cafe_Colombiano.src.Modules.Variedad.Application.Interfaces;
+using Spectre.Console;
 
 namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
 {
@@ -103,82 +104,41 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
             }
             return id;
         }
-        private void ImprimirMenuFiltros(List<string> filtros)
+       private void ImprimirMenuFiltros(List<string> filtros)
         {
-            bool hayFiltrosDisponibles = false;
-            Console.WriteLine("""
-        ============================================================
-                    F I L T R O S   D I S P O N I B L E S
-        ============================================================
-        """);
-            if (!filtros.Contains("nombre"))
+            var opciones = new List<string>();
+
+            if (!filtros.Contains("nombre")) opciones.Add("1. Filtrar por Nombre de grano");
+            if (!filtros.Contains("porte")) opciones.Add("2. Filtrar por Porte del grano");
+            if (!filtros.Contains("tamano")) opciones.Add("3. Filtrar por Tamaño del grano");
+            if (!filtros.Contains("altitud")) opciones.Add("4. Filtrar por Altitud del grano");
+            if (!filtros.Contains("rendimiento")) opciones.Add("5. Filtrar por Rendimiento del grano");
+            if (!filtros.Contains("calidad")) opciones.Add("6. Filtrar por Calidad del grano");
+            if (!filtros.Contains("resistencia")) opciones.Add("7. Filtrar por Resistencia del grano");
+            if (!filtros.Contains("tiempocosecha")) opciones.Add("8. Filtrar por Tiempo de cosecha del grano");
+            if (!filtros.Contains("maduracion")) opciones.Add("9. Filtrar por Maduración del grano");
+            if (!filtros.Contains("nutricion")) opciones.Add("10. Filtrar por Nutrición del grano");
+            if (!filtros.Contains("densidad")) opciones.Add("11. Filtrar por Densidad del grano");
+            if (!filtros.Contains("grupo")) opciones.Add("12. Filtrar por Grupo del grano");
+
+            if (opciones.Count == 0)
             {
-                Console.WriteLine("1. Filtrar por Nombre de grano");
-                hayFiltrosDisponibles = true;
-            }
-            if (!filtros.Contains("porte"))
-            {
-                Console.WriteLine("2. Filtrar por Porte del grano");
-                hayFiltrosDisponibles = true;
-            }
-            if (!filtros.Contains("tamano"))
-            {
-                Console.WriteLine("3. Filtrar por Tamaño del grano");
-                hayFiltrosDisponibles = true;
-            }
-            if (!filtros.Contains("altitud"))
-            {
-                Console.WriteLine("4. Filtrar por Altitud del grano");
-                hayFiltrosDisponibles = true;
-            }
-            if (!filtros.Contains("rendimiento"))
-            {
-                Console.WriteLine("5. Filtrar por Rendimiento del grano");
-                hayFiltrosDisponibles = true;
-            }
-            if (!filtros.Contains("calidad"))
-            {
-                Console.WriteLine("6. Filtrar por Calidad del grano");
-                hayFiltrosDisponibles = true;
-            }
-            if (!filtros.Contains("resistencia"))
-            {
-                Console.WriteLine("7. Filtrar por Resistencia del grano");
-                hayFiltrosDisponibles = true;
-            }
-            if (!filtros.Contains("tiempocosecha"))
-            {
-                Console.WriteLine("8. Filtrar por Tiempo de cosecha del grano");
-                hayFiltrosDisponibles = true;
-            }
-            if (!filtros.Contains("maduracion"))
-            {
-                Console.WriteLine("9. Filtrar por Maduración del grano");
-                hayFiltrosDisponibles = true;
-            }
-            if (!filtros.Contains("nutricion"))
-            {
-                Console.WriteLine("10. Filtrar por Nutrición del grano");
-                hayFiltrosDisponibles = true;
-            }
-            if (!filtros.Contains("densidad"))
-            {
-                Console.WriteLine("11. Filtrar por Densidad del grano");
-                hayFiltrosDisponibles = true;
-            }
-            if (!filtros.Contains("grupo"))
-            {
-                Console.WriteLine("12. Filtrar por Grupo del grano");
-                hayFiltrosDisponibles = true;
+                AnsiConsole.MarkupLine("[bold red]Ya has aplicado todos los filtros[/]");
+                return;
             }
 
-            if (!hayFiltrosDisponibles)
-            {
-                Console.WriteLine("Ya has aplicado todos los filtros");
-            }
-            Console.WriteLine("============================================================");
-            Console.WriteLine("Ingrese un número según el filtro que desea aplicar");
+            AnsiConsole.Write(new Rule("[yellow]FILTROS DISPONIBLES[/]").RuleStyle("green").Centered());
+
+            var opcion = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .Title("[bold yellow]Seleccione el filtro que desea aplicar[/]")
+                    .PageSize(10)
+                    .AddChoices(opciones)
+            );
+
+            AnsiConsole.MarkupLine($"[bold green]Seleccionaste:[/] {opcion}");
         }
+
 
         private void MostrarVariedades(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> variedad)
         {
