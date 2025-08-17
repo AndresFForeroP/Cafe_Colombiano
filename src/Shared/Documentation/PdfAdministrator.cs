@@ -25,7 +25,6 @@ namespace Cafe_Colombiano.src.Shared.Documentation
                 var contexto = DbContextFactory.Create();
                 var repo = new VariedadRepository(contexto);
                 var variedades = await repo.GetAllVariedadesAsync();
-                
                 // Pre-cargar todas las imágenes
                 var imagenesVariedades = new Dictionary<int, byte[]>();
                 foreach (var variedad in variedades)
@@ -84,21 +83,24 @@ namespace Cafe_Colombiano.src.Shared.Documentation
                                                 // Imagen
                                                 if (imagenesVariedades.TryGetValue(variedad.id, out var imagenBytes))
                                                 {
-                                                    _ = row.RelativeItem().Height(100).Width(100)
+                                                    _ = row.RelativeItem()
+                                                        .MinWidth(120)
+                                                        .MaxWidth(150)
+                                                        .MinHeight(110)
+                                                        .MaxHeight(150)
                                                         .AlignCenter()
-                                                        .AspectRatio(1)
-                                                        .Padding(5)
+                                                        .Padding(10)
                                                         .Border(1)
                                                         .BorderColor(Colors.Green.Darken2)
                                                         .CornerRadius(10)
-                                                        .Image(imagenBytes);
+                                                        .Image(imagenBytes).FitArea();
                                                 }
                                                 else
                                                 {
                                                     row.RelativeItem().Height(100).Width(100)
                                                         .Column(col =>
                                                         {
-                                                            col.Item().MaxHeight(100).MaxWidth(100)
+                                                            col.Item()
                                                                 .Image(Placeholders.Image);
                                                             col.Item().PaddingTop(5)
                                                                 .Text("Imagen no disponible")
@@ -111,7 +113,7 @@ namespace Cafe_Colombiano.src.Shared.Documentation
                                                 row.RelativeItem()
                                                     .Text($"{variedad.nombre_comun} ({variedad.nombre_cientifico})")
                                                     .ExtraBold()
-                                                    .FontSize(20)
+                                                    .FontSize(24)
                                                     .FontColor(Colors.Green.Darken4)
                                                     .AlignRight();
                                             });

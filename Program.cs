@@ -11,6 +11,8 @@ internal class Program
 {
     public static async Task Main(string[] args)
     {
+        
+        QuestPDF.Settings.EnableDebugging = true;
         var context = DbContextFactory.Create();
         var pdfAdmin = new PdfAdministrator();
         _ = PdfAdministrator.GenerateSamplePdf(context);
