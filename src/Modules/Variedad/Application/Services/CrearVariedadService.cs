@@ -10,9 +10,9 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
 {
     public class CrearVariedadService
     {
-        private readonly VariedadRepository _variedadService;
+        private readonly IVariedadRepository _variedadService;
 
-        public CrearVariedadService(VariedadRepository variedadService)
+        public CrearVariedadService(IVariedadRepository variedadService)
         {
             _variedadService = variedadService;
         }
@@ -89,6 +89,8 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
 
             Console.Write("Ingrese el rango de Altitud: ");
             var rangoAltitud = Console.ReadLine();
+
+            // VariedadResistencia
 
             //NUEVA VARIEDAD
             var nuevaVariedad = new Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad

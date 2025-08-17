@@ -11,11 +11,6 @@ internal class Program
 {
     public static async Task Main(string[] args)
     {
-        
-        QuestPDF.Settings.EnableDebugging = true;
-        var context = DbContextFactory.Create();
-        var pdfAdmin = new PdfAdministrator();
-        _ = PdfAdministrator.GenerateSamplePdf(context);
         var autenticador = new AutenticadorUsuario("admin", "12345");
         var menuUsuario = new DibujoMenusUsuario(autenticador);
         await menuUsuario.Iniciar();

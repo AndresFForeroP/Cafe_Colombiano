@@ -1,15 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.Formats.Asn1;
 using System.Linq;
 using System.Threading.Tasks;
 using Cafe_Colombiano.src.Modules.Variedad.Application.Interfaces;
+using Cafe_Colombiano.src.Modules.Variedad.Application.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
 {
     public class VariedadRepository : IVariedadRepository
     {
-        private readonly DbContext _context;
+        internal readonly DbContext _context;
 
         public VariedadRepository(DbContext context)
         {
@@ -53,14 +55,20 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
         {
             await _context.Set<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad>().AddAsync(entity);
         }
-        public void Remove(Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad entity)
+        public async Task Remove(Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad entity)
         {
             _context.Set<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad>().Remove(entity);
+            await _context.SaveChangesAsync();
+        }
+        public void RemoveEntity<T>(T entity) where T : class
+        {
+            _context.Set<T>().Remove(entity);
         }
 
-        public void Update(Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad entity)
+        public async Task Update(Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad entity)
         {
             _context.Set<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad>().Update(entity);
+            await _context.SaveChangesAsync();
         }
 
         public async Task SaveAsync()
@@ -68,10 +76,6 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
             await _context.SaveChangesAsync();
         }
         public Task ActualizarVariedadAsync(Domain.Entities.Variedad variedad)
-        {
-            throw new NotImplementedException();
-        }
-        public Task EliminarVariedadAsync(int id)
         {
             throw new NotImplementedException();
         }
@@ -227,7 +231,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
                     nombre = "Desconocido";
                     break;
             }
-            return Lista.Where(v => v.PotencialRendimiento?.nivel_rendimiento!= null && v.PotencialRendimiento.nivel_rendimiento.ToLower().Contains(nombre.ToLower()));
+            return Lista.Where(v => v.PotencialRendimiento?.nivel_rendimiento != null && v.PotencialRendimiento.nivel_rendimiento.ToLower().Contains(nombre.ToLower()));
         }
         public IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorCalidad(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista)
         {
@@ -268,7 +272,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
                     nombre = "Desconocida";
                     break;
             }
-            return Lista.Where(v => v.CalidadGrano?.nivel_calidad!= null && v.CalidadGrano.nivel_calidad.ToLower().Contains(nombre.ToLower()));
+            return Lista.Where(v => v.CalidadGrano?.nivel_calidad != null && v.CalidadGrano.nivel_calidad.ToLower().Contains(nombre.ToLower()));
         }
         public IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorResistencia(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista)
         {
@@ -383,7 +387,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
                     nombre = "Desconocida";
                     break;
             }
-            return Lista.Where(v => v.InformacionAgronomica?.tiempo_cosecha!= null && v.InformacionAgronomica.tiempo_cosecha.ToLower().Contains(nombre.ToLower()));
+            return Lista.Where(v => v.InformacionAgronomica?.tiempo_cosecha != null && v.InformacionAgronomica.tiempo_cosecha.ToLower().Contains(nombre.ToLower()));
         }
         public IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorMaduracion(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista)
         {
@@ -408,7 +412,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
                     nombre = "Tardía";
                     break;
             }
-            return Lista.Where(v => v.InformacionAgronomica?.maduracion!= null && v.InformacionAgronomica.maduracion.ToLower().Contains(nombre.ToLower()));
+            return Lista.Where(v => v.InformacionAgronomica?.maduracion != null && v.InformacionAgronomica.maduracion.ToLower().Contains(nombre.ToLower()));
         }
         public IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorNutricion(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista)
         {
@@ -437,7 +441,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
                     nombre = "Desconocida";
                     break;
             }
-            return Lista.Where(v => v.InformacionAgronomica?.nutricion!= null && v.InformacionAgronomica.nutricion.ToLower().Contains(nombre.ToLower()));
+            return Lista.Where(v => v.InformacionAgronomica?.nutricion != null && v.InformacionAgronomica.nutricion.ToLower().Contains(nombre.ToLower()));
         }
         public IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorDensidad(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista)
         {
@@ -474,7 +478,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
                     nombre = "hasta 10,000 cafetos/ha";
                     break;
             }
-            return Lista.Where(v => v.InformacionAgronomica?.densidad_siembra!= null && v.InformacionAgronomica.densidad_siembra.ToLower().Contains(nombre.ToLower()));
+            return Lista.Where(v => v.InformacionAgronomica?.densidad_siembra != null && v.InformacionAgronomica.densidad_siembra.ToLower().Contains(nombre.ToLower()));
         }
         public IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorGrupo(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista)
         {
@@ -515,9 +519,9 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
                     nombre = "Guinea x Coffea congensis";
                     break;
             }
-            return Lista.Where(v => v.GrupoGenetico?.nombre_grupo!= null && v.GrupoGenetico.nombre_grupo.ToLower().Contains(nombre.ToLower()));
+            return Lista.Where(v => v.GrupoGenetico?.nombre_grupo != null && v.GrupoGenetico.nombre_grupo.ToLower().Contains(nombre.ToLower()));
         }
-        
+
         public int validarentero(int maximo)
         {
             int salida = 0;
@@ -531,6 +535,22 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
             while (salida < 1 || salida > maximo);
             return salida;
         }
+        public string MostrasListaIds()
+        {
+            var variedades = _context.Set<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad>().ToList();
 
+            foreach (var variedad in variedades)
+            {
+                Console.WriteLine($"ID: {variedad.id}, Nombre: {variedad.nombre_comun} ({variedad.nombre_cientifico})");
+            }
+
+            return "Lista de IDs mostrada en consola.";
+        }
+
+
+        public void RemoveEntity(object entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
