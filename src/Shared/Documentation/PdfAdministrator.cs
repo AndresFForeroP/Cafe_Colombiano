@@ -7,7 +7,7 @@ using Cafe_Colombiano.src.Shared.Helpers;
 using Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository;
 using System.Threading.Tasks;
 //en proceso, aun no crea el pdf y hay problemas leyendo el contexto de la base de datos
-namespace Cafe_Colombiano.src.Shared.Helpers
+namespace Cafe_Colombiano.src.Shared.Documentation
 {
     public class PdfAdministrator
     {
