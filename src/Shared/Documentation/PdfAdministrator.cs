@@ -12,17 +12,16 @@ namespace Cafe_Colombiano.src.Shared.Documentation
     public class PdfAdministrator
     {
 
-        public async Task GenerateSamplePdf(AppDbContext context)
+        public static async Task GenerateSamplePdf(AppDbContext context)
         {
             context.Database.EnsureCreated();
             QuestPDF.Settings.License = LicenseType.Community;
             var contexto = DbContextFactory.Create();
             var repo = new VariedadRepository(contexto);
             var variedades = await repo.GetAllVariedadesAsync();
-            var imagesPath = Path.Combine(Directory.GetCurrentDirectory(), "src", "Shared", "Resources", "Images");
-            Document.Create(container =>
+            await Document.Create(async container =>
             {
-                _ = container.Page(page =>
+                _ = container.Page(async page =>
                 {
                     page.Size(PageSizes.A4);
                     page.Margin(1, Unit.Centimetre);
@@ -38,29 +37,20 @@ namespace Cafe_Colombiano.src.Shared.Documentation
 
                     page.Content()
                         .PaddingVertical(1, Unit.Centimetre)
-                        .Column(column =>
+                        .Column(async column =>
                         {
                             column.Spacing(10);
 
                             foreach (var variedad in variedades)
                             {
+                                var imageBytes = await LoadImageFromUrl(variedad.imagen_referencia_url);
                                 // Sección por variedad
                                 column.Item().Background(Colors.Green.Lighten5).CornerRadius(10).Border(1).BorderColor(Colors.Green.Darken2).Padding(20).Column(variedadColumn =>
                                 {
                                     variedadColumn.Item().Row(row =>
                                     {
                                         // Buscar imagen que coincida con el nombre
-                                        var imageFileName = (variedad.nombre_comun != null ? variedad.nombre_comun.Replace(" ", "").ToLower() : "sin_nombre") + ".jpeg";
-                                        var imageFullPath = Path.Combine(imagesPath, imageFileName);
-
-                                        if (File.Exists(imageFullPath))
-                                        {
-                                            row.RelativeItem().Height(100).Width(100).Image(imageFullPath);
-                                        }
-                                        else
-                                        {
-                                            row.RelativeItem().Text("Sin imagen").Bold().FontSize(16).FontColor(Colors.Green.Darken4);
-                                        }
+                                        row.RelativeItem().Height(100).Width(100).Image(variedad.imagen_referencia_url != null ? variedad.imagen_referencia_url ).AspectRatio(1).AlignCenter().Padding(5).Border(1).BorderColor(Colors.Green.Darken2).CornerRadius(10);
                                         row.RelativeItem().Text($"{variedad.nombre_comun} ({variedad.nombre_cientifico})").ExtraBold().FontSize(20).FontColor(Colors.Green.Darken4).AlignRight();
                                     });
                                     variedadColumn.Item().PaddingTop(5).Row(row =>
@@ -178,6 +168,11 @@ namespace Cafe_Colombiano.src.Shared.Documentation
                 });
             })
             .GeneratePdf("catalogo_cafe_colombiano.pdf");
+        }
+        private static async Task<byte[]> LoadImageFromUrl(string url)
+        {
+            using var httpClient = new HttpClient();
+            return await httpClient.GetByteArrayAsync(url);
         }
     }
 }

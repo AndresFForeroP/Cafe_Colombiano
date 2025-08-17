@@ -13,7 +13,7 @@ internal class Program
     {
         var context = DbContextFactory.Create();
         var pdfAdmin = new PdfAdministrator();
-        _ = pdfAdmin.GenerateSamplePdf(context);
+        _ = PdfAdministrator.GenerateSamplePdf(context);
         var autenticador = new AutenticadorUsuario("admin", "12345");
         var menuUsuario = new DibujoMenusUsuario(autenticador);
         await menuUsuario.Iniciar();
