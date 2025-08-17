@@ -19,9 +19,24 @@ namespace Cafe_Colombiano.src.Shared.Documentation
             var contexto = DbContextFactory.Create();
             var repo = new VariedadRepository(contexto);
             var variedades = await repo.GetAllVariedadesAsync();
-            await Document.Create(async container =>
+            var ImagenBytes = Array.Empty<byte>();
+            foreach (var variedad in variedades)
             {
-                _ = container.Page(async page =>
+                if (!string.IsNullOrEmpty(variedad.imagen_referencia_url))
+                {
+                    try
+                    {
+                        ImagenBytes = await LoadImageFromUrl(variedad.imagen_referencia_url);
+                    }
+                    catch
+                    {
+                        ImagenBytes = null; // fallback si falla
+                    }
+                }
+            }
+            await Document.Create(container =>
+            {
+                _ = container.Page(page =>
                 {
                     page.Size(PageSizes.A4);
                     page.Margin(1, Unit.Centimetre);
@@ -37,21 +52,32 @@ namespace Cafe_Colombiano.src.Shared.Documentation
 
                     page.Content()
                         .PaddingVertical(1, Unit.Centimetre)
-                        .Column(async column =>
+                        .Column(column =>
                         {
                             column.Spacing(10);
 
                             foreach (var variedad in variedades)
                             {
-                                var imageBytes = await LoadImageFromUrl(variedad.imagen_referencia_url);
-                                // Sección por variedad
-                                column.Item().Background(Colors.Green.Lighten5).CornerRadius(10).Border(1).BorderColor(Colors.Green.Darken2).Padding(20).Column(variedadColumn =>
+                                column.Item().Background(Colors.Green.Lighten5).CornerRadius(10).Border(1)
+                                    .BorderColor(Colors.Green.Darken2).Padding(20).Column(variedadColumn =>
                                 {
                                     variedadColumn.Item().Row(row =>
                                     {
-                                        // Buscar imagen que coincida con el nombre
-                                        row.RelativeItem().Height(100).Width(100).Image(variedad.imagen_referencia_url != null ? variedad.imagen_referencia_url ).AspectRatio(1).AlignCenter().Padding(5).Border(1).BorderColor(Colors.Green.Darken2).CornerRadius(10);
-                                        row.RelativeItem().Text($"{variedad.nombre_comun} ({variedad.nombre_cientifico})").ExtraBold().FontSize(20).FontColor(Colors.Green.Darken4).AlignRight();
+                                        if (variedad.imagen_referencia_url != null)
+                                        {
+                                            _ = row.RelativeItem().Height(100).Width(100).AspectRatio(1)
+                                                .Image(ImagenBytes)
+                                                .AlignCenter().Padding(5).Border(1)
+                                                .BorderColor(Colors.Green.Darken2).CornerRadius(10);
+                                        }
+                                        else
+                                        {
+                                            _ = row.RelativeItem().Height(100).Width(100).AlignCenter()
+                                                .Text("Sin imagen").FontSize(10).Italic();
+                                        }
+
+                                        row.RelativeItem().Text($"{variedad.nombre_comun} ({variedad.nombre_cientifico})")
+                                            .ExtraBold().FontSize(20).FontColor(Colors.Green.Darken4).AlignRight();
                                     });
                                     variedadColumn.Item().PaddingTop(5).Row(row =>
                                     {
@@ -176,5 +202,3 @@ namespace Cafe_Colombiano.src.Shared.Documentation
         }
     }
 }
-
-// code in your main method
