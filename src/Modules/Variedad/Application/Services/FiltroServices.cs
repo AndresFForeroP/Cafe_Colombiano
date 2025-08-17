@@ -10,6 +10,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
     public class FiltroServices
     {
         private readonly IVariedadRepository _repo;
+        
         public FiltroServices(IVariedadRepository _repo)
         {
             this._repo = _repo;
@@ -24,8 +25,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
             var Variedad = variedades;
             do
             {
-                ImprimirMenuFiltros(FiltrosAplicados);
-                opmenufiltro = validarentero();
+                opmenufiltro = ImprimirMenuFiltros(FiltrosAplicados);
                 switch (opmenufiltro)
                 {
                     case 1:
@@ -104,7 +104,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
             }
             return id;
         }
-       private void ImprimirMenuFiltros(List<string> filtros)
+        private int ImprimirMenuFiltros(List<string> filtros)
         {
             var opciones = new List<string>();
 
@@ -124,7 +124,6 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
             if (opciones.Count == 0)
             {
                 AnsiConsole.MarkupLine("[bold red]Ya has aplicado todos los filtros[/]");
-                return;
             }
 
             AnsiConsole.Write(new Rule("[yellow]FILTROS DISPONIBLES[/]").RuleStyle("green").Centered());
@@ -135,8 +134,19 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
                     .PageSize(10)
                     .AddChoices(opciones)
             );
-
             AnsiConsole.MarkupLine($"[bold green]Seleccionaste:[/] {opcion}");
+            return opcion.StartsWith("1") ? 1 :
+                        opcion.StartsWith("2") ? 2 :
+                        opcion.StartsWith("3") ? 3 :
+                        opcion.StartsWith("4") ? 4 :
+                        opcion.StartsWith("5") ? 5 :
+                        opcion.StartsWith("6") ? 6 :
+                        opcion.StartsWith("7") ? 7 :
+                        opcion.StartsWith("8") ? 8 :
+                        opcion.StartsWith("9") ? 9 :
+                        opcion.StartsWith("10") ? 10 :
+                        opcion.StartsWith("11") ? 11 :
+                        opcion.StartsWith("12") ? 12 : 99;
         }
 
 

@@ -29,6 +29,7 @@ namespace Cafe_Colombiano.src.Modules.Usuario.Ui
             return usuario == _usuarioValido && contrasena == _contrasenaValida;
         }
     }
+    
 
     public class DibujoMenusUsuario
     {
@@ -230,7 +231,7 @@ namespace Cafe_Colombiano.src.Modules.Usuario.Ui
                 });
         }
 
-        
+
         private bool ConfirmarSalida()
         {
             var confirmacion = AnsiConsole.Confirm("[red]¿Está seguro de que desea salir del sistema?[/]");

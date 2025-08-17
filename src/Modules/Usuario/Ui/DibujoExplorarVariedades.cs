@@ -1,14 +1,31 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Cafe_Colombiano.src.Modules.Variedad.Application.Interfaces;
+using Cafe_Colombiano.src.Modules.Variedad.Application.Services;
+using Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository;
+using Cafe_Colombiano.src.Shared.Context;
+using Cafe_Colombiano.src.Shared.Helpers;
 using Spectre.Console;
 
 namespace Cafe_Colombiano.src.Modules.Usuario.Ui
 {
     public class DibujoExplorarVariedades
     {
+        private readonly AppDbContext? _context;
+        readonly VariedadRepository repo = null!;
+        readonly FiltroServices _serviceFiltro = null!;
+        public DibujoExplorarVariedades()
+        {
+            var context = DbContextFactory.Create();
+            _context = context;
+            repo = new VariedadRepository(context);
+            
+
+        }
         public async Task IniciarAsync()
         {
+
             int salida = 0;
             do
             {
@@ -56,7 +73,7 @@ namespace Cafe_Colombiano.src.Modules.Usuario.Ui
             Console.Clear();
             Environment.Exit(0);
         }
-        public static async Task ExplorarProductos(int opcion3)
+        public async Task ExplorarProductos(int opcion3)
         {
             switch (opcion3)
             {
@@ -67,7 +84,8 @@ namespace Cafe_Colombiano.src.Modules.Usuario.Ui
 
                 case 2:
                     AnsiConsole.MarkupLine("[yellow]🔍 Filtrando por variedades...[/]");
-                    await Task.Delay(800);
+                    var _serviceFiltro = new FiltroServices(repo);
+                    await _serviceFiltro.Filtrar();
                     break;
 
                 case 3:
