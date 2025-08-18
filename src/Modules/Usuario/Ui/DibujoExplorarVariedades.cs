@@ -5,6 +5,7 @@ using Cafe_Colombiano.src.Modules.Variedad.Application.Interfaces;
 using Cafe_Colombiano.src.Modules.Variedad.Application.Services;
 using Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository;
 using Cafe_Colombiano.src.Shared.Context;
+using Cafe_Colombiano.src.Shared.Documentation;
 using Cafe_Colombiano.src.Shared.Helpers;
 using Spectre.Console;
 
@@ -90,6 +91,9 @@ namespace Cafe_Colombiano.src.Modules.Usuario.Ui
 
                 case 3:
                     AnsiConsole.MarkupLine("[blue]📑 Generando catálogo en PDF...[/]");
+                    var context = DbContextFactory.Create();
+                    var pdfAdmin = new PdfAdministrator();
+                    _ = PdfAdministrator.GenerateSamplePdf(context);
                     await Task.Delay(800);
                     break;
 
