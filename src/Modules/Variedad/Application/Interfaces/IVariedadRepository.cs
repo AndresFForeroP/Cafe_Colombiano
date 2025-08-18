@@ -27,6 +27,6 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Interfaces
         public IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorGrupo(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista);
         public int validarentero(int maximo);
         public string MostrasListaIds();
-
+        Task Update(Domain.Entities.Variedad variedadToUpdate);
     }
 }

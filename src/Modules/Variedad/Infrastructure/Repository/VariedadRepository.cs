@@ -680,5 +680,10 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
         {
             throw new NotImplementedException();
         }
+
+        internal async Task SaveAsync(Domain.Entities.Variedad variedad)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
