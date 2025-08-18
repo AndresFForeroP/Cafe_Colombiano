@@ -2,6 +2,9 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Spectre.Console;
+using Cafe_Colombiano.src.Modules.Variedad.Domain.Entities;
+using Cafe_Colombiano.src.Shared.Helpers;
+using Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository;
 
 namespace Cafe_Colombiano.src.Modules.Usuario.Ui
 {
@@ -95,8 +98,9 @@ namespace Cafe_Colombiano.src.Modules.Usuario.Ui
         Seleccione una opción: (1-4): ");
         }
 
-        public static async Task AdministrarProductosAsync(int opcion2, bool usarSpectre)
+        public  async Task AdministrarProductosAsync(int opcion2, bool usarSpectre)
         {
+            var variedades = new List<Variedad>();  // ✅ Correcto
             switch (opcion2)
             {
                 case 1:
@@ -113,16 +117,17 @@ namespace Cafe_Colombiano.src.Modules.Usuario.Ui
                     break;
 
                 case 2:
-                    AnsiConsole.Status()
-                        .Start("Cargando módulo...", ctx =>
+
+                    _ = AnsiConsole.Status()
+                        .Start("Cargando módulo...", static async ctx =>
                         {
                             ctx.Spinner(Spinner.Known.Star);
                             ctx.Status("[yellow]Entrando al Gestor de contenido...[/]");
+                            var menu = new GestorVariedades();
+                            await menu.BuscarVariedadAsync(variedades);
                             Thread.Sleep(1200);
                         });
                     Console.Clear();
-                    var menusUsuario3 = new DibujoMenusUsuario();
-                    await menusUsuario3.Iniciar();
                     break;
 
                 case 3:

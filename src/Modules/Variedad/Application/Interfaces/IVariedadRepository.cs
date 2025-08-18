@@ -10,8 +10,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Interfaces
         Task<IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad>> GetAllVariedadesAsync();
         public Task<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad?> GetVariedadByIdAsync(int id);
         public Task Add(Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad entity);
-        public Task Remove(Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad entity);
-        public Task Update(Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad entity);
+       
         public Task SaveAsync();
 
         public IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorNombre(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista);
@@ -28,7 +27,6 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Interfaces
         public IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorGrupo(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista);
         public int validarentero(int maximo);
         public string MostrasListaIds();
-        public void RemoveEntity(object entity);
 
     }
 }

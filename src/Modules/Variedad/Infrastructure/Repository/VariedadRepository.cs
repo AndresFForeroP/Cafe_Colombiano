@@ -676,10 +676,5 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
             return "Lista de IDs mostrada en consola.";
         }
 
-
-        public void RemoveEntity(object entity)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
