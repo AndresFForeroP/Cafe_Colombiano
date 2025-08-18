@@ -31,16 +31,16 @@ internal class Program
 
 
 
-        //await crearVariedadService.CrearVariedad();
-
-
-        await eliminar.EliminarVariedadAsync();
-
-
         await crearVariedadService.CrearVariedad();
 
 
-        await actualizar.ActualizarVariedad();
+        //await eliminar.EliminarVariedadAsync();
+
+
+   
+
+
+        //await actualizar.ActualizarVariedad();
     }
 
 }

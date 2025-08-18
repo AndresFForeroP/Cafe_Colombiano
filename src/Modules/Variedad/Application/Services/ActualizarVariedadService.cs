@@ -7,7 +7,7 @@ using Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository;
 using Spectre.Console;
 
 namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
-    {
+{
     public class ActualizarVariedadService
     {
         private readonly IVariedadRepository _VariedadRepository;
@@ -518,7 +518,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
             var entrada = Console.ReadLine();
             return string.IsNullOrWhiteSpace(entrada) ? valorActual : entrada;
         }
- 
 
-        }
+
     }
+}
