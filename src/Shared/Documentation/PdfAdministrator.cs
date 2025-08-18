@@ -31,7 +31,18 @@ namespace Cafe_Colombiano.src.Shared.Documentation
                 var imagenesVariedades = new Dictionary<int, byte[]>();
                 foreach (var variedad in variedades)
                 {
-                    var imageBytes = new CatalogTemplate().Imgfromurl(variedad);
+                    if (!string.IsNullOrEmpty(variedad.imagen_referencia_url))
+                    {
+                        try
+                        {
+                            var imageBytes = await CatalogTemplate.LoadImageFromUrl(variedad.imagen_referencia_url);
+                            imagenesVariedades[variedad.id] = imageBytes;
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Error cargando imagen para {variedad.nombre_comun}: {ex.Message}");
+                        }
+                    }
                 }
 
                 // Generar documento PDF
@@ -84,7 +95,5 @@ namespace Cafe_Colombiano.src.Shared.Documentation
                 throw;
             }
         }
-        
-        
     }
 }

@@ -225,17 +225,27 @@ namespace Cafe_Colombiano.src.Shared.Documentation.PdfTemplates
                 });
 
         }
-        private static async Task<byte[]> LoadImageFromUrl(string url)
+        public static async Task<byte[]> LoadImageFromUrl(string url)
         {
             if (_imageCache.TryGetValue(url, out var cachedImage))
+            {
+                Console.WriteLine($"Imagen encontrada en caché: {url}");
                 return cachedImage;
+            }
 
             using var httpClient = new HttpClient();
-            httpClient.Timeout = TimeSpan.FromSeconds(10);
+            httpClient.Timeout = TimeSpan.FromSeconds(30); // Aumentar timeout
+            
+            // Agregar headers para evitar bloqueos
+            httpClient.DefaultRequestHeaders.Add("User-Agent", 
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36");
             
             try
             {
+                Console.WriteLine($"Descargando imagen: {url}");
                 var imageBytes = await httpClient.GetByteArrayAsync(url);
+                Console.WriteLine($"Imagen descargada: {imageBytes.Length} bytes");
+                
                 _imageCache[url] = imageBytes;
                 return imageBytes;
             }
@@ -244,25 +254,6 @@ namespace Cafe_Colombiano.src.Shared.Documentation.PdfTemplates
                 Console.WriteLine($"Error descargando imagen {url}: {ex.Message}");
                 throw;
             }
-        }
-        public async Task<byte[]> Imgfromurl(Variedad variedad)
-        {
-            var imagenesVariedades = new Dictionary<int, byte[]>();
-            if (!string.IsNullOrEmpty(variedad.imagen_referencia_url))
-            {
-                try
-                {
-                    var imageBytes = await LoadImageFromUrl(variedad.imagen_referencia_url);
-                    imagenesVariedades[variedad.id] = imageBytes;
-                    return imageBytes;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error cargando imagen para {variedad.nombre_comun}: {ex.Message}");
-                    return null;
-                }
-            }
-            return null;
         }
     }
 }
