@@ -15,5 +15,9 @@ namespace Cafe_Colombiano.src.Modules.Usuario.Infrastructure.Repository
         {
             _context = context;
         }
+        public async Task<IEnumerable<Cafe_Colombiano.src.Modules.Usuario.Domain.Entities.Usuario>> GetUserAsync()
+        {
+            return await _context.Usuario.ToListAsync();
+        }
     }
 }
