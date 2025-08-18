@@ -100,7 +100,6 @@ namespace Cafe_Colombiano.src.Modules.Usuario.Ui
 
         public  async Task AdministrarProductosAsync(int opcion2, bool usarSpectre)
         {
-            var variedades = new List<Variedad>();  // ✅ Correcto
             switch (opcion2)
             {
                 case 1:
@@ -123,11 +122,11 @@ namespace Cafe_Colombiano.src.Modules.Usuario.Ui
                         {
                             ctx.Spinner(Spinner.Known.Star);
                             ctx.Status("[yellow]Entrando al Gestor de contenido...[/]");
-                            var menu = new GestorVariedades();
-                            await menu.BuscarVariedadAsync(variedades);
                             Thread.Sleep(1200);
                         });
-                    Console.Clear();
+                        var menu = new GestorVariedades();
+                        await menu.BuscarVariedadAsync(Variedad);
+                        Console.Clear();
                     break;
 
                 case 3:
