@@ -1,9 +1,8 @@
 using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Cafe_Colombiano.src.Modules.Variedad.Application.Interfaces;
-using Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository;
 using Spectre.Console;
 
 namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
@@ -76,9 +75,10 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
                                 case 5: grupoOpcion = "Guinea x Congo"; break;
                                 case 6: grupoOpcion = "Guinea x Coffea congensis"; break;
                             }
-                            variedadToUpdate.GrupoGenetico.nombre_grupo = grupoOpcion;
+                            // Buscar y reutilizar
+                            var grupoExistente = await _VariedadRepository.GetGrupoGeneticoByNombreAsync(grupoOpcion);
+                            variedadToUpdate.GrupoGenetico = grupoExistente ?? new Cafe_Colombiano.src.Modules.GrupoGenetico.Domain.Entities.GrupoGenetico { nombre_grupo = grupoOpcion };
                         }
-                        // Origen sigue siendo texto libre
                         variedadToUpdate.GrupoGenetico.origen = PedirDatoOpcional("Ingrese el nuevo origen de la variedad:", variedadToUpdate.GrupoGenetico.origen);
                     }
 
@@ -117,7 +117,8 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
                                 case 4: porteOpcion = "Tall"; break;
                                 case 5: porteOpcion = "Desconocido"; break;
                             }
-                            variedadToUpdate.Porte.nombre_porte = porteOpcion;
+                            var porteExistente = await _VariedadRepository.GetPorteByNombreAsync(porteOpcion);
+                            variedadToUpdate.Porte = porteExistente ?? new Cafe_Colombiano.src.Modules.Porte.Domain.Entities.Porte { nombre_porte = porteOpcion };
                         }
                     }
 
@@ -156,7 +157,8 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
                                 case 4: tamanoOpcion = "Muy Grande"; break;
                                 case 5: tamanoOpcion = "Desconocido"; break;
                             }
-                            variedadToUpdate.TamanoGrano.nombre_tamano = tamanoOpcion;
+                            var tamanoExistente = await _VariedadRepository.GetTamanoGranoByNombreAsync(tamanoOpcion);
+                            variedadToUpdate.TamanoGrano = tamanoExistente ?? new Cafe_Colombiano.src.Modules.TamanoGrano.Domain.Entities.TamanoGrano { nombre_tamano = tamanoOpcion };
                         }
                     }
 
@@ -195,7 +197,8 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
                                 case 4: altitudOpcion = "700 msnm"; break;
                                 case 5: altitudOpcion = "1200-1800 msnm"; break;
                             }
-                            variedadToUpdate.AltitudOptima.rango_altitud = altitudOpcion;
+                            var altitudExistente = await _VariedadRepository.GetAltitudOptimaByRangoAsync(altitudOpcion);
+                            variedadToUpdate.AltitudOptima = altitudExistente ?? new Cafe_Colombiano.src.Modules.AltitudOptima.Domain.Entities.AltitudOptima { rango_altitud = altitudOpcion };
                         }
                         variedadToUpdate.AltitudOptima.descripcion = PedirDatoOpcional("Ingrese la nueva descripción de la altitud óptima:", variedadToUpdate.AltitudOptima.descripcion);
                     }
@@ -235,7 +238,8 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
                                 case 4: potencialOpcion = "Muy alto (más de 5000 kg/ha)"; break;
                                 case 5: potencialOpcion = "Desconocido"; break;
                             }
-                            variedadToUpdate.PotencialRendimiento.nivel_rendimiento = potencialOpcion;
+                            var potencialExistente = await _VariedadRepository.GetPotencialRendimientoByNivelAsync(potencialOpcion);
+                            variedadToUpdate.PotencialRendimiento = potencialExistente ?? new Cafe_Colombiano.src.Modules.PotencialRendimiento.Domain.Entities.PotencialRendimiento { nivel_rendimiento = potencialOpcion };
                         }
                     }
 
@@ -277,7 +281,8 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
                                 case 5: calidadOpcion = "Básica"; break;
                                 case 6: calidadOpcion = "Desconocida"; break;
                             }
-                            variedadToUpdate.CalidadGrano.nivel_calidad = calidadOpcion;
+                            var calidadExistente = await _VariedadRepository.GetCalidadGranoByNivelAsync(calidadOpcion);
+                            variedadToUpdate.CalidadGrano = calidadExistente ?? new Cafe_Colombiano.src.Modules.CalidadGrano.Domain.Entities.CalidadGrano { nivel_calidad = calidadOpcion };
                         }
                         variedadToUpdate.CalidadGrano.descripcion = PedirDatoOpcional("Ingrese la nueva descripción de la calidad de grano:", variedadToUpdate.CalidadGrano.descripcion);
                     }
@@ -286,7 +291,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
                     var resistencia = variedadToUpdate.VariedadesResistencia?.FirstOrDefault();
                     if (resistencia != null)
                     {
-                        // Tipo de Resistencia
+                        // Menú para tipo de resistencia
                         var tipoOpcion = resistencia.TipoResistencia?.nombre_tipo ?? "";
                         var tipoMenu = AnsiConsole.Prompt(
                             new SelectionPrompt<string>()
@@ -306,6 +311,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
                                     "9. Mantener valor actual"
                                 }));
 
+                        string nuevoTipo = tipoOpcion;
                         if (!tipoMenu.StartsWith("9"))
                         {
                             int tipo = tipoMenu.StartsWith("1") ? 1 :
@@ -319,19 +325,18 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
 
                             switch (tipo)
                             {
-                                case 1: tipoOpcion = "Roya del cafeto"; break;
-                                case 2: tipoOpcion = "Enfermedad de la cereza del café (CBD)"; break;
-                                case 3: tipoOpcion = "Nematodos"; break;
-                                case 4: tipoOpcion = "Broca del café"; break;
-                                case 5: tipoOpcion = "Barrenador del tallo (Xylosandus compactus)"; break;
-                                case 6: tipoOpcion = "Marchitez del café (CWD)"; break;
-                                case 7: tipoOpcion = "Antracnosis"; break;
-                                case 8: tipoOpcion = "Enfermedad de la ampolla roja"; break;
+                                case 1: nuevoTipo = "Roya del cafeto"; break;
+                                case 2: nuevoTipo = "Enfermedad de la cereza del café (CBD)"; break;
+                                case 3: nuevoTipo = "Nematodos"; break;
+                                case 4: nuevoTipo = "Broca del café"; break;
+                                case 5: nuevoTipo = "Barrenador del tallo (Xylosandus compactus)"; break;
+                                case 6: nuevoTipo = "Marchitez del café (CWD)"; break;
+                                case 7: nuevoTipo = "Antracnosis"; break;
+                                case 8: nuevoTipo = "Enfermedad de la ampolla roja"; break;
                             }
-                            resistencia.TipoResistencia!.nombre_tipo = tipoOpcion;
                         }
 
-                        // Nivel de Resistencia
+                        // Menú para nivel de resistencia
                         var nivelOpcion = resistencia.NivelResistencia?.nombre_nivel ?? "";
                         var nivelMenu = AnsiConsole.Prompt(
                             new SelectionPrompt<string>()
@@ -347,6 +352,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
                                     "9. Mantener valor actual"
                                 }));
 
+                        string nuevoNivel = nivelOpcion;
                         if (!nivelMenu.StartsWith("9"))
                         {
                             int nivel = nivelMenu.StartsWith("1") ? 1 :
@@ -356,12 +362,32 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
 
                             switch (nivel)
                             {
-                                case 1: nivelOpcion = "Resistente"; break;
-                                case 2: nivelOpcion = "Tolerante"; break;
-                                case 3: nivelOpcion = "Susceptible"; break;
-                                case 4: nivelOpcion = "Desconocido"; break;
+                                case 1: nuevoNivel = "Resistente"; break;
+                                case 2: nuevoNivel = "Tolerante"; break;
+                                case 3: nuevoNivel = "Susceptible"; break;
+                                case 4: nuevoNivel = "Desconocido"; break;
                             }
-                            resistencia.NivelResistencia!.nombre_nivel = nivelOpcion;
+                        }
+
+                        // Si el usuario cambió tipo o nivel, elimina y crea la relación
+                        if (nuevoTipo != tipoOpcion || nuevoNivel != nivelOpcion)
+                        {
+                            // Buscar entidades existentes
+                            var tipoExistente = await _VariedadRepository.GetTipoResistenciaByNombreAsync(nuevoTipo);
+                            var nivelExistente = await _VariedadRepository.GetNivelResistenciaByNombreAsync(nuevoNivel);
+
+                            // 1. Elimina la relación existente
+                            variedadToUpdate.VariedadesResistencia!.Remove(resistencia);
+                            await _VariedadRepository.Update(variedadToUpdate);
+                            await _VariedadRepository.SaveAsync();
+
+                            // 2. Crea la nueva relación
+                            var nuevaResistencia = new Cafe_Colombiano.src.Modules.VariedadResistencia.Domain.Entities.VariedadResistencia
+                            {
+                                TipoResistencia = tipoExistente ?? new Cafe_Colombiano.src.Modules.TipoResistencia.Domain.Entities.TipoResistencia { nombre_tipo = nuevoTipo },
+                                NivelResistencia = nivelExistente ?? new Cafe_Colombiano.src.Modules.NivelResistencia.Domain.Entities.NivelResistencia { nombre_nivel = nuevoNivel }
+                            };
+                            variedadToUpdate.VariedadesResistencia.Add(nuevaResistencia);
                         }
                     }
 
@@ -518,7 +544,5 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
             var entrada = Console.ReadLine();
             return string.IsNullOrWhiteSpace(entrada) ? valorActual : entrada;
         }
-
-
     }
 }

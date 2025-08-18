@@ -131,15 +131,41 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
                 imagen_referencia_url = imagenReferenciaUrl
             };
 
-            var nuevoGrupoGenetico = new Cafe_Colombiano.src.Modules.GrupoGenetico.Domain.Entities.GrupoGenetico { nombre_grupo = grupoOpcion };
-            var nuevoPorte = new Cafe_Colombiano.src.Modules.Porte.Domain.Entities.Porte { nombre_porte = porteOpcion };
-            var nuevoTamanoGrano = new Cafe_Colombiano.src.Modules.TamanoGrano.Domain.Entities.TamanoGrano { nombre_tamano = tamanoOpcion };
-            var nuevaAltitudOptima = new Cafe_Colombiano.src.Modules.AltitudOptima.Domain.Entities.AltitudOptima { rango_altitud = altitudOpcion, descripcion = descripcionAltitudOptima };
-            var nuevoPotencialRendimiento = new Cafe_Colombiano.src.Modules.PotencialRendimiento.Domain.Entities.PotencialRendimiento { nivel_rendimiento = potencialOpcion };
-            var nuevaCalidadGrano = new Cafe_Colombiano.src.Modules.CalidadGrano.Domain.Entities.CalidadGrano { nivel_calidad = calidadOpcion };
-            var nuevoTipoResistencia = new Cafe_Colombiano.src.Modules.TipoResistencia.Domain.Entities.TipoResistencia { nombre_tipo = resistenciaOpcion };
-            var nuevoNivelResistencia = new Cafe_Colombiano.src.Modules.NivelResistencia.Domain.Entities.NivelResistencia { nombre_nivel = nivelOpcion };
+            // GRUPO GENÉTICO
+            var grupoExistente = await _variedadService.GetGrupoGeneticoByNombreAsync(grupoOpcion);
+            var nuevoGrupoGenetico = grupoExistente ?? new Cafe_Colombiano.src.Modules.GrupoGenetico.Domain.Entities.GrupoGenetico { nombre_grupo = grupoOpcion };
+            nuevoGrupoGenetico.origen = origen;
 
+            // PORTE
+            var porteExistente = await _variedadService.GetPorteByNombreAsync(porteOpcion);
+            var nuevoPorte = porteExistente ?? new Cafe_Colombiano.src.Modules.Porte.Domain.Entities.Porte { nombre_porte = porteOpcion };
+
+            // TAMAÑO DE GRANO
+            var tamanoExistente = await _variedadService.GetTamanoGranoByNombreAsync(tamanoOpcion);
+            var nuevoTamanoGrano = tamanoExistente ?? new Cafe_Colombiano.src.Modules.TamanoGrano.Domain.Entities.TamanoGrano { nombre_tamano = tamanoOpcion };
+
+            // ALTITUD ÓPTIMA
+            var altitudExistente = await _variedadService.GetAltitudOptimaByRangoAsync(altitudOpcion);
+            var nuevaAltitudOptima = altitudExistente ?? new Cafe_Colombiano.src.Modules.AltitudOptima.Domain.Entities.AltitudOptima { rango_altitud = altitudOpcion, descripcion = descripcionAltitudOptima };
+
+            // POTENCIAL DE RENDIMIENTO
+            var potencialExistente = await _variedadService.GetPotencialRendimientoByNivelAsync(potencialOpcion);
+            var nuevoPotencialRendimiento = potencialExistente ?? new Cafe_Colombiano.src.Modules.PotencialRendimiento.Domain.Entities.PotencialRendimiento { nivel_rendimiento = potencialOpcion };
+
+            // CALIDAD DE GRANO
+            var calidadExistente = await _variedadService.GetCalidadGranoByNivelAsync(calidadOpcion);
+            var nuevaCalidadGrano = calidadExistente ?? new Cafe_Colombiano.src.Modules.CalidadGrano.Domain.Entities.CalidadGrano { nivel_calidad = calidadOpcion };
+            nuevaCalidadGrano.descripcion = descripcionCalidadGrano;
+
+            // TIPO DE RESISTENCIA
+            var tipoResistenciaExistente = await _variedadService.GetTipoResistenciaByNombreAsync(resistenciaOpcion);
+            var nuevoTipoResistencia = tipoResistenciaExistente ?? new Cafe_Colombiano.src.Modules.TipoResistencia.Domain.Entities.TipoResistencia { nombre_tipo = resistenciaOpcion };
+
+            // NIVEL DE RESISTENCIA
+            var nivelResistenciaExistente = await _variedadService.GetNivelResistenciaByNombreAsync(nivelOpcion);
+            var nuevoNivelResistencia = nivelResistenciaExistente ?? new Cafe_Colombiano.src.Modules.NivelResistencia.Domain.Entities.NivelResistencia { nombre_nivel = nivelOpcion };
+
+            // INFORMACIÓN AGRONÓMICA (no suele ser única, así que se puede crear siempre)
             var nuevaInformacionAgronomica = new Cafe_Colombiano.src.Modules.InformacionAgronomica.Domain.Entities.InformacionAgronomica
             {
                 tiempo_cosecha = tiempoOpcion,
