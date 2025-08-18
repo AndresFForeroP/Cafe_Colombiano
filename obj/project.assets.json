@@ -3810,46 +3810,19 @@
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "C:\\Users\\HP\\.nuget\\packages\\": {}
-=======
-    "/home/camper/.nuget/packages/": {}
->>>>>>> feature/GestionContenido
-=======
-    "/home/jm/.nuget/packages/": {}
->>>>>>> feature/RefactorizacionGestionVariedad
+    "C:\\Users\\user\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-      "projectUniqueName": "C:\\Users\\HP\\Desktop\\Cafe_Colombiano\\Cafe_Colombiano.csproj",
-=======
-      "projectUniqueName": "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj",
->>>>>>> feature/GestionContenido
+      "projectUniqueName": "C:\\Proyectos visual\\C#\\Proyecto Final\\v2\\Cafe_Colombiano\\Cafe_Colombiano.csproj",
       "projectName": "Cafe_Colombiano",
-      "projectPath": "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj",
-      "packagesPath": "/home/camper/.nuget/packages/",
-      "outputPath": "/home/camper/Cafe_Colombiano/obj/",
+      "projectPath": "C:\\Proyectos visual\\C#\\Proyecto Final\\v2\\Cafe_Colombiano\\Cafe_Colombiano.csproj",
+      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+      "outputPath": "C:\\Proyectos visual\\C#\\Proyecto Final\\v2\\Cafe_Colombiano\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-<<<<<<< HEAD
-        "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config"
-=======
-        "/home/camper/.nuget/NuGet/NuGet.Config"
->>>>>>> feature/GestionContenido
-=======
-      "projectUniqueName": "/home/jm/developnet/Cafe_Colombiano/Cafe_Colombiano.csproj",
-      "projectName": "Cafe_Colombiano",
-      "projectPath": "/home/jm/developnet/Cafe_Colombiano/Cafe_Colombiano.csproj",
-      "packagesPath": "/home/jm/.nuget/packages/",
-      "outputPath": "/home/jm/developnet/Cafe_Colombiano/obj/",
-      "projectStyle": "PackageReference",
-      "configFilePaths": [
-        "/home/jm/.nuget/NuGet/NuGet.Config"
->>>>>>> feature/RefactorizacionGestionVariedad
+        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -3873,11 +3846,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-<<<<<<< HEAD
       "SdkAnalysisLevel": "9.0.300"
-=======
-      "SdkAnalysisLevel": "9.0.200"
->>>>>>> feature/GestionContenido
     },
     "frameworks": {
       "net8.0": {
@@ -3945,20 +3914,30 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[8.0.18, 8.0.18]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[8.0.18, 8.0.18]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[8.0.18, 8.0.18]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[8.0.18, 8.0.18]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-<<<<<<< HEAD
-<<<<<<< HEAD
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
-=======
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.203/PortableRuntimeIdentifierGraph.json"
->>>>>>> feature/GestionContenido
-=======
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.117/PortableRuntimeIdentifierGraph.json"
->>>>>>> feature/RefactorizacionGestionVariedad
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
   },
@@ -3967,15 +3946,7 @@
       "code": "Undefined",
       "level": "Warning",
       "warningLevel": 1,
-<<<<<<< HEAD
-<<<<<<< HEAD
-      "message": "Problema al leer el archivo de caché C:\\Users\\HP\\Desktop\\Cafe_Colombiano\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0."
-=======
-      "message": "Problema al leer el archivo de caché /home/camper/Cafe_Colombiano/obj/project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
->>>>>>> feature/GestionContenido
-=======
-      "message": "Problem reading the cache file /home/jm/developnet/Cafe_Colombiano/obj/project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
->>>>>>> feature/RefactorizacionGestionVariedad
+      "message": "Problem reading the cache file C:\\Proyectos visual\\C#\\Proyecto Final\\v2\\Cafe_Colombiano\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0."
     }
   ]
 }

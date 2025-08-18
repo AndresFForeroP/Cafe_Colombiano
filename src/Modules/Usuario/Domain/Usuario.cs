@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 
 namespace Cafe_Colombiano.src.Modules.Usuario.Domain
 {
-    public class GestionEntities
+    public class Usuario
     {
-        
+        public int id { get; set; }
+        public string? nombre_usuario { get; set; }
+        public string? contrasena { get; set; }
     }
 }

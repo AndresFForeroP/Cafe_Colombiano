@@ -9,9 +9,8 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Interfaces
     public interface IVariedadService 
     {
         Task CrearVariedadAsync(Domain.Entities.Variedad variedad);
-
         Task ActualizarVariedadAsync(Domain.Entities.Variedad variedad);
-         Task EliminarVariedadAsync(int id);
+        Task EliminarVariedadAsync(int id);
         Task<IEnumerable<Domain.Entities.Variedad>> ConsultarCatalogoAsync();
     }
 }

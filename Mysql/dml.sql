@@ -126,6 +126,4 @@ INSERT INTO VariedadResistencia (id_variedad, id_tipo_resistencia, id_nivel_resi
 
 -- Usuarios de ejemplo
 INSERT INTO Usuario (nombre_usuario, contrasena) VALUES
-('admin', SHA2('admin123', 256)),
-('caficultor', SHA2('cafe2023', 256)),
-('investigador', SHA2('investigaCafe', 256));
+('admin', SHA2('admin', 256));

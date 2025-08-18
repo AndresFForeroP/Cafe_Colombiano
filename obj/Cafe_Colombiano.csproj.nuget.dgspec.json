@@ -1,45 +1,20 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "C:\\Users\\HP\\Desktop\\Cafe_Colombiano\\Cafe_Colombiano.csproj": {}
-=======
-    "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj": {}
->>>>>>> feature/GestionContenido
+    "C:\\Proyectos visual\\C#\\Proyecto Final\\v2\\Cafe_Colombiano\\Cafe_Colombiano.csproj": {}
   },
   "projects": {
-    "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj": {
+    "C:\\Proyectos visual\\C#\\Proyecto Final\\v2\\Cafe_Colombiano\\Cafe_Colombiano.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj",
+        "projectUniqueName": "C:\\Proyectos visual\\C#\\Proyecto Final\\v2\\Cafe_Colombiano\\Cafe_Colombiano.csproj",
         "projectName": "Cafe_Colombiano",
-        "projectPath": "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj",
-        "packagesPath": "/home/camper/.nuget/packages/",
-        "outputPath": "/home/camper/Cafe_Colombiano/obj/",
+        "projectPath": "C:\\Proyectos visual\\C#\\Proyecto Final\\v2\\Cafe_Colombiano\\Cafe_Colombiano.csproj",
+        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+        "outputPath": "C:\\Proyectos visual\\C#\\Proyecto Final\\v2\\Cafe_Colombiano\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-<<<<<<< HEAD
-          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config"
-=======
-          "/home/camper/.nuget/NuGet/NuGet.Config"
->>>>>>> feature/GestionContenido
-=======
-    "/home/jm/developnet/Cafe_Colombiano/Cafe_Colombiano.csproj": {}
-  },
-  "projects": {
-    "/home/jm/developnet/Cafe_Colombiano/Cafe_Colombiano.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "/home/jm/developnet/Cafe_Colombiano/Cafe_Colombiano.csproj",
-        "projectName": "Cafe_Colombiano",
-        "projectPath": "/home/jm/developnet/Cafe_Colombiano/Cafe_Colombiano.csproj",
-        "packagesPath": "/home/jm/.nuget/packages/",
-        "outputPath": "/home/jm/developnet/Cafe_Colombiano/obj/",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "/home/jm/.nuget/NuGet/NuGet.Config"
->>>>>>> feature/RefactorizacionGestionVariedad
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -63,11 +38,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-<<<<<<< HEAD
         "SdkAnalysisLevel": "9.0.300"
-=======
-        "SdkAnalysisLevel": "9.0.200"
->>>>>>> feature/GestionContenido
       },
       "frameworks": {
         "net8.0": {
@@ -135,20 +106,30 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.18, 8.0.18]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[8.0.18, 8.0.18]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.18, 8.0.18]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.18, 8.0.18]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-<<<<<<< HEAD
-<<<<<<< HEAD
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
-=======
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.203/PortableRuntimeIdentifierGraph.json"
->>>>>>> feature/GestionContenido
-=======
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.117/PortableRuntimeIdentifierGraph.json"
->>>>>>> feature/RefactorizacionGestionVariedad
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
