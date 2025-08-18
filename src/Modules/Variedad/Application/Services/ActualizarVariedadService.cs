@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Cafe_Colombiano.src.Modules.Variedad.Application.Interfaces;
 using Spectre.Console;
+using System.Linq;
 
 namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
 {
@@ -25,517 +26,135 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
             _VariedadRepository.MostrasListaIds();
 
             Console.Write("Ingrese el ID de la variedad a actualizar: ");
-            if (int.TryParse(Console.ReadLine(), out int id))
-            {
-                var variedadToUpdate = await _VariedadRepository.GetVariedadByIdAsync(id);
-                if (variedadToUpdate != null)
-                {
-                    // Datos principales
-                    variedadToUpdate.nombre_comun = PedirDatoOpcional("Ingrese el nuevo nombre común de la variedad:", variedadToUpdate.nombre_comun);
-                    variedadToUpdate.nombre_cientifico = PedirDatoOpcional("Ingrese el nuevo nombre científico de la variedad:", variedadToUpdate.nombre_cientifico);
-                    variedadToUpdate.descripcion_general = PedirDatoOpcional("Ingrese la nueva descripción de la variedad:", variedadToUpdate.descripcion_general);
-                    variedadToUpdate.historia_linaje = PedirDatoOpcional("Ingrese la nueva historia del linaje de la variedad:", variedadToUpdate.historia_linaje);
-                    variedadToUpdate.imagen_referencia_url = PedirDatoOpcional("Ingrese la nueva URL de la imagen de referencia de la variedad:", variedadToUpdate.imagen_referencia_url);
-
-                    // Grupo Genético
-                    if (variedadToUpdate.GrupoGenetico != null)
-                    {
-                        var grupoOpcion = variedadToUpdate.GrupoGenetico.nombre_grupo;
-                        var grupoMenu = AnsiConsole.Prompt(
-                            new SelectionPrompt<string>()
-                                .Title("[bold yellow]Opción de grupo Genético (actual: " + grupoOpcion + ")[/]")
-                                .PageSize(7)
-                                .HighlightStyle(new Style(foreground: Color.Cyan2, decoration: Decoration.Bold))
-                                .AddChoices(new[]
-                                {
-                                    "1. Arábigo",
-                                    "2. Guinea",
-                                    "3. Congo",
-                                    "4. Uganda",
-                                    "5. Guinea x Congo",
-                                    "6. Guinea x Coffea congensis",
-                                    "9. Mantener valor actual"
-                                }));
-
-                        if (!grupoMenu.StartsWith("9"))
-                        {
-                            int grupo = grupoMenu.StartsWith("1") ? 1 :
-                                        grupoMenu.StartsWith("2") ? 2 :
-                                        grupoMenu.StartsWith("3") ? 3 :
-                                        grupoMenu.StartsWith("4") ? 4 :
-                                        grupoMenu.StartsWith("5") ? 5 :
-                                        grupoMenu.StartsWith("6") ? 6 : 0;
-
-                            switch (grupo)
-                            {
-                                case 1: grupoOpcion = "Arabigo"; break;
-                                case 2: grupoOpcion = "Guinea"; break;
-                                case 3: grupoOpcion = "Congo"; break;
-                                case 4: grupoOpcion = "Uganda"; break;
-                                case 5: grupoOpcion = "Guinea x Congo"; break;
-                                case 6: grupoOpcion = "Guinea x Coffea congensis"; break;
-                            }
-                            // Buscar y reutilizar
-                            var grupoExistente = await _VariedadRepository.GetGrupoGeneticoByNombreAsync(grupoOpcion);
-                            variedadToUpdate.GrupoGenetico = grupoExistente ?? new Cafe_Colombiano.src.Modules.GrupoGenetico.Domain.Entities.GrupoGenetico { nombre_grupo = grupoOpcion };
-                        }
-                        variedadToUpdate.GrupoGenetico.origen = PedirDatoOpcional("Ingrese el nuevo origen de la variedad:", variedadToUpdate.GrupoGenetico.origen);
-                    }
-
-                    // Porte
-                    if (variedadToUpdate.Porte != null)
-                    {
-                        var porteOpcion = variedadToUpdate.Porte.nombre_porte;
-                        var porteMenu = AnsiConsole.Prompt(
-                            new SelectionPrompt<string>()
-                                .Title("[bold yellow]Opción de Porte (actual: " + porteOpcion + ")[/]")
-                                .PageSize(7)
-                                .HighlightStyle(new Style(foreground: Color.Cyan2, decoration: Decoration.Bold))
-                                .AddChoices(new[]
-                                {
-                                    "1. Alto",
-                                    "2. Bajo",
-                                    "3. Dwarf/Compact",
-                                    "4. Tall",
-                                    "5. Desconocido",
-                                    "9. Mantener valor actual"
-                                }));
-
-                        if (!porteMenu.StartsWith("9"))
-                        {
-                            int porte = porteMenu.StartsWith("1") ? 1 :
-                                        porteMenu.StartsWith("2") ? 2 :
-                                        porteMenu.StartsWith("3") ? 3 :
-                                        porteMenu.StartsWith("4") ? 4 :
-                                        porteMenu.StartsWith("5") ? 5 : 0;
-
-                            switch (porte)
-                            {
-                                case 1: porteOpcion = "Alto"; break;
-                                case 2: porteOpcion = "Bajo"; break;
-                                case 3: porteOpcion = "Dwarf/Compact"; break;
-                                case 4: porteOpcion = "Tall"; break;
-                                case 5: porteOpcion = "Desconocido"; break;
-                            }
-                            var porteExistente = await _VariedadRepository.GetPorteByNombreAsync(porteOpcion);
-                            variedadToUpdate.Porte = porteExistente ?? new Cafe_Colombiano.src.Modules.Porte.Domain.Entities.Porte { nombre_porte = porteOpcion };
-                        }
-                    }
-
-                    // Tamaño de Grano
-                    if (variedadToUpdate.TamanoGrano != null)
-                    {
-                        var tamanoOpcion = variedadToUpdate.TamanoGrano.nombre_tamano;
-                        var tamanoMenu = AnsiConsole.Prompt(
-                            new SelectionPrompt<string>()
-                                .Title("[bold yellow]Opción de Tamaño (actual: " + tamanoOpcion + ")[/]")
-                                .PageSize(7)
-                                .HighlightStyle(new Style(foreground: Color.Cyan2, decoration: Decoration.Bold))
-                                .AddChoices(new[]
-                                {
-                                    "1. Pequeño",
-                                    "2. Mediano",
-                                    "3. Grande",
-                                    "4. Muy Grande",
-                                    "5. Desconocido",
-                                    "9. Mantener valor actual"
-                                }));
-
-                        if (!tamanoMenu.StartsWith("9"))
-                        {
-                            int tamano = tamanoMenu.StartsWith("1") ? 1 :
-                                         tamanoMenu.StartsWith("2") ? 2 :
-                                         tamanoMenu.StartsWith("3") ? 3 :
-                                         tamanoMenu.StartsWith("4") ? 4 :
-                                         tamanoMenu.StartsWith("5") ? 5 : 0;
-
-                            switch (tamano)
-                            {
-                                case 1: tamanoOpcion = "Pequeño"; break;
-                                case 2: tamanoOpcion = "Mediano"; break;
-                                case 3: tamanoOpcion = "Grande"; break;
-                                case 4: tamanoOpcion = "Muy Grande"; break;
-                                case 5: tamanoOpcion = "Desconocido"; break;
-                            }
-                            var tamanoExistente = await _VariedadRepository.GetTamanoGranoByNombreAsync(tamanoOpcion);
-                            variedadToUpdate.TamanoGrano = tamanoExistente ?? new Cafe_Colombiano.src.Modules.TamanoGrano.Domain.Entities.TamanoGrano { nombre_tamano = tamanoOpcion };
-                        }
-                    }
-
-                    // Altitud Óptima
-                    if (variedadToUpdate.AltitudOptima != null)
-                    {
-                        var altitudOpcion = variedadToUpdate.AltitudOptima.rango_altitud;
-                        var altitudMenu = AnsiConsole.Prompt(
-                            new SelectionPrompt<string>()
-                                .Title("[bold yellow]Opción de Altitud (actual: " + altitudOpcion + ")[/]")
-                                .PageSize(7)
-                                .HighlightStyle(new Style(foreground: Color.Cyan2, decoration: Decoration.Bold))
-                                .AddChoices(new[]
-                                {
-                                    "1. 500-1000 msnm",
-                                    "2. 400-900 msnm",
-                                    "3. 500-800 msnm",
-                                    "4. 700 msnm",
-                                    "5. 1200-1800 msnm",
-                                    "9. Mantener valor actual"
-                                }));
-
-                        if (!altitudMenu.StartsWith("9"))
-                        {
-                            int altitud = altitudMenu.StartsWith("1") ? 1 :
-                                          altitudMenu.StartsWith("2") ? 2 :
-                                          altitudMenu.StartsWith("3") ? 3 :
-                                          altitudMenu.StartsWith("4") ? 4 :
-                                          altitudMenu.StartsWith("5") ? 5 : 0;
-
-                            switch (altitud)
-                            {
-                                case 1: altitudOpcion = "500-1000 msnm"; break;
-                                case 2: altitudOpcion = "400-900 msnm"; break;
-                                case 3: altitudOpcion = "500-800 msnm"; break;
-                                case 4: altitudOpcion = "700 msnm"; break;
-                                case 5: altitudOpcion = "1200-1800 msnm"; break;
-                            }
-                            var altitudExistente = await _VariedadRepository.GetAltitudOptimaByRangoAsync(altitudOpcion);
-                            variedadToUpdate.AltitudOptima = altitudExistente ?? new Cafe_Colombiano.src.Modules.AltitudOptima.Domain.Entities.AltitudOptima { rango_altitud = altitudOpcion };
-                        }
-                        variedadToUpdate.AltitudOptima.descripcion = PedirDatoOpcional("Ingrese la nueva descripción de la altitud óptima:", variedadToUpdate.AltitudOptima.descripcion);
-                    }
-
-                    // Potencial de Rendimiento
-                    if (variedadToUpdate.PotencialRendimiento != null)
-                    {
-                        var potencialOpcion = variedadToUpdate.PotencialRendimiento.nivel_rendimiento;
-                        var potencialMenu = AnsiConsole.Prompt(
-                            new SelectionPrompt<string>()
-                                .Title("[bold yellow]Opción de Potencial de Rendimiento (actual: " + potencialOpcion + ")[/]")
-                                .PageSize(7)
-                                .HighlightStyle(new Style(foreground: Color.Cyan2, decoration: Decoration.Bold))
-                                .AddChoices(new[]
-                                {
-                                    "1. Bajo (menos de 1500 kg/ha)",
-                                    "2. Medio (1500-3000 kg/ha)",
-                                    "3. Alto (3000-5000 kg/ha)",
-                                    "4. Muy alto (más de 5000 kg/ha)",
-                                    "5. Desconocido",
-                                    "9. Mantener valor actual"
-                                }));
-
-                        if (!potencialMenu.StartsWith("9"))
-                        {
-                            int potencial = potencialMenu.StartsWith("1") ? 1 :
-                                            potencialMenu.StartsWith("2") ? 2 :
-                                            potencialMenu.StartsWith("3") ? 3 :
-                                            potencialMenu.StartsWith("4") ? 4 :
-                                            potencialMenu.StartsWith("5") ? 5 : 0;
-
-                            switch (potencial)
-                            {
-                                case 1: potencialOpcion = "Bajo (menos de 1500 kg/ha)"; break;
-                                case 2: potencialOpcion = "Medio (1500-3000 kg/ha)"; break;
-                                case 3: potencialOpcion = "Alto (3000-5000 kg/ha)"; break;
-                                case 4: potencialOpcion = "Muy alto (más de 5000 kg/ha)"; break;
-                                case 5: potencialOpcion = "Desconocido"; break;
-                            }
-                            var potencialExistente = await _VariedadRepository.GetPotencialRendimientoByNivelAsync(potencialOpcion);
-                            variedadToUpdate.PotencialRendimiento = potencialExistente ?? new Cafe_Colombiano.src.Modules.PotencialRendimiento.Domain.Entities.PotencialRendimiento { nivel_rendimiento = potencialOpcion };
-                        }
-                    }
-
-                    // Calidad de Grano
-                    if (variedadToUpdate.CalidadGrano != null)
-                    {
-                        var calidadOpcion = variedadToUpdate.CalidadGrano.nivel_calidad;
-                        var calidadMenu = AnsiConsole.Prompt(
-                            new SelectionPrompt<string>()
-                                .Title("[bold yellow]Opción de Calidad (actual: " + calidadOpcion + ")[/]")
-                                .PageSize(7)
-                                .HighlightStyle(new Style(foreground: Color.Cyan2, decoration: Decoration.Bold))
-                                .AddChoices(new[]
-                                {
-                                    "1. Excelente",
-                                    "2. Muy buena",
-                                    "3. Buena",
-                                    "4. Regular",
-                                    "5. Básica",
-                                    "6. Desconocida",
-                                    "9. Mantener valor actual"
-                                }));
-
-                        if (!calidadMenu.StartsWith("9"))
-                        {
-                            int calidad = calidadMenu.StartsWith("1") ? 1 :
-                                          calidadMenu.StartsWith("2") ? 2 :
-                                          calidadMenu.StartsWith("3") ? 3 :
-                                          calidadMenu.StartsWith("4") ? 4 :
-                                          calidadMenu.StartsWith("5") ? 5 :
-                                          calidadMenu.StartsWith("6") ? 6 : 0;
-
-                            switch (calidad)
-                            {
-                                case 1: calidadOpcion = "Excelente"; break;
-                                case 2: calidadOpcion = "Muy buena"; break;
-                                case 3: calidadOpcion = "Buena"; break;
-                                case 4: calidadOpcion = "Regular"; break;
-                                case 5: calidadOpcion = "Básica"; break;
-                                case 6: calidadOpcion = "Desconocida"; break;
-                            }
-                            var calidadExistente = await _VariedadRepository.GetCalidadGranoByNivelAsync(calidadOpcion);
-                            variedadToUpdate.CalidadGrano = calidadExistente ?? new Cafe_Colombiano.src.Modules.CalidadGrano.Domain.Entities.CalidadGrano { nivel_calidad = calidadOpcion };
-                        }
-                        variedadToUpdate.CalidadGrano.descripcion = PedirDatoOpcional("Ingrese la nueva descripción de la calidad de grano:", variedadToUpdate.CalidadGrano.descripcion);
-                    }
-
-                    // Resistencia (solo el primero)
-                    var resistencia = variedadToUpdate.VariedadesResistencia?.FirstOrDefault();
-                    if (resistencia != null)
-                    {
-                        // Menú para tipo de resistencia
-                        var tipoOpcion = resistencia.TipoResistencia?.nombre_tipo ?? "";
-                        var tipoMenu = AnsiConsole.Prompt(
-                            new SelectionPrompt<string>()
-                                .Title("[bold yellow]Opción de Resistencia (actual: " + tipoOpcion + ")[/]")
-                                .PageSize(8)
-                                .HighlightStyle(new Style(foreground: Color.Cyan2, decoration: Decoration.Bold))
-                                .AddChoices(new[]
-                                {
-                                    "1. Roya del cafeto",
-                                    "2. Enfermedad de la cereza del café (CBD)",
-                                    "3. Nematodos",
-                                    "4. Broca del café",
-                                    "5. Barrenador del tallo (Xylosandus compactus)",
-                                    "6. Marchitez del café (CWD)",
-                                    "7. Antracnosis",
-                                    "8. Enfermedad de la ampolla roja",
-                                    "9. Mantener valor actual"
-                                }));
-
-                        string nuevoTipo = tipoOpcion;
-                        if (!tipoMenu.StartsWith("9"))
-                        {
-                            int tipo = tipoMenu.StartsWith("1") ? 1 :
-                                       tipoMenu.StartsWith("2") ? 2 :
-                                       tipoMenu.StartsWith("3") ? 3 :
-                                       tipoMenu.StartsWith("4") ? 4 :
-                                       tipoMenu.StartsWith("5") ? 5 :
-                                       tipoMenu.StartsWith("6") ? 6 :
-                                       tipoMenu.StartsWith("7") ? 7 :
-                                       tipoMenu.StartsWith("8") ? 8 : 0;
-
-                            switch (tipo)
-                            {
-                                case 1: nuevoTipo = "Roya del cafeto"; break;
-                                case 2: nuevoTipo = "Enfermedad de la cereza del café (CBD)"; break;
-                                case 3: nuevoTipo = "Nematodos"; break;
-                                case 4: nuevoTipo = "Broca del café"; break;
-                                case 5: nuevoTipo = "Barrenador del tallo (Xylosandus compactus)"; break;
-                                case 6: nuevoTipo = "Marchitez del café (CWD)"; break;
-                                case 7: nuevoTipo = "Antracnosis"; break;
-                                case 8: nuevoTipo = "Enfermedad de la ampolla roja"; break;
-                            }
-                        }
-
-                        // Menú para nivel de resistencia
-                        var nivelOpcion = resistencia.NivelResistencia?.nombre_nivel ?? "";
-                        var nivelMenu = AnsiConsole.Prompt(
-                            new SelectionPrompt<string>()
-                                .Title("[bold yellow]Opción de nivel de Resistencia (actual: " + nivelOpcion + ")[/]")
-                                .PageSize(7)
-                                .HighlightStyle(new Style(foreground: Color.Cyan2, decoration: Decoration.Bold))
-                                .AddChoices(new[]
-                                {
-                                    "1. Resistente",
-                                    "2. Tolerante",
-                                    "3. Susceptible",
-                                    "4. Desconocido",
-                                    "9. Mantener valor actual"
-                                }));
-
-                        string nuevoNivel = nivelOpcion;
-                        if (!nivelMenu.StartsWith("9"))
-                        {
-                            int nivel = nivelMenu.StartsWith("1") ? 1 :
-                                        nivelMenu.StartsWith("2") ? 2 :
-                                        nivelMenu.StartsWith("3") ? 3 :
-                                        nivelMenu.StartsWith("4") ? 4 : 0;
-
-                            switch (nivel)
-                            {
-                                case 1: nuevoNivel = "Resistente"; break;
-                                case 2: nuevoNivel = "Tolerante"; break;
-                                case 3: nuevoNivel = "Susceptible"; break;
-                                case 4: nuevoNivel = "Desconocido"; break;
-                            }
-                        }
-
-                        // Si el usuario cambió tipo o nivel, elimina y crea la relación
-                        if (nuevoTipo != tipoOpcion || nuevoNivel != nivelOpcion)
-                        {
-                            // Buscar entidades existentes
-                            var tipoExistente = await _VariedadRepository.GetTipoResistenciaByNombreAsync(nuevoTipo);
-                            var nivelExistente = await _VariedadRepository.GetNivelResistenciaByNombreAsync(nuevoNivel);
-
-                            // 1. Elimina la relación existente
-                            variedadToUpdate.VariedadesResistencia!.Remove(resistencia);
-                            await _VariedadRepository.Update(variedadToUpdate);
-                            await _VariedadRepository.SaveAsync();
-
-                            // 2. Crea la nueva relación
-                            var nuevaResistencia = new Cafe_Colombiano.src.Modules.VariedadResistencia.Domain.Entities.VariedadResistencia
-                            {
-                                TipoResistencia = tipoExistente ?? new Cafe_Colombiano.src.Modules.TipoResistencia.Domain.Entities.TipoResistencia { nombre_tipo = nuevoTipo },
-                                NivelResistencia = nivelExistente ?? new Cafe_Colombiano.src.Modules.NivelResistencia.Domain.Entities.NivelResistencia { nombre_nivel = nuevoNivel }
-                            };
-                            variedadToUpdate.VariedadesResistencia.Add(nuevaResistencia);
-                        }
-                    }
-
-                    // Información Agronómica
-                    if (variedadToUpdate.InformacionAgronomica != null)
-                    {
-                        // Tiempo de cosecha
-                        var tiempoOpcion = variedadToUpdate.InformacionAgronomica.tiempo_cosecha;
-                        var tiempoMenu = AnsiConsole.Prompt(
-                            new SelectionPrompt<string>()
-                                .Title("[bold yellow]Opción de tiempo de cosecha (actual: " + tiempoOpcion + ")[/]")
-                                .PageSize(7)
-                                .HighlightStyle(new Style(foreground: Color.Cyan2, decoration: Decoration.Bold))
-                                .AddChoices(new[]
-                                {
-                                    "1. 6-8 meses",
-                                    "2. Año 2",
-                                    "3. Año 4",
-                                    "4. Desconocida",
-                                    "9. Mantener valor actual"
-                                }));
-
-                        if (!tiempoMenu.StartsWith("9"))
-                        {
-                            int tiempo = tiempoMenu.StartsWith("1") ? 1 :
-                                         tiempoMenu.StartsWith("2") ? 2 :
-                                         tiempoMenu.StartsWith("3") ? 3 :
-                                         tiempoMenu.StartsWith("4") ? 4 : 0;
-
-                            switch (tiempo)
-                            {
-                                case 1: tiempoOpcion = "6-8 meses"; break;
-                                case 2: tiempoOpcion = "Año 2"; break;
-                                case 3: tiempoOpcion = "Año 4"; break;
-                                case 4: tiempoOpcion = "Desconocido"; break;
-                            }
-                            variedadToUpdate.InformacionAgronomica.tiempo_cosecha = tiempoOpcion;
-                        }
-
-                        // Maduración
-                        var maduracionOpcion = variedadToUpdate.InformacionAgronomica.maduracion;
-                        var maduracionMenu = AnsiConsole.Prompt(
-                            new SelectionPrompt<string>()
-                                .Title("[bold yellow]Opción de maduración (actual: " + maduracionOpcion + ")[/]")
-                                .PageSize(7)
-                                .HighlightStyle(new Style(foreground: Color.Cyan2, decoration: Decoration.Bold))
-                                .AddChoices(new[]
-                                {
-                                    "1. Promedio",
-                                    "2. Tardía",
-                                    "9. Mantener valor actual"
-                                }));
-
-                        if (!maduracionMenu.StartsWith("9"))
-                        {
-                            int maduracion = maduracionMenu.StartsWith("1") ? 1 :
-                                             maduracionMenu.StartsWith("2") ? 2 : 0;
-
-                            switch (maduracion)
-                            {
-                                case 1: maduracionOpcion = "Promedio"; break;
-                                case 2: maduracionOpcion = "Tardía"; break;
-                            }
-                            variedadToUpdate.InformacionAgronomica.maduracion = maduracionOpcion;
-                        }
-
-                        // Nutrición
-                        var nutricionOpcion = variedadToUpdate.InformacionAgronomica.nutricion;
-                        var nutricionMenu = AnsiConsole.Prompt(
-                            new SelectionPrompt<string>()
-                                .Title("[bold yellow]Opción de nutrición (actual: " + nutricionOpcion + ")[/]")
-                                .PageSize(7)
-                                .HighlightStyle(new Style(foreground: Color.Cyan2, decoration: Decoration.Bold))
-                                .AddChoices(new[]
-                                {
-                                    "1. Media",
-                                    "2. Alta",
-                                    "3. Desconocida",
-                                    "9. Mantener valor actual"
-                                }));
-
-                        if (!nutricionMenu.StartsWith("9"))
-                        {
-                            int nutricion = nutricionMenu.StartsWith("1") ? 1 :
-                                            nutricionMenu.StartsWith("2") ? 2 :
-                                            nutricionMenu.StartsWith("3") ? 3 : 0;
-
-                            switch (nutricion)
-                            {
-                                case 1: nutricionOpcion = "Media"; break;
-                                case 2: nutricionOpcion = "Alta"; break;
-                                case 3: nutricionOpcion = "Desconocida"; break;
-                            }
-                            variedadToUpdate.InformacionAgronomica.nutricion = nutricionOpcion;
-                        }
-
-                        // Densidad de siembra
-                        var densidadOpcion = variedadToUpdate.InformacionAgronomica.densidad_siembra;
-                        var densidadMenu = AnsiConsole.Prompt(
-                            new SelectionPrompt<string>()
-                                .Title("[bold yellow]Opción de densidad de siembra (actual: " + densidadOpcion + ")[/]")
-                                .PageSize(7)
-                                .HighlightStyle(new Style(foreground: Color.Cyan2, decoration: Decoration.Bold))
-                                .AddChoices(new[]
-                                {
-                                    "1. 1000-2000 plantas/ha (usando poda de un solo tallo)",
-                                    "2. 2,500 árboles/ha",
-                                    "3. hasta 3,000 plantas/ha",
-                                    "4. 2000-3000 plantas/ha (usando poda de múltiples tallos)",
-                                    "5. hasta 10,000 cafetos/ha",
-                                    "9. Mantener valor actual"
-                                }));
-
-                        if (!densidadMenu.StartsWith("9"))
-                        {
-                            int densidad = densidadMenu.StartsWith("1") ? 1 :
-                                           densidadMenu.StartsWith("2") ? 2 :
-                                           densidadMenu.StartsWith("3") ? 3 :
-                                           densidadMenu.StartsWith("4") ? 4 :
-                                           densidadMenu.StartsWith("5") ? 5 : 0;
-
-                            switch (densidad)
-                            {
-                                case 1: densidadOpcion = "1000-2000 plantas/ha (usando poda de un solo tallo)"; break;
-                                case 2: densidadOpcion = "2000-3000 plantas/ha (usando poda de múltiples tallos)"; break;
-                                case 3: densidadOpcion = "Hasta 3,000 plantas/ha"; break;
-                                case 4: densidadOpcion = "2000-3000 plantas/ha (usando poda de múltiples tallos)"; break;
-                                case 5: densidadOpcion = "hasta 10,000 cafetos/ha"; break;
-                            }
-                            variedadToUpdate.InformacionAgronomica.densidad_siembra = densidadOpcion;
-                        }
-                    }
-
-                    await _VariedadRepository.Update(variedadToUpdate);
-                    await _VariedadRepository.SaveAsync();
-                    Console.Clear();
-                    Console.WriteLine("Variedad actualizada correctamente.");
-                }
-                else
-                {
-                    Console.Clear();
-                    Console.WriteLine("Variedad no encontrada.");
-                }
-            }
-            else
+            if (!int.TryParse(Console.ReadLine(), out int id))
             {
                 Console.WriteLine("ID inválido.");
+                return;
             }
+
+            var variedadToUpdate = await _VariedadRepository.GetVariedadByIdAsync(id);
+            if (variedadToUpdate == null)
+            {
+                Console.Clear();
+                Console.WriteLine("Variedad no encontrada.");
+                return;
+            }
+
+            // Datos principales
+            variedadToUpdate.nombre_comun = PedirDatoOpcional("Ingrese el nuevo nombre común de la variedad:", variedadToUpdate.nombre_comun);
+            variedadToUpdate.nombre_cientifico = PedirDatoOpcional("Ingrese el nuevo nombre científico de la variedad:", variedadToUpdate.nombre_cientifico);
+            variedadToUpdate.descripcion_general = PedirDatoOpcional("Ingrese la nueva descripción de la variedad:", variedadToUpdate.descripcion_general);
+            variedadToUpdate.historia_linaje = PedirDatoOpcional("Ingrese la nueva historia del linaje de la variedad:", variedadToUpdate.historia_linaje);
+            variedadToUpdate.imagen_referencia_url = PedirDatoOpcional("Ingrese la nueva URL de la imagen de referencia de la variedad:", variedadToUpdate.imagen_referencia_url);
+
+            // Grupo Genético
+            if (variedadToUpdate.GrupoGenetico != null)
+            {
+                string[] opcionesGrupo = { "1. Arábigo", "2. Guinea", "3. Congo", "4. Uganda", "5. Guinea x Congo", "6. Guinea x Coffea congensis" };
+                string[] valoresGrupo = { "Arabigo", "Guinea", "Congo", "Uganda", "Guinea x Congo", "Guinea x Coffea congensis" };
+                var grupoOpcion = await SeleccionarOpcionAsync("[bold yellow]Opción de grupo Genético[/]", opcionesGrupo, valoresGrupo, variedadToUpdate.GrupoGenetico.nombre_grupo,
+                    _VariedadRepository.GetGrupoGeneticoByNombreAsync,
+                    nombre => new Cafe_Colombiano.src.Modules.GrupoGenetico.Domain.Entities.GrupoGenetico { nombre_grupo = nombre });
+                variedadToUpdate.GrupoGenetico = grupoOpcion;
+                variedadToUpdate.GrupoGenetico.origen = PedirDatoOpcional("Ingrese el nuevo origen de la variedad:", variedadToUpdate.GrupoGenetico.origen);
+            }
+
+            // Porte
+            if (variedadToUpdate.Porte != null)
+            {
+                string[] opcionesPorte = { "1. Alto", "2. Bajo", "3. Dwarf/Compact", "4. Tall", "5. Desconocido" };
+                string[] valoresPorte = { "Alto", "Bajo", "Dwarf/Compact", "Tall", "Desconocido" };
+                var porteOpcion = await SeleccionarOpcionAsync("[bold yellow]Opción de Porte[/]", opcionesPorte, valoresPorte, variedadToUpdate.Porte.nombre_porte,
+                    _VariedadRepository.GetPorteByNombreAsync,
+                    nombre => new Cafe_Colombiano.src.Modules.Porte.Domain.Entities.Porte { nombre_porte = nombre });
+                variedadToUpdate.Porte = porteOpcion;
+            }
+
+            // Tamaño de Grano
+            if (variedadToUpdate.TamanoGrano != null)
+            {
+                string[] opcionesTamano = { "1. Pequeño", "2. Mediano", "3. Grande", "4. Muy Grande", "5. Desconocido" };
+                string[] valoresTamano = { "Pequeño", "Mediano", "Grande", "Muy Grande", "Desconocido" };
+                var tamanoOpcion = await SeleccionarOpcionAsync("[bold yellow]Opción de Tamaño[/]", opcionesTamano, valoresTamano, variedadToUpdate.TamanoGrano.nombre_tamano,
+                    _VariedadRepository.GetTamanoGranoByNombreAsync,
+                    nombre => new Cafe_Colombiano.src.Modules.TamanoGrano.Domain.Entities.TamanoGrano { nombre_tamano = nombre });
+                variedadToUpdate.TamanoGrano = tamanoOpcion;
+            }
+
+            // Altitud Óptima
+            if (variedadToUpdate.AltitudOptima != null)
+            {
+                string[] opcionesAltitud = { "1. 500-1000 msnm", "2. 400-900 msnm", "3. 500-800 msnm", "4. 700 msnm", "5. 1200-1800 msnm" };
+                string[] valoresAltitud = { "500-1000 msnm", "400-900 msnm", "500-800 msnm", "700 msnm", "1200-1800 msnm" };
+                var altitudOpcion = await SeleccionarOpcionAsync("[bold yellow]Opción de Altitud[/]", opcionesAltitud, valoresAltitud, variedadToUpdate.AltitudOptima.rango_altitud,
+                    _VariedadRepository.GetAltitudOptimaByRangoAsync,
+                    rango => new Cafe_Colombiano.src.Modules.AltitudOptima.Domain.Entities.AltitudOptima { rango_altitud = rango });
+                variedadToUpdate.AltitudOptima = altitudOpcion;
+                variedadToUpdate.AltitudOptima.descripcion = PedirDatoOpcional("Ingrese la nueva descripción de la altitud óptima:", variedadToUpdate.AltitudOptima.descripcion);
+            }
+
+            // Potencial de Rendimiento
+            if (variedadToUpdate.PotencialRendimiento != null)
+            {
+                string[] opcionesPotencial = { "1. Bajo (menos de 1500 kg/ha)", "2. Medio (1500-3000 kg/ha)", "3. Alto (3000-5000 kg/ha)", "4. Muy alto (más de 5000 kg/ha)", "5. Desconocido" };
+                string[] valoresPotencial = { "Bajo (menos de 1500 kg/ha)", "Medio (1500-3000 kg/ha)", "Alto (3000-5000 kg/ha)", "Muy alto (más de 5000 kg/ha)", "Desconocido" };
+                var potencialOpcion = await SeleccionarOpcionAsync("[bold yellow]Opción de Potencial de Rendimiento[/]", opcionesPotencial, valoresPotencial, variedadToUpdate.PotencialRendimiento.nivel_rendimiento,
+                    _VariedadRepository.GetPotencialRendimientoByNivelAsync,
+                    nivel => new Cafe_Colombiano.src.Modules.PotencialRendimiento.Domain.Entities.PotencialRendimiento { nivel_rendimiento = nivel });
+                variedadToUpdate.PotencialRendimiento = potencialOpcion;
+            }
+
+            // Calidad de Grano
+            if (variedadToUpdate.CalidadGrano != null)
+            {
+                string[] opcionesCalidad = { "1. Excelente", "2. Muy buena", "3. Buena", "4. Regular", "5. Básica", "6. Desconocida" };
+                string[] valoresCalidad = { "Excelente", "Muy buena", "Buena", "Regular", "Básica", "Desconocida" };
+                var calidadOpcion = await SeleccionarOpcionAsync("[bold yellow]Opción de Calidad[/]", opcionesCalidad, valoresCalidad, variedadToUpdate.CalidadGrano.nivel_calidad,
+                    _VariedadRepository.GetCalidadGranoByNivelAsync,
+                    nivel => new Cafe_Colombiano.src.Modules.CalidadGrano.Domain.Entities.CalidadGrano { nivel_calidad = nivel });
+                variedadToUpdate.CalidadGrano = calidadOpcion;
+                variedadToUpdate.CalidadGrano.descripcion = PedirDatoOpcional("Ingrese la nueva descripción de la calidad de grano:", variedadToUpdate.CalidadGrano.descripcion);
+            }
+
+            // Resistencia (solo el primero)
+            await ActualizarResistenciaAsync(variedadToUpdate);
+
+            // Información Agronómica
+            if (variedadToUpdate.InformacionAgronomica != null)
+            {
+                string[] opcionesTiempo = { "1. 6-8 meses", "2. Año 2", "3. Año 4", "4. Desconocida" };
+                string[] valoresTiempo = { "6-8 meses", "Año 2", "Año 4", "Desconocido" };
+                variedadToUpdate.InformacionAgronomica.tiempo_cosecha = SeleccionarOpcion("[bold yellow]Opción de tiempo de cosecha[/]", opcionesTiempo, valoresTiempo, variedadToUpdate.InformacionAgronomica.tiempo_cosecha);
+
+                string[] opcionesMaduracion = { "1. Promedio", "2. Tardía" };
+                string[] valoresMaduracion = { "Promedio", "Tardía" };
+                variedadToUpdate.InformacionAgronomica.maduracion = SeleccionarOpcion("[bold yellow]Opción de maduración[/]", opcionesMaduracion, valoresMaduracion, variedadToUpdate.InformacionAgronomica.maduracion);
+
+                string[] opcionesNutricion = { "1. Media", "2. Alta", "3. Desconocida" };
+                string[] valoresNutricion = { "Media", "Alta", "Desconocida" };
+                variedadToUpdate.InformacionAgronomica.nutricion = SeleccionarOpcion("[bold yellow]Opción de nutrición[/]", opcionesNutricion, valoresNutricion, variedadToUpdate.InformacionAgronomica.nutricion);
+
+                string[] opcionesDensidad = {
+                    "1. 1000-2000 plantas/ha (usando poda de un solo tallo)",
+                    "2. 2,500 árboles/ha",
+                    "3. hasta 3,000 plantas/ha",
+                    "4. 2000-3000 plantas/ha (usando poda de múltiples tallos)",
+                    "5. hasta 10,000 cafetos/ha"
+                };
+                string[] valoresDensidad = {
+                    "1000-2000 plantas/ha (usando poda de un solo tallo)",
+                    "2,500 árboles/ha",
+                    "hasta 3,000 plantas/ha",
+                    "2000-3000 plantas/ha (usando poda de múltiples tallos)",
+                    "hasta 10,000 cafetos/ha"
+                };
+                variedadToUpdate.InformacionAgronomica.densidad_siembra = SeleccionarOpcion("[bold yellow]Opción de densidad de siembra[/]", opcionesDensidad, valoresDensidad, variedadToUpdate.InformacionAgronomica.densidad_siembra);
+            }
+
+            await _VariedadRepository.Update(variedadToUpdate);
+            await _VariedadRepository.SaveAsync();
+            Console.Clear();
+            Console.WriteLine("Variedad actualizada correctamente.");
         }
 
         private string PedirDatoOpcional(string mensaje, string valorActual)
@@ -543,6 +162,92 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
             Console.Write($"{mensaje} (actual: {valorActual}): ");
             var entrada = Console.ReadLine();
             return string.IsNullOrWhiteSpace(entrada) ? valorActual : entrada;
+        }
+
+        private string SeleccionarOpcion(string titulo, string[] opciones, string[] valores, string valorActual)
+        {
+            var opcionesMenu = opciones.Concat(new[] { "9. Mantener valor actual" }).ToArray();
+            var opcion = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .Title($"{titulo} (actual: {valorActual})")
+                    .PageSize(Math.Max(opcionesMenu.Length, 3))
+                    .HighlightStyle(new Style(foreground: Color.Cyan2, decoration: Decoration.Bold))
+                    .AddChoices(opcionesMenu)
+            );
+            if (opcion.StartsWith("9"))
+                return valorActual;
+            int idx = Array.FindIndex(opcionesMenu, o => o == opcion);
+            return valores[idx];
+        }
+
+        private async Task<T> SeleccionarOpcionAsync<T>(
+            string titulo,
+            string[] opciones,
+            string[] valores,
+            string valorActual,
+            Func<string, Task<T?>> buscarExistente,
+            Func<string, T> crearNuevo
+        ) where T : class
+        {
+            var seleccion = SeleccionarOpcion(titulo, opciones, valores, valorActual);
+            if (seleccion == valorActual)
+                return await buscarExistente(valorActual) ?? crearNuevo(valorActual);
+
+            var existente = await buscarExistente(seleccion);
+            return existente ?? crearNuevo(seleccion);
+        }
+
+        private async Task ActualizarResistenciaAsync(Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad variedadToUpdate)
+        {
+            var resistencia = variedadToUpdate.VariedadesResistencia?.FirstOrDefault();
+            if (resistencia == null) return;
+
+            string[] opcionesTipo = {
+                "1. Roya del cafeto",
+                "2. Enfermedad de la cereza del café (CBD)",
+                "3. Nematodos",
+                "4. Broca del café",
+                "5. Barrenador del tallo (Xylosandus compactus)",
+                "6. Marchitez del café (CWD)",
+                "7. Antracnosis",
+                "8. Enfermedad de la ampolla roja"
+            };
+            string[] valoresTipo = {
+                "Roya del cafeto",
+                "Enfermedad de la cereza del café (CBD)",
+                "Nematodos",
+                "Broca del café",
+                "Barrenador del tallo (Xylosandus compactus)",
+                "Marchitez del café (CWD)",
+                "Antracnosis",
+                "Enfermedad de la ampolla roja"
+            };
+            string tipoActual = resistencia.TipoResistencia?.nombre_tipo ?? "";
+            var nuevoTipo = await SeleccionarOpcionAsync("[bold yellow]Opción de Resistencia[/]", opcionesTipo, valoresTipo, tipoActual,
+                _VariedadRepository.GetTipoResistenciaByNombreAsync,
+                nombre => new Cafe_Colombiano.src.Modules.TipoResistencia.Domain.Entities.TipoResistencia { nombre_tipo = nombre });
+
+            string[] opcionesNivel = { "1. Resistente", "2. Tolerante", "3. Susceptible", "4. Desconocido" };
+            string[] valoresNivel = { "Resistente", "Tolerante", "Susceptible", "Desconocido" };
+            string nivelActual = resistencia.NivelResistencia?.nombre_nivel ?? "";
+            var nuevoNivel = await SeleccionarOpcionAsync("[bold yellow]Opción de nivel de Resistencia[/]", opcionesNivel, valoresNivel, nivelActual,
+                _VariedadRepository.GetNivelResistenciaByNombreAsync,
+                nombre => new Cafe_Colombiano.src.Modules.NivelResistencia.Domain.Entities.NivelResistencia { nombre_nivel = nombre });
+
+            // Si el usuario cambió tipo o nivel, elimina y crea la relación
+            if (nuevoTipo.nombre_tipo != tipoActual || nuevoNivel.nombre_nivel != nivelActual)
+            {
+                variedadToUpdate.VariedadesResistencia!.Remove(resistencia);
+                await _VariedadRepository.Update(variedadToUpdate);
+                await _VariedadRepository.SaveAsync();
+
+                var nuevaResistencia = new Cafe_Colombiano.src.Modules.VariedadResistencia.Domain.Entities.VariedadResistencia
+                {
+                    TipoResistencia = nuevoTipo,
+                    NivelResistencia = nuevoNivel
+                };
+                variedadToUpdate.VariedadesResistencia.Add(nuevaResistencia);
+            }
         }
     }
 }
