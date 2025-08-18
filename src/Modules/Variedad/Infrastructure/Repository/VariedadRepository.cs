@@ -677,9 +677,5 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
         }
 
 
-        public void RemoveEntity(object entity)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
