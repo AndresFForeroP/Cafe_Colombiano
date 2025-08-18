@@ -39,8 +39,8 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
             AnsiConsole.MarkupLine("[bold yellow]╚═══════════════════════════════════════════════════════════╝[/]");
             Console.WriteLine();
 
-            
 
+            Console.Clear();
             string grupoOpcion = "";
 
             var opcion = AnsiConsole.Prompt(
@@ -90,7 +90,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
 
 
             var origen = PedirDatoObligatorio("Ingrese el origen de la variedad: ");
-
+            Console.Clear();
             // DETALLES DEL GRANO
             AnsiConsole.MarkupLine("[bold green]╔════════════════════════════════════════════════╗[/]");
             AnsiConsole.MarkupLine("[bold green]║              DETALLES DEL GRANO                ║[/]");
@@ -138,6 +138,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
                     break;
                     
             }
+            Console.Clear();
              string tamanoOpcion = "";
              opcion = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
@@ -179,6 +180,8 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
 
                             
                     }
+
+                Console.Clear();
                 string altitudOpcion = "";
                 opcion = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
@@ -220,8 +223,10 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
 
                             
                     }
+            Console.Clear();
             var descripcionAltitudOptima = PedirDatoObligatorio("Ingrese la descripción de la altitud óptima: ");
-            var potencialRendimiento = PedirDatoObligatorio("Ingrese el potencial de rendimiento: ");
+           
+            Console.Clear();
             string potencialOpcion = "";
                 opcion = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
@@ -262,7 +267,8 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
                             break;
 
                     }
-  
+                    Console.Clear();
+
             string calidadOpcion = "";
                 opcion = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
@@ -309,9 +315,9 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
 
             }
 
-
+            Console.Clear();
             var descripcionCalidadGrano = PedirDatoObligatorio("Descripcion de la calidad de grano: ");
-           
+           Console.Clear();
             string ResistenciaOpcion = "";
                 opcion = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
@@ -369,7 +375,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
             }
 
  
-
+            Console.Clear();
              string nivelOpcion = "";
                 opcion = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
@@ -404,7 +410,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
                     nivelOpcion = "Desconocido";
                     break;
             }
-
+            Console.Clear();
 
             // INFORMACION AGRONOMICA
             AnsiConsole.MarkupLine("[bold blue]╔════════════════════════════════════════════════════════════════════════╗[/]");
@@ -448,7 +454,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
             }
 
 
-
+            Console.Clear();
             string maduracionOpcion = "";
                 opcion = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
@@ -476,7 +482,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
  
             }
             
-
+            Console.Clear();
             string nutricionOpcion = "";
                 opcion = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
@@ -508,7 +514,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
                     break;
  
             }
-            
+            Console.Clear();
             string densidadOpcion = "";
                 opcion = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
@@ -551,8 +557,6 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
  
             }
 
-            Console.Write("Ingrese el rango de Altitud: ");
-            var rangoAltitud = Console.ReadLine();
 
             // VariedadResistencia
 
@@ -593,7 +597,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
             nuevaVariedad.CalidadGrano = nuevaCalidadGrano;
             nuevaCalidadGrano.descripcion = descripcionCalidadGrano;
             nuevaVariedad.InformacionAgronomica = nuevaInformacionAgronomica;
-            nuevaAltitudOptima.rango_altitud = rangoAltitud;
+            nuevaAltitudOptima.rango_altitud = altitudOpcion;
 
             nuevaVariedad.VariedadesResistencia!.Add(new Cafe_Colombiano.src.Modules.VariedadResistencia.Domain.Entities.VariedadResistencia
             {

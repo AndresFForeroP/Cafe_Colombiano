@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS Porte (
 
 CREATE TABLE IF NOT EXISTS TamanoGrano (
   id INT NOT NULL AUTO_INCREMENT,
-  nombre_tamano VARCHAR(50) NOT NULL UNIQUE,
+  nombre_tamano VARCHAR(50) NOT NULL ,
   PRIMARY KEY (id)
 ) ENGINE = InnoDB;
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS PotencialRendimiento (
 
 CREATE TABLE IF NOT EXISTS CalidadGrano (
   id INT NOT NULL AUTO_INCREMENT,
-  nivel_calidad VARCHAR(50) NOT NULL UNIQUE,
+  nivel_calidad VARCHAR(50) NOT NULL ,
   descripcion TEXT,
   PRIMARY KEY (id)
 ) ENGINE = InnoDB;

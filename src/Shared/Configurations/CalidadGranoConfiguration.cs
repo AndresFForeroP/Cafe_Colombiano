@@ -15,7 +15,7 @@ namespace Cafe_Colombiano.src.Shared.Configurations
             builder.ToTable("CalidadGrano");
             builder.HasKey(cg => cg.id);
             builder.Property(cg => cg.nivel_calidad).IsRequired().HasMaxLength(50);
-            builder.HasIndex(cg => cg.nivel_calidad).IsUnique();
+            builder.HasIndex(cg => cg.nivel_calidad);
             builder.Property(cg => cg.descripcion);
             builder.HasMany(cg => cg.Variedades)
                 .WithOne(v => v.CalidadGrano)

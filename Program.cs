@@ -31,7 +31,7 @@ internal class Program
 
 
 
-        await crearVariedadService.CrearVariedad();
+        //await crearVariedadService.CrearVariedad();
 
 
         await eliminar.EliminarVariedadAsync();
