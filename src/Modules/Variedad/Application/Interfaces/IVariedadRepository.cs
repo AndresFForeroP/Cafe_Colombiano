@@ -27,6 +27,18 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Interfaces
         public IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorGrupo(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista);
         public int validarentero(int maximo);
         public string MostrasListaIds();
-        Task Update(Domain.Entities.Variedad variedadToUpdate);
+        public void RemoveEntity<T>(T entity) where T : class;
+
+
+        Task<Cafe_Colombiano.src.Modules.GrupoGenetico.Domain.Entities.GrupoGenetico?> GetGrupoGeneticoByNombreAsync(string nombre);
+        Task<Cafe_Colombiano.src.Modules.Porte.Domain.Entities.Porte?> GetPorteByNombreAsync(string nombre);
+        Task<Cafe_Colombiano.src.Modules.TamanoGrano.Domain.Entities.TamanoGrano?> GetTamanoGranoByNombreAsync(string nombre);
+        Task<Cafe_Colombiano.src.Modules.AltitudOptima.Domain.Entities.AltitudOptima?> GetAltitudOptimaByRangoAsync(string rango);
+        Task<Cafe_Colombiano.src.Modules.PotencialRendimiento.Domain.Entities.PotencialRendimiento?> GetPotencialRendimientoByNivelAsync(string nivel);
+        Task<Cafe_Colombiano.src.Modules.CalidadGrano.Domain.Entities.CalidadGrano?> GetCalidadGranoByNivelAsync(string nivel);
+        Task<Cafe_Colombiano.src.Modules.TipoResistencia.Domain.Entities.TipoResistencia?> GetTipoResistenciaByNombreAsync(string nombre);
+        Task<Cafe_Colombiano.src.Modules.NivelResistencia.Domain.Entities.NivelResistencia?> GetNivelResistenciaByNombreAsync(string nombre);
+
+
     }
 }

@@ -187,7 +187,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
             return Lista.Where(v => v.TamanoGrano?.nombre_tamano != null &&
                                     v.TamanoGrano.nombre_tamano.ToLower().Contains(nombre.ToLower()));
         }
-        public IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorAltitud( IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista)
+        public IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorAltitud(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista)
         {
             string nombre = "";
 
@@ -235,7 +235,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
                                     v.AltitudOptima.rango_altitud.ToLower().Contains(nombre.ToLower()));
         }
 
-       public IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorRendimiento(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista)
+        public IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorRendimiento(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista)
         {
             string nombre = "";
 
@@ -336,7 +336,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
                                     v.CalidadGrano.nivel_calidad.ToLower().Contains(nombre.ToLower()));
         }
 
-       public IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorResistencia(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista)
+        public IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorResistencia(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista)
         {
             string nombre = "";
             string NivelResistencia = "";
@@ -481,7 +481,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
                                     v.InformacionAgronomica.tiempo_cosecha.ToLower().Contains(nombre.ToLower()));
         }
 
-       public IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorMaduracion(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista)
+        public IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorMaduracion(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista)
         {
             string nombre = "";
 
@@ -650,7 +650,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
                                     v.GrupoGenetico.nombre_grupo.ToLower().Contains(nombre.ToLower()));
         }
 
-        
+
         public int validarentero(int maximo)
         {
             int salida = 0;
@@ -676,10 +676,52 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
             return "Lista de IDs mostrada en consola.";
         }
 
-
-        public void RemoveEntity(object entity)
+        public Task<GrupoGenetico.Domain.Entities.GrupoGenetico?> GetGrupoGeneticoByNombreAsync(string nombre)
         {
-            throw new NotImplementedException();
+            return _context.Set<GrupoGenetico.Domain.Entities.GrupoGenetico>()
+                .FirstOrDefaultAsync(g => g.nombre_grupo == nombre);
+        }
+
+        public Task<Porte.Domain.Entities.Porte?> GetPorteByNombreAsync(string nombre)
+        {
+            return _context.Set<Porte.Domain.Entities.Porte>()
+                .FirstOrDefaultAsync(p => p.nombre_porte == nombre);
+        }
+
+        public Task<TamanoGrano.Domain.Entities.TamanoGrano?> GetTamanoGranoByNombreAsync(string nombre)
+        {
+            return _context.Set<TamanoGrano.Domain.Entities.TamanoGrano>()
+                .FirstOrDefaultAsync(t => t.nombre_tamano == nombre);
+        }
+
+        public Task<AltitudOptima.Domain.Entities.AltitudOptima?> GetAltitudOptimaByRangoAsync(string rango)
+        {
+            return _context.Set<AltitudOptima.Domain.Entities.AltitudOptima>()
+                .FirstOrDefaultAsync(a => a.rango_altitud == rango);
+        }
+
+        public Task<PotencialRendimiento.Domain.Entities.PotencialRendimiento?> GetPotencialRendimientoByNivelAsync(string nivel)
+        {
+            return _context.Set<PotencialRendimiento.Domain.Entities.PotencialRendimiento>()
+                .FirstOrDefaultAsync(p => p.nivel_rendimiento == nivel);
+        }
+
+        public Task<CalidadGrano.Domain.Entities.CalidadGrano?> GetCalidadGranoByNivelAsync(string nivel)
+        {
+            return _context.Set<CalidadGrano.Domain.Entities.CalidadGrano>()
+                .FirstOrDefaultAsync(c => c.nivel_calidad == nivel);
+        }
+
+        public Task<TipoResistencia.Domain.Entities.TipoResistencia?> GetTipoResistenciaByNombreAsync(string nombre)
+        {
+            return _context.Set<TipoResistencia.Domain.Entities.TipoResistencia>()
+                .FirstOrDefaultAsync(t => t.nombre_tipo == nombre);
+        }
+
+        public Task<NivelResistencia.Domain.Entities.NivelResistencia?> GetNivelResistenciaByNombreAsync(string nombre)
+        {
+            return _context.Set<NivelResistencia.Domain.Entities.NivelResistencia>()
+                .FirstOrDefaultAsync(n => n.nombre_nivel == nombre);
         }
     }
 }
