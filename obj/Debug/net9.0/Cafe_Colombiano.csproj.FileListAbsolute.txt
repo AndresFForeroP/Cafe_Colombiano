@@ -1013,6 +1013,7 @@ C:/Proyectos visual/C#/Proyecto Final/v2/Cafe_Colombiano/obj/Debug/net9.0/ref/Ca
 /home/camper/Cafe_Colombiano/bin/Debug/net9.0/runtimes/win-arm64/native/libSkiaSharp.dll
 /home/camper/Cafe_Colombiano/bin/Debug/net9.0/runtimes/win-x64/native/libSkiaSharp.dll
 /home/camper/Cafe_Colombiano/bin/Debug/net9.0/runtimes/win-x86/native/libSkiaSharp.dll
+<<<<<<< HEAD
 C:\Proyectos visual\C#\Proyecto Final\v2\Cafe_Colombiano\bin\Debug\net9.0\appsettings.json
 C:\Proyectos visual\C#\Proyecto Final\v2\Cafe_Colombiano\bin\Debug\net9.0\LatoFont\Lato-Black.ttf
 C:\Proyectos visual\C#\Proyecto Final\v2\Cafe_Colombiano\bin\Debug\net9.0\LatoFont\Lato-BlackItalic.ttf
@@ -1395,3 +1396,21 @@ C:\Users\HP\Desktop\Cafe_Colombiano\obj\Debug\net9.0\refint\Cafe_Colombiano.dll
 C:\Users\HP\Desktop\Cafe_Colombiano\obj\Debug\net9.0\Cafe_Colombiano.pdb
 C:\Users\HP\Desktop\Cafe_Colombiano\obj\Debug\net9.0\Cafe_Colombiano.genruntimeconfig.cache
 C:\Users\HP\Desktop\Cafe_Colombiano\obj\Debug\net9.0\ref\Cafe_Colombiano.dll
+=======
+C:/Proyectos visual/C#/Proyecto Final/v2/Cafe_Colombiano/bin/Debug/net9.0/SkiaSharp.dll
+C:/Proyectos visual/C#/Proyecto Final/v2/Cafe_Colombiano/bin/Debug/net9.0/runtimes/linux-arm/native/libSkiaSharp.so
+C:/Proyectos visual/C#/Proyecto Final/v2/Cafe_Colombiano/bin/Debug/net9.0/runtimes/linux-arm64/native/libSkiaSharp.so
+C:/Proyectos visual/C#/Proyecto Final/v2/Cafe_Colombiano/bin/Debug/net9.0/runtimes/linux-loongarch64/native/libSkiaSharp.so
+C:/Proyectos visual/C#/Proyecto Final/v2/Cafe_Colombiano/bin/Debug/net9.0/runtimes/linux-musl-arm/native/libSkiaSharp.so
+C:/Proyectos visual/C#/Proyecto Final/v2/Cafe_Colombiano/bin/Debug/net9.0/runtimes/linux-musl-arm64/native/libSkiaSharp.so
+C:/Proyectos visual/C#/Proyecto Final/v2/Cafe_Colombiano/bin/Debug/net9.0/runtimes/linux-musl-loongarch64/native/libSkiaSharp.so
+C:/Proyectos visual/C#/Proyecto Final/v2/Cafe_Colombiano/bin/Debug/net9.0/runtimes/linux-musl-riscv64/native/libSkiaSharp.so
+C:/Proyectos visual/C#/Proyecto Final/v2/Cafe_Colombiano/bin/Debug/net9.0/runtimes/linux-musl-x64/native/libSkiaSharp.so
+C:/Proyectos visual/C#/Proyecto Final/v2/Cafe_Colombiano/bin/Debug/net9.0/runtimes/linux-riscv64/native/libSkiaSharp.so
+C:/Proyectos visual/C#/Proyecto Final/v2/Cafe_Colombiano/bin/Debug/net9.0/runtimes/linux-x64/native/libSkiaSharp.so
+C:/Proyectos visual/C#/Proyecto Final/v2/Cafe_Colombiano/bin/Debug/net9.0/runtimes/linux-x86/native/libSkiaSharp.so
+C:/Proyectos visual/C#/Proyecto Final/v2/Cafe_Colombiano/bin/Debug/net9.0/runtimes/osx/native/libSkiaSharp.dylib
+C:/Proyectos visual/C#/Proyecto Final/v2/Cafe_Colombiano/bin/Debug/net9.0/runtimes/win-arm64/native/libSkiaSharp.dll
+C:/Proyectos visual/C#/Proyecto Final/v2/Cafe_Colombiano/bin/Debug/net9.0/runtimes/win-x64/native/libSkiaSharp.dll
+C:/Proyectos visual/C#/Proyecto Final/v2/Cafe_Colombiano/bin/Debug/net9.0/runtimes/win-x86/native/libSkiaSharp.dll
+>>>>>>> feature/GestionContenido

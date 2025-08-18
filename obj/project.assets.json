@@ -3702,19 +3702,31 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "C:\\Users\\HP\\.nuget\\packages\\": {}
+=======
+    "/home/camper/.nuget/packages/": {}
+>>>>>>> feature/GestionContenido
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\HP\\Desktop\\Cafe_Colombiano\\Cafe_Colombiano.csproj",
+=======
+      "projectUniqueName": "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj",
+>>>>>>> feature/GestionContenido
       "projectName": "Cafe_Colombiano",
-      "projectPath": "C:\\Users\\HP\\Desktop\\Cafe_Colombiano\\Cafe_Colombiano.csproj",
-      "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\HP\\Desktop\\Cafe_Colombiano\\obj\\",
+      "projectPath": "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj",
+      "packagesPath": "/home/camper/.nuget/packages/",
+      "outputPath": "/home/camper/Cafe_Colombiano/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
+<<<<<<< HEAD
         "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config"
+=======
+        "/home/camper/.nuget/NuGet/NuGet.Config"
+>>>>>>> feature/GestionContenido
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -3738,7 +3750,11 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
+<<<<<<< HEAD
       "SdkAnalysisLevel": "9.0.300"
+=======
+      "SdkAnalysisLevel": "9.0.200"
+>>>>>>> feature/GestionContenido
     },
     "frameworks": {
       "net9.0": {
@@ -3811,7 +3827,11 @@
             "privateAssets": "all"
           }
         },
+<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
+=======
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.203/PortableRuntimeIdentifierGraph.json"
+>>>>>>> feature/GestionContenido
       }
     }
   },
@@ -3820,7 +3840,11 @@
       "code": "Undefined",
       "level": "Warning",
       "warningLevel": 1,
+<<<<<<< HEAD
       "message": "Problema al leer el archivo de caché C:\\Users\\HP\\Desktop\\Cafe_Colombiano\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0."
+=======
+      "message": "Problema al leer el archivo de caché /home/camper/Cafe_Colombiano/obj/project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+>>>>>>> feature/GestionContenido
     }
   ]
 }

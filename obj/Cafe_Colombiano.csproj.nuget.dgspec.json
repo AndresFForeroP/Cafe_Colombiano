@@ -1,20 +1,28 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "C:\\Users\\HP\\Desktop\\Cafe_Colombiano\\Cafe_Colombiano.csproj": {}
+=======
+    "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj": {}
+>>>>>>> feature/GestionContenido
   },
   "projects": {
-    "C:\\Users\\HP\\Desktop\\Cafe_Colombiano\\Cafe_Colombiano.csproj": {
+    "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HP\\Desktop\\Cafe_Colombiano\\Cafe_Colombiano.csproj",
+        "projectUniqueName": "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj",
         "projectName": "Cafe_Colombiano",
-        "projectPath": "C:\\Users\\HP\\Desktop\\Cafe_Colombiano\\Cafe_Colombiano.csproj",
-        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HP\\Desktop\\Cafe_Colombiano\\obj\\",
+        "projectPath": "/home/camper/Cafe_Colombiano/Cafe_Colombiano.csproj",
+        "packagesPath": "/home/camper/.nuget/packages/",
+        "outputPath": "/home/camper/Cafe_Colombiano/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
+<<<<<<< HEAD
           "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config"
+=======
+          "/home/camper/.nuget/NuGet/NuGet.Config"
+>>>>>>> feature/GestionContenido
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -38,7 +46,11 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
+<<<<<<< HEAD
         "SdkAnalysisLevel": "9.0.300"
+=======
+        "SdkAnalysisLevel": "9.0.200"
+>>>>>>> feature/GestionContenido
       },
       "frameworks": {
         "net9.0": {
@@ -111,7 +123,11 @@
               "privateAssets": "all"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
+=======
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.203/PortableRuntimeIdentifierGraph.json"
+>>>>>>> feature/GestionContenido
         }
       }
     }
