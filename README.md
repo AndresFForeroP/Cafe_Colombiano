@@ -125,7 +125,7 @@ Cada módulo funcional (e.g. Variedades, PDF, Administración) se organiza como 
 
 ---
 
-## 📝 Tareas Fase 1
+## 📝 Tareas Etapa 1
 
 - **Hector Andrés Mejia Samoret** → UI de todos los menús  
 - **Hadassa Raquel Galindo Rojas** → Generar el PDF  
@@ -135,7 +135,7 @@ Cada módulo funcional (e.g. Variedades, PDF, Administración) se organiza como 
 ---
 
 
-## 📝 Tareas Fase 2
+## 📝 Tareas Etapa 2
 
 - **Hector Andrés Mejia Samoret** → Gestion de contenido  
 - **Hadassa Raquel Galindo Rojas** → Terminacion Generar el PDF  
@@ -144,11 +144,29 @@ Cada módulo funcional (e.g. Variedades, PDF, Administración) se organiza como 
 
 ---
 
-## 📝 Tareas Fase 3
+## 📝 Tareas Etapa 3
 
 - **Hector Andrés Mejia Samoret** → Terminar menus y Gestion de contenido 
 - **Hadassa Raquel Galindo Rojas** → Refactorizar codigo
 - **Juan Manuel Crispin Castellanos** → Actualizar y eliminar variedades  
 - **Andres Felipe Forero Perez** → > Validacion de usuario  
+
+---
+
+## 📝 Tareas Etapa 4
+
+- **Hector Andrés Mejia Samoret** → Gestion de contenido 
+- **Hadassa Raquel Galindo Rojas** → Refactorizar codigo
+- **Juan Manuel Crispin Castellanos** → Refactorizar su codigo  
+- **Andres Felipe Forero Perez** → > Reactorizar su codigo
+
+---
+
+## 📝 Tareas Etapa 5
+
+- **Andres Felipe Forero Perez** → > Conectar todos los menus con las funciones,refactorizar y revisar codigo del equipo
+- **Hector Andrés Mejia Samoret** → Revisar codigo en busca de errores o problemas
+- **Hadassa Raquel Galindo Rojas** → Revisar codigo en busca de errores o problemas
+- **Juan Manuel Crispin Castellanos** → Revisar codigo en busca de errores o problemas  
 
 ---

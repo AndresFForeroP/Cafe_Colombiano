@@ -24,27 +24,33 @@ namespace Cafe_Colombiano.src.Shared.Documentation
                 QuestPDF.Settings.License = LicenseType.Community;
                 
                 // Obtener datos
-                var contexto = DbContextFactory.Create();
-                var repo = new VariedadRepository(contexto);
+                var repo = new VariedadRepository(context);
                 var variedades = await repo.GetAllVariedadesAsync();
-                // Pre-cargar todas las imágenes
+                
+                // Pre-cargar todas las imágenes ANTES de generar el PDF
                 var imagenesVariedades = new Dictionary<int, byte[]>();
+                //para entrar a cada variedad y sacar la imagen
                 foreach (var variedad in variedades)
                 {
                     if (!string.IsNullOrEmpty(variedad.imagen_referencia_url))
                     {
                         try
                         {
-                            var imageBytes = await CatalogTemplate.LoadImageFromUrl(variedad.imagen_referencia_url);
+                             var imageBytes = await CatalogTemplate.LoadImageFromUrl(variedad.imagen_referencia_url);
                             imagenesVariedades[variedad.id] = imageBytes;
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine($"Error cargando imagen para {variedad.nombre_comun}: {ex.Message}");
+                            Console.WriteLine($"❌ Error cargando imagen para {variedad.nombre_comun}: {ex.Message}");
                         }
                     }
+                    else
+                    {
+                        Console.WriteLine($"⚠️ {variedad.nombre_comun} no tiene URL de imagen");
+                    }
                 }
-
+                // Crear instancia del template
+                var catalogTemplate = new CatalogTemplate();
                 // Generar documento PDF
                 Document.Create(container =>
                 {
@@ -54,7 +60,6 @@ namespace Cafe_Colombiano.src.Shared.Documentation
                         page.Margin(1, Unit.Centimetre);
                         page.PageColor(Colors.White);
                         page.DefaultTextStyle(x => x.FontSize(12).FontFamily("verdana"));
-
                         // Encabezado
                         page.Header()
                             .AlignCenter()
@@ -62,20 +67,18 @@ namespace Cafe_Colombiano.src.Shared.Documentation
                             .ExtraBold()
                             .FontSize(24)
                             .FontColor(Colors.Green.Darken2);
-
                         // Contenido
                         page.Content()
                             .PaddingVertical(1, Unit.Centimetre)
-                            .Column(async column =>
+                            .Column(column =>
                             {
                                 column.Spacing(10);
-
                                 foreach (var variedad in variedades)
                                 {
-                                    await new CatalogTemplate().Tarjetas(column.Item(), variedad, imagenesVariedades);
+                                    // Llamar al método sincronizado
+                                    catalogTemplate.TarjetasSync(column.Item(), variedad, imagenesVariedades);
                                 }
                             });
-
                         // Pie de página
                         page.Footer()
                             .AlignRight()
@@ -86,12 +89,12 @@ namespace Cafe_Colombiano.src.Shared.Documentation
                             });
                     });
                 }).GeneratePdf("catalogo_cafe_colombiano.pdf");
-
-                Console.WriteLine("PDF generado exitosamente.");
+                Console.WriteLine("✅ PDF generado exitosamente.");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error generando PDF: {ex.Message}");
+                Console.WriteLine($"❌ Error generando PDF: {ex.Message}");
+                Console.WriteLine($"StackTrace: {ex.StackTrace}");
                 throw;
             }
         }

@@ -8,10 +8,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Cafe_Colombiano.src.Modules.Usuario.Infrastructure.Repository
 {
-    public class ExplorarVrepository : IExplorarVrepository
+    public class UsuarioRepository
     {
         private readonly AppDbContext _context;
-        public ExplorarVrepository(AppDbContext context)
+        public UsuarioRepository(AppDbContext context)
         {
             _context = context;
         }

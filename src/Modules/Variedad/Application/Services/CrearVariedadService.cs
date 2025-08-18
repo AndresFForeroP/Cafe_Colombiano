@@ -23,7 +23,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
         {
             Console.Clear();
             AnsiConsole.MarkupLine("[bold cyan]╔══════════════════════════════════════════════════════════════════════════════════╗[/]");
-            AnsiConsole.MarkupLine("[bold cyan]║                      ☕ CREAR NUEVA VARIEDAD DE CAFÉ ☕                            ║[/]");
+            AnsiConsole.MarkupLine("[bold cyan]║                      ☕ CREAR NUEVA VARIEDAD DE CAFÉ ☕                          ║[/]");
             AnsiConsole.MarkupLine("[bold cyan]╚══════════════════════════════════════════════════════════════════════════════════╝[/]");
             Console.WriteLine();
 
@@ -121,7 +121,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
 
             // VariedadResistencia
 
-            // CREACIÓN DE OBJETOS (igual a tu código original)
+            // CREACIÓN DE OBJETOS
             var nuevaVariedad = new Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad
             {
                 nombre_comun = nombreComun,

@@ -41,22 +41,22 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
             }
 
             // Datos principales
-            variedadToUpdate.nombre_comun = PedirDatoOpcional("Ingrese el nuevo nombre común de la variedad:", variedadToUpdate.nombre_comun);
-            variedadToUpdate.nombre_cientifico = PedirDatoOpcional("Ingrese el nuevo nombre científico de la variedad:", variedadToUpdate.nombre_cientifico);
-            variedadToUpdate.descripcion_general = PedirDatoOpcional("Ingrese la nueva descripción de la variedad:", variedadToUpdate.descripcion_general);
-            variedadToUpdate.historia_linaje = PedirDatoOpcional("Ingrese la nueva historia del linaje de la variedad:", variedadToUpdate.historia_linaje);
-            variedadToUpdate.imagen_referencia_url = PedirDatoOpcional("Ingrese la nueva URL de la imagen de referencia de la variedad:", variedadToUpdate.imagen_referencia_url);
+            variedadToUpdate.nombre_comun = PedirDatoOpcional("Ingrese el nuevo nombre común de la variedad:", variedadToUpdate.nombre_comun ?? string.Empty) ;
+            variedadToUpdate.nombre_cientifico = PedirDatoOpcional("Ingrese el nuevo nombre científico de la variedad:", variedadToUpdate.nombre_cientifico ?? string.Empty);
+            variedadToUpdate.descripcion_general = PedirDatoOpcional("Ingrese la nueva descripción de la variedad:", variedadToUpdate.descripcion_general ?? string.Empty);
+            variedadToUpdate.historia_linaje = PedirDatoOpcional("Ingrese la nueva historia del linaje de la variedad:", variedadToUpdate.historia_linaje ?? string.Empty);
+            variedadToUpdate.imagen_referencia_url = PedirDatoOpcional("Ingrese la nueva URL de la imagen de referencia de la variedad:", variedadToUpdate.imagen_referencia_url ?? string.Empty);
 
             // Grupo Genético
             if (variedadToUpdate.GrupoGenetico != null)
             {
                 string[] opcionesGrupo = { "1. Arábigo", "2. Guinea", "3. Congo", "4. Uganda", "5. Guinea x Congo", "6. Guinea x Coffea congensis" };
                 string[] valoresGrupo = { "Arabigo", "Guinea", "Congo", "Uganda", "Guinea x Congo", "Guinea x Coffea congensis" };
-                var grupoOpcion = await SeleccionarOpcionAsync("[bold yellow]Opción de grupo Genético[/]", opcionesGrupo, valoresGrupo, variedadToUpdate.GrupoGenetico.nombre_grupo,
+                var grupoOpcion = await SeleccionarOpcionAsync("[bold yellow]Opción de grupo Genético[/]", opcionesGrupo, valoresGrupo, variedadToUpdate.GrupoGenetico.nombre_grupo ?? string.Empty,
                     _VariedadRepository.GetGrupoGeneticoByNombreAsync,
                     nombre => new Cafe_Colombiano.src.Modules.GrupoGenetico.Domain.Entities.GrupoGenetico { nombre_grupo = nombre });
                 variedadToUpdate.GrupoGenetico = grupoOpcion;
-                variedadToUpdate.GrupoGenetico.origen = PedirDatoOpcional("Ingrese el nuevo origen de la variedad:", variedadToUpdate.GrupoGenetico.origen);
+                variedadToUpdate.GrupoGenetico.origen = PedirDatoOpcional("Ingrese el nuevo origen de la variedad:", variedadToUpdate.GrupoGenetico.origen ?? string.Empty);
             }
 
             // Porte
@@ -64,7 +64,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
             {
                 string[] opcionesPorte = { "1. Alto", "2. Bajo", "3. Dwarf/Compact", "4. Tall", "5. Desconocido" };
                 string[] valoresPorte = { "Alto", "Bajo", "Dwarf/Compact", "Tall", "Desconocido" };
-                var porteOpcion = await SeleccionarOpcionAsync("[bold yellow]Opción de Porte[/]", opcionesPorte, valoresPorte, variedadToUpdate.Porte.nombre_porte,
+                var porteOpcion = await SeleccionarOpcionAsync("[bold yellow]Opción de Porte[/]", opcionesPorte, valoresPorte, variedadToUpdate.Porte.nombre_porte ?? string.Empty,
                     _VariedadRepository.GetPorteByNombreAsync,
                     nombre => new Cafe_Colombiano.src.Modules.Porte.Domain.Entities.Porte { nombre_porte = nombre });
                 variedadToUpdate.Porte = porteOpcion;
@@ -75,7 +75,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
             {
                 string[] opcionesTamano = { "1. Pequeño", "2. Mediano", "3. Grande", "4. Muy Grande", "5. Desconocido" };
                 string[] valoresTamano = { "Pequeño", "Mediano", "Grande", "Muy Grande", "Desconocido" };
-                var tamanoOpcion = await SeleccionarOpcionAsync("[bold yellow]Opción de Tamaño[/]", opcionesTamano, valoresTamano, variedadToUpdate.TamanoGrano.nombre_tamano,
+                var tamanoOpcion = await SeleccionarOpcionAsync("[bold yellow]Opción de Tamaño[/]", opcionesTamano, valoresTamano, variedadToUpdate.TamanoGrano.nombre_tamano ?? string.Empty,
                     _VariedadRepository.GetTamanoGranoByNombreAsync,
                     nombre => new Cafe_Colombiano.src.Modules.TamanoGrano.Domain.Entities.TamanoGrano { nombre_tamano = nombre });
                 variedadToUpdate.TamanoGrano = tamanoOpcion;
@@ -86,11 +86,11 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
             {
                 string[] opcionesAltitud = { "1. 500-1000 msnm", "2. 400-900 msnm", "3. 500-800 msnm", "4. 700 msnm", "5. 1200-1800 msnm" };
                 string[] valoresAltitud = { "500-1000 msnm", "400-900 msnm", "500-800 msnm", "700 msnm", "1200-1800 msnm" };
-                var altitudOpcion = await SeleccionarOpcionAsync("[bold yellow]Opción de Altitud[/]", opcionesAltitud, valoresAltitud, variedadToUpdate.AltitudOptima.rango_altitud,
+                var altitudOpcion = await SeleccionarOpcionAsync("[bold yellow]Opción de Altitud[/]", opcionesAltitud, valoresAltitud, variedadToUpdate.AltitudOptima.rango_altitud ?? string.Empty,
                     _VariedadRepository.GetAltitudOptimaByRangoAsync,
                     rango => new Cafe_Colombiano.src.Modules.AltitudOptima.Domain.Entities.AltitudOptima { rango_altitud = rango });
                 variedadToUpdate.AltitudOptima = altitudOpcion;
-                variedadToUpdate.AltitudOptima.descripcion = PedirDatoOpcional("Ingrese la nueva descripción de la altitud óptima:", variedadToUpdate.AltitudOptima.descripcion);
+                variedadToUpdate.AltitudOptima.descripcion = PedirDatoOpcional("Ingrese la nueva descripción de la altitud óptima:", variedadToUpdate.AltitudOptima.descripcion ?? string.Empty );
             }
 
             // Potencial de Rendimiento
@@ -98,7 +98,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
             {
                 string[] opcionesPotencial = { "1. Bajo (menos de 1500 kg/ha)", "2. Medio (1500-3000 kg/ha)", "3. Alto (3000-5000 kg/ha)", "4. Muy alto (más de 5000 kg/ha)", "5. Desconocido" };
                 string[] valoresPotencial = { "Bajo (menos de 1500 kg/ha)", "Medio (1500-3000 kg/ha)", "Alto (3000-5000 kg/ha)", "Muy alto (más de 5000 kg/ha)", "Desconocido" };
-                var potencialOpcion = await SeleccionarOpcionAsync("[bold yellow]Opción de Potencial de Rendimiento[/]", opcionesPotencial, valoresPotencial, variedadToUpdate.PotencialRendimiento.nivel_rendimiento,
+                var potencialOpcion = await SeleccionarOpcionAsync("[bold yellow]Opción de Potencial de Rendimiento[/]", opcionesPotencial, valoresPotencial, variedadToUpdate.PotencialRendimiento.nivel_rendimiento ?? string.Empty,
                     _VariedadRepository.GetPotencialRendimientoByNivelAsync,
                     nivel => new Cafe_Colombiano.src.Modules.PotencialRendimiento.Domain.Entities.PotencialRendimiento { nivel_rendimiento = nivel });
                 variedadToUpdate.PotencialRendimiento = potencialOpcion;
@@ -109,11 +109,11 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
             {
                 string[] opcionesCalidad = { "1. Excelente", "2. Muy buena", "3. Buena", "4. Regular", "5. Básica", "6. Desconocida" };
                 string[] valoresCalidad = { "Excelente", "Muy buena", "Buena", "Regular", "Básica", "Desconocida" };
-                var calidadOpcion = await SeleccionarOpcionAsync("[bold yellow]Opción de Calidad[/]", opcionesCalidad, valoresCalidad, variedadToUpdate.CalidadGrano.nivel_calidad,
+                var calidadOpcion = await SeleccionarOpcionAsync("[bold yellow]Opción de Calidad[/]", opcionesCalidad, valoresCalidad, variedadToUpdate.CalidadGrano.nivel_calidad ?? string.Empty,
                     _VariedadRepository.GetCalidadGranoByNivelAsync,
                     nivel => new Cafe_Colombiano.src.Modules.CalidadGrano.Domain.Entities.CalidadGrano { nivel_calidad = nivel });
                 variedadToUpdate.CalidadGrano = calidadOpcion;
-                variedadToUpdate.CalidadGrano.descripcion = PedirDatoOpcional("Ingrese la nueva descripción de la calidad de grano:", variedadToUpdate.CalidadGrano.descripcion);
+                variedadToUpdate.CalidadGrano.descripcion = PedirDatoOpcional("Ingrese la nueva descripción de la calidad de grano:", variedadToUpdate.CalidadGrano.descripcion ?? string.Empty);
             }
 
             // Resistencia (solo el primero)
@@ -124,15 +124,15 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
             {
                 string[] opcionesTiempo = { "1. 6-8 meses", "2. Año 2", "3. Año 4", "4. Desconocida" };
                 string[] valoresTiempo = { "6-8 meses", "Año 2", "Año 4", "Desconocido" };
-                variedadToUpdate.InformacionAgronomica.tiempo_cosecha = SeleccionarOpcion("[bold yellow]Opción de tiempo de cosecha[/]", opcionesTiempo, valoresTiempo, variedadToUpdate.InformacionAgronomica.tiempo_cosecha);
+                variedadToUpdate.InformacionAgronomica.tiempo_cosecha = SeleccionarOpcion("[bold yellow]Opción de tiempo de cosecha[/]", opcionesTiempo, valoresTiempo, variedadToUpdate.InformacionAgronomica.tiempo_cosecha ?? string.Empty);
 
                 string[] opcionesMaduracion = { "1. Promedio", "2. Tardía" };
                 string[] valoresMaduracion = { "Promedio", "Tardía" };
-                variedadToUpdate.InformacionAgronomica.maduracion = SeleccionarOpcion("[bold yellow]Opción de maduración[/]", opcionesMaduracion, valoresMaduracion, variedadToUpdate.InformacionAgronomica.maduracion);
+                variedadToUpdate.InformacionAgronomica.maduracion = SeleccionarOpcion("[bold yellow]Opción de maduración[/]", opcionesMaduracion, valoresMaduracion, variedadToUpdate.InformacionAgronomica.maduracion ?? string.Empty);
 
                 string[] opcionesNutricion = { "1. Media", "2. Alta", "3. Desconocida" };
                 string[] valoresNutricion = { "Media", "Alta", "Desconocida" };
-                variedadToUpdate.InformacionAgronomica.nutricion = SeleccionarOpcion("[bold yellow]Opción de nutrición[/]", opcionesNutricion, valoresNutricion, variedadToUpdate.InformacionAgronomica.nutricion);
+                variedadToUpdate.InformacionAgronomica.nutricion = SeleccionarOpcion("[bold yellow]Opción de nutrición[/]", opcionesNutricion, valoresNutricion, variedadToUpdate.InformacionAgronomica.nutricion ?? string.Empty);
 
                 string[] opcionesDensidad = {
                     "1. 1000-2000 plantas/ha (usando poda de un solo tallo)",
@@ -148,7 +148,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
                     "2000-3000 plantas/ha (usando poda de múltiples tallos)",
                     "hasta 10,000 cafetos/ha"
                 };
-                variedadToUpdate.InformacionAgronomica.densidad_siembra = SeleccionarOpcion("[bold yellow]Opción de densidad de siembra[/]", opcionesDensidad, valoresDensidad, variedadToUpdate.InformacionAgronomica.densidad_siembra);
+                variedadToUpdate.InformacionAgronomica.densidad_siembra = SeleccionarOpcion("[bold yellow]Opción de densidad de siembra[/]", opcionesDensidad, valoresDensidad, variedadToUpdate.InformacionAgronomica.densidad_siembra ?? string.Empty);
             }
 
             await _VariedadRepository.Update(variedadToUpdate);

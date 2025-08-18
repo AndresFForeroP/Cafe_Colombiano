@@ -63,11 +63,6 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
             _context.Set<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad>().Remove(entity);
             await _context.SaveChangesAsync();
         }
-        public void RemoveEntity<T>(T entity) where T : class
-        {
-            _context.Set<T>().Remove(entity);
-        }
-
         public async Task Update(Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad entity)
         {
             _context.Set<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad>().Update(entity);
@@ -105,10 +100,6 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository
             }
 
             return "Lista de IDs mostrada en consola.";
-        }
-        public void RemoveEntity(object entity)
-        {
-            throw new NotImplementedException();
         }
         public IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> FiltrarPorNombre(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> Lista)
         {

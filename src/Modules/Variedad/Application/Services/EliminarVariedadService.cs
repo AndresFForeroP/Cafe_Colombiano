@@ -34,50 +34,7 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
                     if (idEliminar != null)
                     {
                         Console.Clear();
-
-                        // Elimina resistencias asociadas y sus tipos/niveles
-                        if (idEliminar.VariedadesResistencia != null)
-                        {
-                            foreach (var resistencia in idEliminar.VariedadesResistencia.ToList())
-                            {
-                                if (resistencia.TipoResistencia != null)
-                                    _repo.RemoveEntity(resistencia.TipoResistencia);
-
-                                if (resistencia.NivelResistencia != null)
-                                    _repo.RemoveEntity(resistencia.NivelResistencia);
-
-                                _repo.RemoveEntity(resistencia);
-                            }
-                        }
-
-                        // Elimina entidades relacionadas si no hay cascada
-                        if (idEliminar.GrupoGenetico != null)
-                            _repo.RemoveEntity(idEliminar.GrupoGenetico);
-
-                        if (idEliminar.Porte != null)
-                            _repo.RemoveEntity(idEliminar.Porte);
-
-                        if (idEliminar.TamanoGrano != null)
-                            _repo.RemoveEntity(idEliminar.TamanoGrano);
-
-                        if (idEliminar.AltitudOptima != null)
-                            _repo.RemoveEntity(idEliminar.AltitudOptima);
-
-                        if (idEliminar.PotencialRendimiento != null)
-                            _repo.RemoveEntity(idEliminar.PotencialRendimiento);
-
-                        if (idEliminar.CalidadGrano != null)
-                            _repo.RemoveEntity(idEliminar.CalidadGrano);
-
-                        if (idEliminar.InformacionAgronomica != null)
-                            _repo.RemoveEntity(idEliminar.InformacionAgronomica);
-
-                        // Finalmente elimina la variedad principal
                         await _repo.Remove(idEliminar);
-
-                        // Guarda todos los cambios
-                        await _repo.SaveAsync();
-
                         Console.WriteLine("Variedad y todos sus datos relacionados eliminados con éxito.");
                         break;
                     }
