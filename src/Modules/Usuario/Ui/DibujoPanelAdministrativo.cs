@@ -117,16 +117,58 @@ namespace Cafe_Colombiano.src.Modules.Usuario.Ui
 
                 case 2:
 
-                    _ = AnsiConsole.Status()
-                        .Start("Cargando módulo...", static async ctx =>
+                   await AnsiConsole.Status()
+                        .StartAsync("Cargando módulo...", async ctx =>
                         {
                             ctx.Spinner(Spinner.Known.Star);
                             ctx.Status("[yellow]Entrando al Gestor de contenido...[/]");
-                            Thread.Sleep(1200);
+                            await Task.Delay(1200);
                         });
-                        var menu = new GestorVariedades();
-                        await menu.BuscarVariedadAsync(Variedad);
+
+                    // ✅ SOLUCIÓN: Obtener datos reales de la base de datos
+                    try
+                    {
+                        AnsiConsole.Status()
+                            .Start("Cargando variedades...", ctx =>
+                            {
+                                ctx.Spinner(Spinner.Known.Dots);
+                                ctx.Status("[cyan]Obteniendo datos de variedades...[/]");
+                            });
+
+                        // Crear contexto y repositorio
+                        using var contexto = DbContextFactory.Create();
+                        var repo = new VariedadRepository(contexto);
+                        
+                        // Obtener todas las variedades
+                        var variedades = await repo.GetAllVariedadesAsync();
+                        
                         Console.Clear();
+                        
+                        if (variedades?.Any() == true)
+                        {
+                            AnsiConsole.MarkupLine($"[green]✅ Se cargaron {variedades.Count()} variedades[/]");
+                            await Task.Delay(500);
+                            
+                            using var contextoa = DbContextFactory.Create();
+                            var repoa = new VariedadRepository(contextoa);
+                            var gestor = new GestorVariedades(repoa);
+                            await gestor.BuscarYActualizarVariedadAsync();
+                        }
+                        else
+                        {
+                            AnsiConsole.MarkupLine("[yellow]⚠️ No se encontraron variedades en la base de datos[/]");
+                            AnsiConsole.MarkupLine("[dim]Presione cualquier tecla para continuar...[/]");
+                            Console.ReadKey();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        AnsiConsole.MarkupLine($"[red]❌ Error al cargar variedades:[/] {ex.Message}");
+                        AnsiConsole.MarkupLine("[dim]Presione cualquier tecla para continuar...[/]");
+                        Console.ReadKey();
+                    }
+                    
+                    Console.Clear();
                     break;
 
                 case 3:
