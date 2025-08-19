@@ -1,12 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Liga_futbol.Src.Shared.Context;
+using Cafe_Colombiano.src.Shared.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace Liga_Futbol.src.Shared.Helpers
+namespace Cafe_Colombiano.src.Shared.Helpers
 {
     public class DbContextFactory
     {

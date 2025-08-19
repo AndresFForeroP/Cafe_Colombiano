@@ -13,6 +13,15 @@ Brindar una herramienta interactiva y funcional que permita:
 
 ---
 
+## 👥 Integrantes
+
+- **Andres Felipe Forero Perez** *(Líder de eqipo)*
+- Hector Andrés Mejia Samoret
+- Hadassa Raquel Galindo Rojas
+- Juan Manuel Crispin Castellanos
+
+---
+
 ## 🧱 Arquitectura
 
 ### 🔷 Hexagonal (Ports & Adapters)
@@ -113,3 +122,51 @@ Cada módulo funcional (e.g. Variedades, PDF, Administración) se organiza como 
 2. Configura el archivo appsetings segun tu base de datos.
 
 3. Ejecuta desde la consola dotnet run.
+
+---
+
+## 📝 Tareas Etapa 1
+
+- **Hector Andrés Mejia Samoret** → UI de todos los menús  
+- **Hadassa Raquel Galindo Rojas** → Generar el PDF  
+- **Juan Manuel Crispin Castellanos** → Función ver catálogo  
+- **Andres Felipe Forero Perez** → Filtrar variedades  
+
+---
+
+
+## 📝 Tareas Etapa 2
+
+- **Hector Andrés Mejia Samoret** → Gestion de contenido  
+- **Hadassa Raquel Galindo Rojas** → Terminacion Generar el PDF  
+- **Juan Manuel Crispin Castellanos** → Gestion de variedades  
+- **Andres Felipe Forero Perez** → > Validacion de usuario, y terminar filtrado  
+
+---
+
+## 📝 Tareas Etapa 3
+
+- **Hector Andrés Mejia Samoret** → Terminar menus y Gestion de contenido 
+- **Hadassa Raquel Galindo Rojas** → Refactorizar codigo
+- **Juan Manuel Crispin Castellanos** → Actualizar y eliminar variedades  
+- **Andres Felipe Forero Perez** → > Validacion de usuario  
+
+---
+
+## 📝 Tareas Etapa 4
+
+- **Hector Andrés Mejia Samoret** → Gestion de contenido 
+- **Hadassa Raquel Galindo Rojas** → Refactorizar codigo
+- **Juan Manuel Crispin Castellanos** → Refactorizar su codigo  
+- **Andres Felipe Forero Perez** → > Reactorizar su codigo
+
+---
+
+## 📝 Tareas Etapa 5
+
+- **Andres Felipe Forero Perez** → > Conectar todos los menus con las funciones,refactorizar y revisar codigo del equipo
+- **Hector Andrés Mejia Samoret** → Revisar codigo en busca de errores o problemas
+- **Hadassa Raquel Galindo Rojas** → Revisar codigo en busca de errores o problemas
+- **Juan Manuel Crispin Castellanos** → Revisar codigo en busca de errores o problemas  
+
+---
