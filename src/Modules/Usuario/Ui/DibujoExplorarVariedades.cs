@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Cafe_Colombiano.src.Modules.Usuario.Application.Interfaces;
 using Cafe_Colombiano.src.Modules.Variedad.Application.Interfaces;
 using Cafe_Colombiano.src.Modules.Variedad.Application.Services;
 using Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository;
@@ -11,7 +12,7 @@ using Spectre.Console;
 
 namespace Cafe_Colombiano.src.Modules.Usuario.Ui
 {
-    public class DibujoExplorarVariedades
+    public class DibujoExplorarVariedades : IDibujoExplorarVariedades
     {
         public void DibujarMenu()
         {

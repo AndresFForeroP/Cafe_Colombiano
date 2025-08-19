@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Cafe_Colombiano.src.Modules.Usuario.Application.Interfaces;
 using Cafe_Colombiano.src.Modules.Variedad.Application.Services;
 using Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository;
 using Cafe_Colombiano.src.Shared.Context;
@@ -11,7 +12,7 @@ using Spectre.Console;
 
 namespace Cafe_Colombiano.src.Modules.Usuario.Ui
 {
-    public class MenuExplorarVariedades
+    public class MenuExplorarVariedades : IMenuExplorarVariedades
     {
         private readonly AppDbContext? _context;
 
@@ -94,6 +95,8 @@ namespace Cafe_Colombiano.src.Modules.Usuario.Ui
                     await menusUsuario.Iniciar(); // Llama al menú principal
                     break;
             }
+            await IniciarAsync(); // Llama al menú administrativo
+
         }
         
     }

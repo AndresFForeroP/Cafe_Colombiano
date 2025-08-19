@@ -7,7 +7,7 @@ using Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository;
 
 namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
 {
-    public class VariedadShowCatalogoService 
+    public class VariedadShowCatalogoService : Ishowcatalogo
     {
         private readonly VariedadRepository _repo;
 

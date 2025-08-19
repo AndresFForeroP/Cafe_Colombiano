@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Cafe_Colombiano.src.Modules.Variedad.Application.Interfaces;
 
 namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
 {
-    public class VariedadServices
+    public class VariedadServices : IVaredadServices
     {
         public void MostrarVariedades(IEnumerable<Cafe_Colombiano.src.Modules.Variedad.Domain.Entities.Variedad> variedad)
         {
@@ -58,12 +59,12 @@ namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
         public string Validarfiltros()
         {
             Console.Clear();
-            Console.WriteLine("Desea agregar otro filtro a la busqueda?");
+            Console.WriteLine("Desea agregar otro filtro a la busqueda? (si/no)");
             string Respuesta = Console.ReadLine() ?? "";
             while (Respuesta.ToLower() != "no" && Respuesta.ToLower() != "si")
             {
                 Console.WriteLine("Valor invalido");
-                Console.WriteLine("Ingrese si para actualizar el torneo o no si desea volver a ingresar los datos");
+                Console.WriteLine("Ingrese si para agregar otro filtro o no si desea ver las variedades con los filtros aplicados");
                 Respuesta = Console.ReadLine() ?? "";
             }
             return Respuesta.ToLower();

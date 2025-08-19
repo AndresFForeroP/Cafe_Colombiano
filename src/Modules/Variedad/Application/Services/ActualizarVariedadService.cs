@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
 {
-    public class ActualizarVariedadService
+    public class ActualizarVariedadService : IActualizarVariedadServices
     {
         private readonly IVariedadRepository _VariedadRepository;
 

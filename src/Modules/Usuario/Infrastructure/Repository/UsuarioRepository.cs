@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Cafe_Colombiano.src.Modules.Usuario.Infrastructure.Repository
 {
-    public class UsuarioRepository
+    public class UsuarioRepository : IUsuarioRepositoy
     {
         private readonly AppDbContext _context;
         public UsuarioRepository(AppDbContext context)

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
 {
-    public class EliminarVariedadService
+    public class EliminarVariedadService : IEliminarVariedadService
     {
         private readonly IVariedadRepository _repo;
 

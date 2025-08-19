@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Cafe_Colombiano.src.Modules.Usuario.Application.Interfaces;
 using Cafe_Colombiano.src.Modules.Usuario.Application.Services;
 using Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository;
 using Cafe_Colombiano.src.Modules.Variedad.Ui;
@@ -10,7 +11,7 @@ using Spectre.Console;
 
 namespace Cafe_Colombiano.src.Modules.Usuario.Ui
 {
-    public class MenuPanelAdministrativo
+    public class MenuPanelAdministrativo : IMenuPanelAdministrativo
     {
         public async Task iniciar()
         {
@@ -125,6 +126,7 @@ namespace Cafe_Colombiano.src.Modules.Usuario.Ui
                     Console.Clear();
                     break;
             }
+            await iniciar(); 
         }
     }
 }

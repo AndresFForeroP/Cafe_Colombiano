@@ -4,11 +4,12 @@ using System.Threading.Tasks;
 using Spectre.Console; // Librería para interfaces de consola enriquecidas
 using Cafe_Colombiano.src.Modules.Variedad.Domain.Entities; // Entidad Variedad
 using Cafe_Colombiano.src.Shared.Helpers; // Helpers compartidos del proyecto
-using Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository; // Repositorio para acceder a la base de datos
+using Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository;
+using Cafe_Colombiano.src.Modules.Usuario.Application.Interfaces; // Repositorio para acceder a la base de datos
 
 namespace Cafe_Colombiano.src.Modules.Usuario.Ui
 {
-    public class DibujoPanelAdministrativo
+    public class DibujoPanelAdministrativo : IDibujoPanelAdministrativo
     {
         public void Dibujar()
         {

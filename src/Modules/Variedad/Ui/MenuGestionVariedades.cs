@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Cafe_Colombiano.src.Modules.Variedad.Application.Interfaces;
 using Cafe_Colombiano.src.Modules.Variedad.Application.Services;
 using Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository;
 using Cafe_Colombiano.src.Shared.Helpers;
@@ -9,7 +7,7 @@ using Spectre.Console;
 
 namespace Cafe_Colombiano.src.Modules.Usuario.Ui
 {
-    public class MenuGestionVariedades
+    public class MenuGestionVariedades : IMenuGestionVariedades
     {
         private readonly VariedadRepository repo = null!;
         readonly VariedadServices serviciosvariedad = new VariedadServices();
@@ -24,8 +22,8 @@ namespace Cafe_Colombiano.src.Modules.Usuario.Ui
                         new SelectionPrompt<int>()
                             .Title("\n[bold cyan]Seleccione una opción:[/]")
                             .HighlightStyle(new Style(Color.Black, Color.Yellow, Decoration.Bold))
-                            .PageSize(5)
-                            .AddChoices(1, 2, 3, 4) // Opciones del menú
+                            .PageSize(7)
+                            .AddChoices(1, 2, 3, 4, 5, 6) // Opciones del menú
                             .UseConverter(op =>
                             {
                                 return op switch
@@ -90,8 +88,9 @@ namespace Cafe_Colombiano.src.Modules.Usuario.Ui
                     break;
             }
             
-            await menusUsuario2.iniciar();
+            await iniciar();
         }
+
     }
     
 }

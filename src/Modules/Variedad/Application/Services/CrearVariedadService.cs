@@ -9,7 +9,7 @@ using Spectre.Console;
 
 namespace Cafe_Colombiano.src.Modules.Variedad.Application.Services
 {
-    public class CrearVariedadService
+    public class CrearVariedadService : ICrearVariedadServices
     {
         private readonly IVariedadRepository _variedadService;
 

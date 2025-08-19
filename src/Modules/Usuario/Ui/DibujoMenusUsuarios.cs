@@ -14,7 +14,7 @@ using System.Text; // Librería para gráficos (ej. mostrar gifs en consola)
 /* --- INTERFAZ DE AUTENTICACIÓN --- */
 namespace Cafe_Colombiano.src.Modules.Usuario.Ui
 {
-    public class DibujoMenusUsuarios()
+    public class DibujoMenusUsuarios() : IDibujoMenusUsuarios
     {
         // Dibuja el menú principal colorido con Spectre.Console    
         public string DibujarMenuColorido()

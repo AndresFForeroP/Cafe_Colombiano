@@ -4,13 +4,14 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Cafe_Colombiano.src.Modules.Usuario.Application.Interfaces;
 using Cafe_Colombiano.src.Modules.Usuario.Infrastructure.Repository;
 using Cafe_Colombiano.src.Shared.Helpers;
 using Spectre.Console;
 
 namespace Cafe_Colombiano.src.Modules.Usuario.Ui
 {
-    public class MenuPrincipal
+    public class MenuPrincipal : IMenuPrincipal
     {
         public readonly UsuarioRepository repo = null!;
         private readonly DibujoMenusUsuarios dibujoMenusPrincipal;

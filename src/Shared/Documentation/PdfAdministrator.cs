@@ -36,7 +36,7 @@ namespace Cafe_Colombiano.src.Shared.Documentation
                     {
                         try
                         {
-                             var imageBytes = await CatalogTemplate.LoadImageFromUrl(variedad.imagen_referencia_url);
+                            var imageBytes = await CatalogTemplate.LoadImageFromUrl(variedad.imagen_referencia_url);
                             imagenesVariedades[variedad.id] = imageBytes;
                         }
                         catch (Exception ex)

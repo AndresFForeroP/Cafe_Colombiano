@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Cafe_Colombiano.src.Modules.Usuario.Application.Interfaces;
 using Cafe_Colombiano.src.Modules.Usuario.Ui;
 using Cafe_Colombiano.src.Modules.Variedad.Infrastructure.Repository;
 using Spectre.Console;
 
 namespace Cafe_Colombiano.src.Modules.Usuario.Application.Services
 {
-    public class GestionServices
+    public class GestionServices : IGestionServices
     {
         private readonly VariedadRepository _repo;
 
